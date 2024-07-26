@@ -4,7 +4,7 @@ import { getVideos } from '../../../Services/GetAPI';
 import Loader from '../../../Components/LoaderComponent';
 
 const RecentLuckyDraws = () => {
-    const [videos, setVideos] = useState([]);
+    const [videos, setVideos] = useState([{}]);
     const [loading, setLoading] = useState(true);
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -24,7 +24,8 @@ const RecentLuckyDraws = () => {
     useEffect(() => {
         getVideos()
             .then(data => {
-                setVideos(data);
+                // setVideos(data);
+                 alert(JSON.stringify())
                 setLoading(false);
             })
             .catch(error => {
