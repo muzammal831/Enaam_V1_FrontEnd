@@ -5,87 +5,87 @@ import './Sidebar.css'; // Import CSS for styling
 
 function Sidebar() {
     const location = useLocation();
-    
+
     return (
         <div className="sidebar">
             <h2 className="sidebar-title">Admin Panel</h2>
             <ul className="sidebar-menu">
                 <li>
-                    <Link 
-                        to="/dashboard" 
+                    <Link
+                        to="/"
                         className={`sidebar-link ${location.pathname === '/dashboard' ? 'active' : ''}`}
                     >
                         <i className="bi bi-house-door"></i> Users
                     </Link>
                 </li>
-                
-                
+
+
                 <li>
-                    <Link 
-                        to="/rewards" 
+                    <Link
+                        to="/rewards"
                         className={`sidebar-link ${location.pathname === '/rewards' ? 'active' : ''}`}
                     >
                         <i className="bi bi-trophy"></i> Rewards
                     </Link>
                 </li>
-                
+
                 <li>
-                    <Link 
-                        to="/products" 
+                    <Link
+                        to="/products"
                         className={`sidebar-link ${location.pathname === '/products' ? 'active' : ''}`}
                     >
                         <i className="bi bi-box"></i> Products
                     </Link>
                 </li>
-                
+
                 <li>
-                    <Link 
-                        to="/questions" 
+                    <Link
+                        to="/questions"
                         className={`sidebar-link ${location.pathname === '/questions' ? 'active' : ''}`}
                     >
                         <i className="bi bi-question-circle"></i> Questions
                     </Link>
                 </li>
-                
+
                 <li>
-                    <Link 
-                        to="/faqs" 
+                    <Link
+                        to="/faqs"
                         className={`sidebar-link ${location.pathname === '/faqs' ? 'active' : ''}`}
                     >
                         <i className="bi bi-question"></i> FAQs
                     </Link>
                 </li>
-                
+
                 <li>
-                    <Link 
-                        to="/about-us" 
+                    <Link
+                        to="/about-us"
                         className={`sidebar-link ${location.pathname === '/about-us' ? 'active' : ''}`}
                     >
                         <i className="bi bi-info-circle"></i> About Us
                     </Link>
                 </li>
-                
+
                 <li>
-                    <Link 
-                        to="/blogs" 
+                    <Link
+                        to="/blogs"
                         className={`sidebar-link ${location.pathname === '/blogs' ? 'active' : ''}`}
                     >
                         <i className="bi bi-journal-text"></i> Blogs
                     </Link>
                 </li>
-                
+
                 <li>
-                    <Link 
-                        to="/videos" 
+                    <Link
+                        to="/videos"
                         className={`sidebar-link ${location.pathname === '/videos' ? 'active' : ''}`}
                     >
                         <i className="bi bi-film"></i> Videos
                     </Link>
                 </li>
-                
+
                 <li>
-                    <Link 
-                        to="/banners" 
+                    <Link
+                        to="/banners"
                         className={`sidebar-link ${location.pathname === '/banners' ? 'active' : ''}`}
                     >
                         <i className="bi bi-image"></i> Banners

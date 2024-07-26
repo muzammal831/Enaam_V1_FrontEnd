@@ -1,0 +1,18 @@
+.addCartButton{
+    text-decoration:none;
+    border-radius: 30px ;
+    padding: 10px 20px 10px 20px;
+    background-color: #1B1464;
+    border : 2px solid #1B1464;
+    margin-left: 20px;
+    color: white;
+}
+
+.prizeDetailsButton{
+    text-decoration:none;
+    border-radius: 30 ;
+    padding: 10px 20px 10px 20px;
+    border-radius: 30px;
+    border : 1px solid #1B1464;
+    color: #1B1464
+}
