@@ -14,7 +14,7 @@ function App() {
         <WinnersCarousel/>
         <RecentLuckyDraws/>
         <InsightSection/>
-        {/* <ProductsListComponent/> */}
+        <ProductsListComponent/>
         <Footer/>
     </div>
   );

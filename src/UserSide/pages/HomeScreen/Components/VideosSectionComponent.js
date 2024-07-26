@@ -24,8 +24,7 @@ const RecentLuckyDraws = () => {
     useEffect(() => {
         getVideos()
             .then(data => {
-                // setVideos(data);
-                 alert(JSON.stringify())
+                setVideos(data);
                 setLoading(false);
             })
             .catch(error => {
