@@ -85,6 +85,6 @@ export const getRecentLuckyDraws = async () => {
         return data;
       } catch (error) {
         console.error('Error fetching about information:', error);
-        return false;
+        return error;
       }
     };
