@@ -9,15 +9,15 @@ const RecentLuckyDraws = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const handlePrevClick = () => {
-        setActiveIndex((prevIndex) => (prevIndex === 0 ? videos.length - 1 : prevIndex - 1));
+        setActiveIndex((prevIndex) => (prevIndex === 0 ? videos?.length - 1 : prevIndex - 1));
     };
 
     const handleNextClick = () => {
-        setActiveIndex((prevIndex) => (prevIndex === videos.length - 1 ? 0 : prevIndex + 1));
+        setActiveIndex((prevIndex) => (prevIndex === videos?.length - 1 ? 0 : prevIndex + 1));
     };
 
     const vieosBottom = [];
-    for (let i = 0; i < videos.length; i += 3) {
+    for (let i = 0; i < videos?.length; i += 3) {
         vieosBottom.push(videos.slice(i, i + 3));
     }
 

@@ -12,9 +12,9 @@ function App() {
     <div className="App">
         <HomeBanner />
         <WinnersCarousel/>
-        <RecentLuckyDraws/>
+        {/* <RecentLuckyDraws/> */}
         <InsightSection/>
-        <ProductsListComponent/>
+        {/* <ProductsListComponent/> */}
         <Footer/>
     </div>
   );
