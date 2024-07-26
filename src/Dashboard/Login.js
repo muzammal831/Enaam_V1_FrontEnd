@@ -43,7 +43,7 @@
 //             </form>
 //             {message && <p style={{ color: 'green' }}>{message}</p>}
 //             {error && <p style={{ color: 'red' }}>{error}</p>}
-//             <Link to="/forgot-password">Forgot Password?</Link>
+//             <Link to="/dashboard/forgot-password">Forgot Password?</Link>
 //         </div>
 //     );
 // }
@@ -114,7 +114,7 @@ function Login() {
                             {message && <p className="text-success mt-3">{message}</p>}
                             {error && <p className="text-danger mt-3">{error}</p>}
                             <div className="mt-3">
-                                <Link to="/forgot-password" className="btn btn-link">Forgot Password?</Link>
+                                <Link to="/dashboard/forgot-password" className="btn btn-link">Forgot Password?</Link>
                             </div>
                         </div>
                     </div>

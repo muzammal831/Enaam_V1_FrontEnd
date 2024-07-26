@@ -12,7 +12,7 @@ function Sidebar() {
             <ul className="sidebar-menu">
                 <li>
                     <Link
-                        to="/"
+                        to="/dashboard/"
                         className={`sidebar-link ${location.pathname === '/dashboard' ? 'active' : ''}`}
                     >
                         <i className="bi bi-house-door"></i> Users
@@ -22,7 +22,7 @@ function Sidebar() {
 
                 <li>
                     <Link
-                        to="/rewards"
+                        to="/dashboard/rewards"
                         className={`sidebar-link ${location.pathname === '/rewards' ? 'active' : ''}`}
                     >
                         <i className="bi bi-trophy"></i> Rewards
@@ -31,7 +31,7 @@ function Sidebar() {
 
                 <li>
                     <Link
-                        to="/products"
+                        to="/dashboard/products"
                         className={`sidebar-link ${location.pathname === '/products' ? 'active' : ''}`}
                     >
                         <i className="bi bi-box"></i> Products
@@ -40,7 +40,7 @@ function Sidebar() {
 
                 <li>
                     <Link
-                        to="/questions"
+                        to="/dashboard/questions"
                         className={`sidebar-link ${location.pathname === '/questions' ? 'active' : ''}`}
                     >
                         <i className="bi bi-question-circle"></i> Questions
@@ -49,7 +49,7 @@ function Sidebar() {
 
                 <li>
                     <Link
-                        to="/faqs"
+                        to="/dashboard/faqs"
                         className={`sidebar-link ${location.pathname === '/faqs' ? 'active' : ''}`}
                     >
                         <i className="bi bi-question"></i> FAQs
@@ -58,7 +58,7 @@ function Sidebar() {
 
                 <li>
                     <Link
-                        to="/about-us"
+                        to="/dashboard/about-us"
                         className={`sidebar-link ${location.pathname === '/about-us' ? 'active' : ''}`}
                     >
                         <i className="bi bi-info-circle"></i> About Us
@@ -67,7 +67,7 @@ function Sidebar() {
 
                 <li>
                     <Link
-                        to="/blogs"
+                        to="/dashboard/blogs"
                         className={`sidebar-link ${location.pathname === '/blogs' ? 'active' : ''}`}
                     >
                         <i className="bi bi-journal-text"></i> Blogs
@@ -76,7 +76,7 @@ function Sidebar() {
 
                 <li>
                     <Link
-                        to="/videos"
+                        to="/dashboard/videos"
                         className={`sidebar-link ${location.pathname === '/videos' ? 'active' : ''}`}
                     >
                         <i className="bi bi-film"></i> Videos
@@ -85,7 +85,7 @@ function Sidebar() {
 
                 <li>
                     <Link
-                        to="/banners"
+                        to="/dashboard/banners"
                         className={`sidebar-link ${location.pathname === '/banners' ? 'active' : ''}`}
                     >
                         <i className="bi bi-image"></i> Banners
@@ -95,10 +95,10 @@ function Sidebar() {
             <div className="sidebar-submenu">
                 <h5>Banner Categories</h5>
                 <ul className="submenu-list">
-                    <li><Link to="/banners/desktop">Desktop Banners</Link></li>
-                    <li><Link to="/banners/mobile">Mobile Banners</Link></li>
-                    <li><Link to="/banners/mobilead">Mobile Ads Banners</Link></li>
-                    <li><Link to="/banners/both">All Platforms</Link></li>
+                    <li><Link to="/dashboard/banners/desktop">Desktop Banners</Link></li>
+                    <li><Link to="/dashboard/banners/mobile">Mobile Banners</Link></li>
+                    <li><Link to="/dashboard/banners/mobilead">Mobile Ads Banners</Link></li>
+                    <li><Link to="/dashboard/banners/both">All Platforms</Link></li>
                 </ul>
             </div>
         </div>

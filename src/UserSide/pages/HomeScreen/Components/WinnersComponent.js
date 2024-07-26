@@ -3,9 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { getWinners } from '../../../Services/GetAPI';
 import { WinnerComponent } from '../../WinnersPage/Components/WinnerComponent';
 import Loader from '../../../Components/LoaderComponent';
-import { Colors } from '../../../globals/colors';
 
-const WinnersCarousel = ({ }) => {
+const WinnersCarousel = () => {
     const [winners, setWinners] = useState([]);
     const [loading, setLoading] = useState(true);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -84,11 +83,11 @@ const WinnersCarousel = ({ }) => {
                             ))}
                         </div>
                         <a className="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev" onClick={handlePrevClick}>
-                            <span className="carousel-control-prev-icon" style={{borderRadius:"5px"}} aria-hidden="true"></span>
+                            <span className="carousel-control-prev-icon" style={{ borderRadius: "5px" }} aria-hidden="true"></span>
                             <span className="sr-only">Previous</span>
                         </a>
                         <a className="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next" onClick={handleNextClick}>
-                            <span className="carousel-control-next-icon" style={{borderRadius:"5px"}} aria-hidden="true"></span>
+                            <span className="carousel-control-next-icon" style={{ borderRadius: "5px" }} aria-hidden="true"></span>
                             <span className="sr-only">Next</span>
                         </a>
                     </div>

@@ -39,55 +39,55 @@ import ViewBanner from './banners/ViewBanner';
 import BannerDisplay from './banners/BannerDisplay';
 
 
-export const Dashboard = () => {
-    return (<>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/user" element={<UserInfo />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
+export const DashboardRoutes = () => {
+    return (  
+        <Routes>
+        <Route path="/dashboard/register" element={<Register />} />
+        <Route path="/dashboard/login" element={<Login />} />
+        <Route path="/dashboard/user" element={<UserInfo />} />
+        <Route path="/dashboard/forgot-password" element={<ForgotPassword />} />
+        <Route path="/dashboard/reset-password/:token" element={<ResetPassword />} />
 
         {/* Admin Routes */}
-        <Route path="/" element={<AdminDashboard />} />
-        ?<Route path="/users/:id" element={<UserEdit />} />
-        <Route path="/rewards" element={<RewardsList />} />
-        <Route path="/rewards/create" element={<RewardCreate />} />
-        <Route path="/rewards/:id/edit" element={<RewardEdit />} />
-        <Route path="/" element={<h1>Welcome to Laravel React App</h1>} />
-        <Route path="/products" element={<ProductsList />} /> {/* Add ProductsList route */}
-        <Route path="/products/create" element={<NewProduct />} /> {/* Route for creating a new product */}
-        <Route path="/products/:id/edit" element={<EditProduct />} /> {/* Route for editing an existing product */}
+        <Route path="/dashboard" element={<AdminDashboard />} />
+        ?<Route path="/dashboard/users/:id" element={<UserEdit />} />
+        <Route path="/dashboard/rewards" element={<RewardsList />} />
+        <Route path="/dashboard/rewards/create" element={<RewardCreate />} />
+        <Route path="/dashboard/rewards/:id/edit" element={<RewardEdit />} />
+        <Route path="/dashboard/products" element={<ProductsList />} /> {/* Add ProductsList route */}
+        <Route path="/dashboard/products/create" element={<NewProduct />} /> {/* Route for creating a new product */}
+        <Route path="/dashboard/products/:id/edit" element={<EditProduct />} /> {/* Route for editing an existing product */}
 
-        <Route path="/questions" element={<QuestionList />} /> {/* Route for listing questions */}
-        <Route path="/questions/add" element={<AddQuestion />} /> {/* Route for adding a new question */}
-        <Route path="/questions/:id/answer" element={<AnswerQuestion />} /> {/* Route for answering a question */}
-        <Route path="/questions/:id/edit" element={<EditQuestion />} />
-        <Route path="/faqs" element={<FAQList />} />
-        <Route path="/faqs/create" element={<CreateFAQ />} />
-        <Route path="/faqs/:id/edit" element={<EditFAQ />} />
-        <Route path="/about-us" element={<AboutUsList />} />
-        <Route path="/about-us/create" element={<CreateAboutUs />} />
-        <Route path="/about-us/:id/edit" element={<EditAboutUs />} />
-        <Route path="/blogs" element={<BlogList />} />
-        <Route path="/blogs/add" element={<AddBlog />} />
-        <Route path="/blogs/:id/edit" element={<EditBlog />} />
-        <Route path="/blogs/:id" element={<ViewBlog />} />
-        <Route path="/videos" element={<VideoList />} />
-        <Route path="/videos/add" element={<AddVideo />} />
-        <Route path="/videos/:id/edit" element={<EditVideo />} />
-        <Route path="/videos/:id" element={<ViewVideo />} />
+        <Route path="/dashboard/questions" element={<QuestionList />} /> {/* Route for listing questions */}
+        <Route path="/dashboard/questions/add" element={<AddQuestion />} /> {/* Route for adding a new question */}
+        <Route path="/dashboard/questions/:id/answer" element={<AnswerQuestion />} /> {/* Route for answering a question */}
+        <Route path="/dashboard/questions/:id/edit" element={<EditQuestion />} />
+        <Route path="/dashboard/faqs" element={<FAQList />} />
+        <Route path="/dashboard/faqs/create" element={<CreateFAQ />} />
+        <Route path="/dashboard/faqs/:id/edit" element={<EditFAQ />} />
+        <Route path="/dashboard/about-us" element={<AboutUsList />} />
+        <Route path="/dashboard/about-us/create" element={<CreateAboutUs />} />
+        <Route path="/dashboard/about-us/:id/edit" element={<EditAboutUs />} />
+        <Route path="/dashboard/blogs" element={<BlogList />} />
+        <Route path="/dashboard/blogs/add" element={<AddBlog />} />
+        <Route path="/dashboard/blogs/:id/edit" element={<EditBlog />} />
+        <Route path="/dashboard/blogs/:id" element={<ViewBlog />} />
+        <Route path="/dashboard/videos" element={<VideoList />} />
+        <Route path="/dashboard/videos/add" element={<AddVideo />} />
+        <Route path="/dashboard/videos/:id/edit" element={<EditVideo />} />
+        <Route path="/dashboard/videos/:id" element={<ViewVideo />} />
 
         {/* Banners Routes */}
-        <Route path="/banners" element={<BannerList />} />
-        <Route path="/banners/add" element={<AddBanner />} />
-        <Route path="/banners/:id/edit" element={<EditBanner />} />
-        <Route path="/banners/:id" element={<ViewBanner />} />
-        {/* <Route path="/banners/platform/:platform" element={<BannerDisplay />} /> */}
-        <Route path="/banners/desktop" element={<BannerDisplay platform="desktop" />} />
-        <Route path="/banners/mobile" element={<BannerDisplay platform="mobile" />} />
-        <Route path="/banners/mobilead" element={<BannerDisplay platform="mobilead" />} />
-        <Route path="/banners/both" element={<BannerDisplay platform="both" />} />
-    </>
+        <Route path="/dashboard/banners" element={<BannerList />} />
+        <Route path="/dashboard/banners/add" element={<AddBanner />} />
+        <Route path="/dashboard/banners/:id/edit" element={<EditBanner />} />
+        <Route path="/dashboard/banners/:id" element={<ViewBanner />} />
+        {/* <Route path="/dashboard/banners/platform/:platform" element={<BannerDisplay />} /> */}
+        <Route path="/dashboard/banners/desktop" element={<BannerDisplay platform="desktop" />} />
+        <Route path="/dashboard/banners/mobile" element={<BannerDisplay platform="mobile" />} />
+        <Route path="/dashboard/banners/mobilead" element={<BannerDisplay platform="mobilead" />} />
+        <Route path="/dashboard/banners/both" element={<BannerDisplay platform="both" />} />
+    </Routes>
     );
 }
 

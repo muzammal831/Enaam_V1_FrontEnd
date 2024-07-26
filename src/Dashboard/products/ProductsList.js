@@ -41,7 +41,7 @@
 //     return (
 //         <div className="container mt-5">
 //             <h1>Products List</h1>
-//             <Link to="/products/create" className="btn btn-primary mb-3">Add New Product</Link>
+//             <Link to="/dashboard/products/create" className="btn btn-primary mb-3">Add New Product</Link>
 //             <table className="table">
 //                 <thead>
 //                     <tr>
@@ -138,7 +138,7 @@ function ProductsList() {
                 <div className="col-md-9">
                     <div className="container mt-5">
                         <h1>Products List</h1>
-                        <Link to="/products/create" className="btn btn-primary mb-3">Add New Product</Link>
+                        <Link to="/dashboard/products/create" className="btn btn-primary mb-3">Add New Product</Link>
                         <table className="table">
                             <thead>
                                 <tr>

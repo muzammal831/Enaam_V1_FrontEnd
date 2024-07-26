@@ -1,16 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './Dashboard/Login';
-import { Dashboard } from './Dashboard';
+import  {DashboardRoutes}from './Dashboard/index.js'
+import UserSide from './UserSide/index.js';
 
 
 function App() {
     return (
         <Router>
-            <Routes>
-                <Route path="/" element={<Dashboard/>} />
-                <Route path="/login" element={<Login />} />
-            </Routes>
+            <UserSide/>
+            <DashboardRoutes/>
         </Router>
     );
 }

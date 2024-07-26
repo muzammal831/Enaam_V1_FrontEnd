@@ -3,17 +3,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { getVideos } from '../../../Services/GetAPI';
 import Loader from '../../../Components/LoaderComponent';
 
-const RecentLuckyDraws = ({ liveVideo, videoChunks, mobileVideos }) => {
+const RecentLuckyDraws = () => {
     const [videos, setVideos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [activeIndex, setActiveIndex] = useState(0);
 
     const handlePrevClick = () => {
-        setActiveIndex((prevIndex) => (prevIndex === 0 ? videoChunks.length - 1 : prevIndex - 1));
+        setActiveIndex((prevIndex) => (prevIndex === 0 ? videos.length - 1 : prevIndex - 1));
     };
 
     const handleNextClick = () => {
-        setActiveIndex((prevIndex) => (prevIndex === videoChunks.length - 1 ? 0 : prevIndex + 1));
+        setActiveIndex((prevIndex) => (prevIndex === videos.length - 1 ? 0 : prevIndex + 1));
     };
 
     const vieosBottom = [];
@@ -62,7 +62,7 @@ const RecentLuckyDraws = ({ liveVideo, videoChunks, mobileVideos }) => {
                             data-ride="carousel"
                         >
                             <ol className="carousel-indicators iframs-slider products-c">
-                                {vieosBottom.map((_, index) => (
+                                {videos.map((_, index) => (
                                     <li
                                         key={index}
                                         data-target="#carouselExampleIndicatoriframs"
@@ -126,7 +126,7 @@ const RecentLuckyDraws = ({ liveVideo, videoChunks, mobileVideos }) => {
                         data-ride="carousel"
                     >
                         <ol className="carousel-indicators iframs-slider products-c">
-                            {mobileVideos.map((_, index) => (
+                            {videos.map((_, index) => (
                                 <li
                                     key={index}
                                     data-target="#carouselExampleIndicatoriframsmobile"
@@ -136,7 +136,7 @@ const RecentLuckyDraws = ({ liveVideo, videoChunks, mobileVideos }) => {
                             ))}
                         </ol>
                         <div className="carousel-inner">
-                            {mobileVideos.map((video, index) => (
+                            {videos.map((video, index) => (
                                 <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
                                     <div className="row">
                                         <div className="col-md-3 col-12">

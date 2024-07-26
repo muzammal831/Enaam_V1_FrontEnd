@@ -43,7 +43,7 @@ function RewardsList() {
                 <div className="col-md-9">
                     <div className="container mt-5">
                         <h1 className="mb-4">Rewards List</h1>
-                        <Link to="/rewards/create" className="btn btn-primary mb-3">Add New Reward</Link>
+                        <Link to="/dashboard/rewards/create" className="btn btn-primary mb-3">Add New Reward</Link>
                         <table className="table table-striped table-bordered">
                             <thead>
                                 <tr>
