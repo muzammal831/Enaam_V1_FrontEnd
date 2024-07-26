@@ -79,7 +79,7 @@ const RecentLuckyDraws = () => {
                                         className={`carousel-item ${index === activeIndex ? 'active' : ''}`}
                                     >
                                         <div className="row">
-                                            {videos.map((video, i) => (
+                                            {videos?.map((video, i) => (
                                                 <div key={i} className="col-md-3 col-6">
                                                     <iframe
                                                         width="100%"
