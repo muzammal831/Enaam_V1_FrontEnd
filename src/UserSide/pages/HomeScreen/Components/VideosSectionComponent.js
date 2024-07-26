@@ -62,7 +62,7 @@ const RecentLuckyDraws = () => {
                             data-ride="carousel"
                         >
                             <ol className="carousel-indicators iframs-slider products-c">
-                                {videos.map((_, index) => (
+                                {vieosBottom.map((_, index) => (
                                     <li
                                         key={index}
                                         data-target="#carouselExampleIndicatoriframs"

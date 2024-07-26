@@ -25,11 +25,11 @@ function VideoList() {
     }, []);
 
     const handleEdit = (id) => {
-        navigate(`/videos/${id}/edit`);
+        navigate(`/dashboard/videos/${id}/edit`);
     };
 
     const handleView = (id) => {
-        navigate(`/videos/${id}`);
+        navigate(`/dashboard/videos/${id}`);
     };
 
     const handleDelete = async (id) => {
@@ -54,7 +54,7 @@ function VideoList() {
                 <div className="col-md-9">
                     <div className="container mt-5">
                         <h1>Videos List</h1>
-                        <button className="btn btn-primary mb-3" onClick={() => navigate('/videos/add')}>
+                        <button className="btn btn-primary mb-3" onClick={() => navigate("/dashboard/videos/add")}>
                             <i className="bi bi-plus-circle"></i> Add New Video
                         </button>
                         <table className="table">

@@ -26,11 +26,11 @@ function QuestionList() {
     }, []);
 
     const handleAnswerClick = (id) => {
-        navigate(`/questions/${id}/answer`);
+        navigate(`/dashboard/questions/${id}/answer`);
     };
 
     const handleEditClick = (id) => {
-        navigate(`/questions/${id}/edit`);
+        navigate(`/dashboard/questions/${id}/edit`);
     };
 
     const handleDeleteClick = async (id) => {
@@ -47,74 +47,73 @@ function QuestionList() {
     };
 
     return (
-     <div className="container-fluid ">
-    <div className="row text-start">
-        <div className="col-md-3">
+        <div className="container-fluid ">
+            <div className="row text-start">
+                <div className="col-md-3">
+                    <Sidebar />
+                </div>
+                <div className="col-md-9">
+                    <div className="container-fluid mt-5">
 
-     <Sidebar/>
-     </div>
-     <div className="col-md-9">
-     <div className="container-fluid mt-5">
-   
-            <h1>Questions List</h1>
-            <div className="d-flex justify-content-between mb-4">
+                        <h1>Questions List</h1>
+                        <div className="d-flex justify-content-between mb-4">
                             <div className="add-question-box shadow-sm p-3">
                                 <button
                                     className="btn btn-primary"
-                                    onClick={() => navigate('/questions/add')}
+                                    onClick={() => navigate("/dashboard/questions/add")}
                                 >
                                     <i className="bi bi-plus-lg"></i> Add New Question
                                 </button>
                             </div>
                         </div>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>Question</th>
-                        <th>Option 1</th>
-                        <th>Option 2</th>
-                        <th>Option 3</th>
-                        <th>Correct Option</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {questions.map((question) => (
-                        <tr key={question.id}>
-                            <td>{question.question_text}</td>
-                            <td>{question.option1}</td>
-                            <td>{question.option2}</td>
-                            <td>{question.option3}</td>
-                            <td>{question.right_option}</td>
-                            <td>
-                                <button
-                                    className="btn btn-link p-0 me-2"
-                                    onClick={() => handleAnswerClick(question.id)}
-                                >
-                                    <i className="bi bi-chat-dots"></i> {/* Answer icon */}
-                                </button>
-                                <button
-                                    className="btn btn-link p-0 me-2"
-                                    onClick={() => handleEditClick(question.id)}
-                                >
-                                    <i className="bi bi-pencil-square"></i> {/* Edit icon */}
-                                </button>
-                                <button
-                                    className="btn btn-link p-0 text-danger"
-                                    onClick={() => handleDeleteClick(question.id)}
-                                >
-                                    <i className="bi bi-trash"></i> {/* Delete icon */}
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th>Question</th>
+                                    <th>Option 1</th>
+                                    <th>Option 2</th>
+                                    <th>Option 3</th>
+                                    <th>Correct Option</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {questions.map((question) => (
+                                    <tr key={question.id}>
+                                        <td>{question.question_text}</td>
+                                        <td>{question.option1}</td>
+                                        <td>{question.option2}</td>
+                                        <td>{question.option3}</td>
+                                        <td>{question.right_option}</td>
+                                        <td>
+                                            <button
+                                                className="btn btn-link p-0 me-2"
+                                                onClick={() => handleAnswerClick(question.id)}
+                                            >
+                                                <i className="bi bi-chat-dots"></i> {/* Answer icon */}
+                                            </button>
+                                            <button
+                                                className="btn btn-link p-0 me-2"
+                                                onClick={() => handleEditClick(question.id)}
+                                            >
+                                                <i className="bi bi-pencil-square"></i> {/* Edit icon */}
+                                            </button>
+                                            <button
+                                                className="btn btn-link p-0 text-danger"
+                                                onClick={() => handleDeleteClick(question.id)}
+                                            >
+                                                <i className="bi bi-trash"></i> {/* Delete icon */}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
 
-     </div>
-    </div>
-    </div>
+                </div>
+            </div>
+        </div>
 
     );
 }

@@ -63,7 +63,7 @@ function BlogList() {
                     <div className="container mt-5">
                         <div className="d-flex justify-content-between align-items-center mb-3">
                             <h1>Blogs List</h1>
-                            <button className="btn btn-primary" onClick={() => navigate('/blogs/add')}>
+                            <button className="btn btn-primary" onClick={() => navigate("/dashboard/blogs/add")}>
                                 <i className="bi bi-plus-circle"></i> Add New Blog
                             </button>
                         </div>

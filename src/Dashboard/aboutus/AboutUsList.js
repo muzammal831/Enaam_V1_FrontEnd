@@ -26,7 +26,7 @@ function AboutUsList() {
     }, []);
 
     const handleEditClick = (id) => {
-        navigate(`/about-us/${id}/edit`);
+        navigate(`/dashboard/about-us/${id}/edit`);
     };
 
     const handleDeleteClick = async (id) => {
@@ -54,7 +54,7 @@ function AboutUsList() {
                             <h1>About Us List</h1>
                             <button
                                 className="btn btn-primary"
-                                onClick={() => navigate('/about-us/create')}
+                                onClick={() => navigate("/dashboard/about-us/create")}
                             >
                                 <i className="bi bi-plus-circle"></i> Add New
                             </button>
