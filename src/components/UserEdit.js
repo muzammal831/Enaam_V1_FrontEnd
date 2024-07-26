@@ -16,7 +16,7 @@
 //     useEffect(() => {
 //         const fetchUser = async () => {
 //             try {
-//                 const response = await axios.get(`http://localhost:8000/api/admin/users/${id}`, {
+//                 const response = await axios.get(`http://localhost:8000/api/users/${id}`, {
 //                     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
 //                 });
 //                 setUser(response.data);
@@ -33,7 +33,7 @@
 //     const handleUpdate = async (e) => {
 //         e.preventDefault();
 //         try {
-//             await axios.put(`http://localhost:8000/api/admin/users/${id}`, {
+//             await axios.put(`http://localhost:8000/api/users/${id}`, {
 //                 name,
 //                 email,
 //                 password,
@@ -41,7 +41,7 @@
 //             }, {
 //                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
 //             });
-//             navigate('/admin/dashboard');
+//             navigate('/dashboard');
 //         } catch (error) {
 //             console.error(error);
 //         }
@@ -81,7 +81,7 @@ function UserEdit() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/admin/users/${id}`, {
+                const response = await axios.get(`http://localhost:8000/api/users/${id}`, {
                     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                 });
                 setUser(response.data);
@@ -98,7 +98,7 @@ function UserEdit() {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:8000/api/admin/users/${id}`, {
+            await axios.put(`http://localhost:8000/api/users/${id}`, {
                 name,
                 email,
                 password,
@@ -106,7 +106,7 @@ function UserEdit() {
             }, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
-            navigate('/admin/dashboard');
+            navigate('/dashboard');
         } catch (error) {
             console.error(error);
         }

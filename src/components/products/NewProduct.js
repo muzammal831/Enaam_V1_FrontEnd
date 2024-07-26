@@ -22,7 +22,7 @@ function NewProduct() {
     useEffect(() => {
         const fetchRewards = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/admin/rewards', {
+                const response = await axios.get('http://localhost:8000/api/rewards', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -50,7 +50,7 @@ function NewProduct() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/admin/products', formData, {
+            const response = await axios.post('http://localhost:8000/api/products', formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ function NewProduct() {
             if (image) {
                 const imageData = new FormData();
                 imageData.append('image', image);
-                await axios.post(`http://localhost:8000/api/admin/products/${productId}/upload-image`, imageData, {
+                await axios.post(`http://localhost:8000/api/products/${productId}/upload-image`, imageData, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                         'Content-Type': 'multipart/form-data',
@@ -69,7 +69,7 @@ function NewProduct() {
                 });
             }
 
-            navigate('/admin/products');
+            navigate('/products');
         } catch (error) {
             console.error('Error:', error.response ? error.response.data : error.message);
         }

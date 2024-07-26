@@ -9,7 +9,7 @@ function RewardsList() {
     useEffect(() => {
         const fetchRewards = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/admin/rewards', {
+                const response = await axios.get('http://localhost:8000/api/rewards', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -25,7 +25,7 @@ function RewardsList() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/api/admin/rewards/${id}`, {
+            await axios.delete(`http://localhost:8000/api/rewards/${id}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
             setRewards(rewards.filter(reward => reward.id !== id));
@@ -43,7 +43,7 @@ function RewardsList() {
                 <div className="col-md-9">
                     <div className="container mt-5">
                         <h1 className="mb-4">Rewards List</h1>
-                        <Link to="/admin/rewards/create" className="btn btn-primary mb-3">Add New Reward</Link>
+                        <Link to="/rewards/create" className="btn btn-primary mb-3">Add New Reward</Link>
                         <table className="table table-striped table-bordered">
                             <thead>
                                 <tr>
@@ -62,7 +62,7 @@ function RewardsList() {
                                         <td><img src={`http://localhost:8000${reward.image_url}`} alt={reward.name} style={{ width: '100px' }} /></td>
                                         <td>{reward.description}</td>
                                         <td>
-                                            <Link to={`/admin/rewards/${reward.id}/edit`} className="btn btn-primary btn-sm">Edit</Link>
+                                            <Link to={`/rewards/${reward.id}/edit`} className="btn btn-primary btn-sm">Edit</Link>
                                             <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDelete(reward.id)}>Delete</button>
                                         </td>
                                     </tr>

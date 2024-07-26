@@ -9,7 +9,7 @@
 //     useEffect(() => {
 //         const fetchUsers = async () => {
 //             try {
-//                 const response = await axios.get('http://localhost:8000/api/admin/users', {
+//                 const response = await axios.get('http://localhost:8000/api/users', {
 //                     headers: {
 //                         Authorization: `Bearer ${localStorage.getItem('token')}`
 //                     }
@@ -28,7 +28,7 @@
 
 //     const handleDelete = async (id) => {
 //         try {
-//             await axios.delete(`http://localhost:8000/api/admin/users/${id}`, {
+//             await axios.delete(`http://localhost:8000/api/users/${id}`, {
 //                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
 //             });
 //             setUsers(users.filter(user => user.id !== id));
@@ -60,13 +60,13 @@
 //                         <tr key={user.id}>
 //                             <td>{index + 1}</td>
 //                             <td>
-//                                 <Link to={`/admin/users/${user.id}`} className="text-decoration-none">
+//                                 <Link to={`/users/${user.id}`} className="text-decoration-none">
 //                                     {user.name}
 //                                 </Link>
 //                             </td>
 //                             <td>{user.email}</td>
 //                             <td>
-//                                 <Link to={`/admin/users/${user.id}`} className="text-decoration-none">
+//                                 <Link to={`/users/${user.id}`} className="text-decoration-none">
 //                                     <button 
 //                                         className="btn btn-primary btn-sm" 
 //                                     >
@@ -104,7 +104,7 @@ function AdminDashboard() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/admin/users', {
+                const response = await axios.get('http://localhost:8000/api/users', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -123,7 +123,7 @@ function AdminDashboard() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/api/admin/users/${id}`, {
+            await axios.delete(`http://localhost:8000/api/users/${id}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
             setUsers(users.filter(user => user.id !== id));
@@ -155,13 +155,13 @@ function AdminDashboard() {
                             <tr key={user.id}>
                                 <td>{index + 1}</td>
                                 <td>
-                                    <Link to={`/admin/users/${user.id}`} className="text-decoration-none">
+                                    <Link to={`/users/${user.id}`} className="text-decoration-none">
                                         {user.name}
                                     </Link>
                                 </td>
                                 <td>{user.email}</td>
                                 <td>
-                                    <Link to={`/admin/users/${user.id}`} className="text-decoration-none">
+                                    <Link to={`/users/${user.id}`} className="text-decoration-none">
                                         <button 
                                             className="btn btn-primary btn-sm" 
                                         >

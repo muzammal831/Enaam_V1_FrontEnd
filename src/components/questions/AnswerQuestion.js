@@ -11,7 +11,7 @@
 //     useEffect(() => {
 //         const fetchQuestion = async () => {
 //             try {
-//                 const response = await axios.get(`http://localhost:8000/api/admin/questions/${id}`, {
+//                 const response = await axios.get(`http://localhost:8000/api/questions/${id}`, {
 //                     headers: {
 //                         Authorization: `Bearer ${localStorage.getItem('token')}`,
 //                     },
@@ -82,7 +82,7 @@ function AnswerQuestion() {
     useEffect(() => {
         const fetchQuestion = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/admin/questions/${id}`, {
+                const response = await axios.get(`http://localhost:8000/api/questions/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -102,7 +102,7 @@ function AnswerQuestion() {
             setResult(selectedOption === question.right_option ? 'Correct!' : 'Wrong answer!');
             // Redirect back to the question list after a short delay
             setTimeout(() => {
-                navigate('/admin/questions');
+                navigate('/questions');
             }, 2000); // Adjust the delay time as needed
         }
     };

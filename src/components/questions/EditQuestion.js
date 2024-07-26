@@ -17,7 +17,7 @@
 //     useEffect(() => {
 //         const fetchQuestion = async () => {
 //             try {
-//                 const response = await axios.get(`http://localhost:8000/api/admin/questions/${id}`, {
+//                 const response = await axios.get(`http://localhost:8000/api/questions/${id}`, {
 //                     headers: {
 //                         Authorization: `Bearer ${localStorage.getItem('token')}`,
 //                     },
@@ -46,12 +46,12 @@
 //     const handleSubmit = async (e) => {
 //         e.preventDefault();
 //         try {
-//             await axios.put(`http://localhost:8000/api/admin/questions/${id}`, formData, {
+//             await axios.put(`http://localhost:8000/api/questions/${id}`, formData, {
 //                 headers: {
 //                     Authorization: `Bearer ${localStorage.getItem('token')}`,
 //                 },
 //             });
-//             navigate('/admin/questions');
+//             navigate('/questions');
 //         } catch (error) {
 //             console.error('Error updating question:', error);
 //         }
@@ -146,7 +146,7 @@ function EditQuestion() {
     useEffect(() => {
         const fetchQuestion = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/admin/questions/${id}`, {
+                const response = await axios.get(`http://localhost:8000/api/questions/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -175,12 +175,12 @@ function EditQuestion() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:8000/api/admin/questions/${id}`, formData, {
+            await axios.put(`http://localhost:8000/api/questions/${id}`, formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
-            navigate('/admin/questions');
+            navigate('/questions');
         } catch (error) {
             console.error('Error updating question:', error);
         }

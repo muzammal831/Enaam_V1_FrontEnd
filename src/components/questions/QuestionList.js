@@ -11,7 +11,7 @@ function QuestionList() {
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/admin/questions', {
+                const response = await axios.get('http://localhost:8000/api/questions', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -26,16 +26,16 @@ function QuestionList() {
     }, []);
 
     const handleAnswerClick = (id) => {
-        navigate(`/admin/questions/${id}/answer`);
+        navigate(`/questions/${id}/answer`);
     };
 
     const handleEditClick = (id) => {
-        navigate(`/admin/questions/${id}/edit`);
+        navigate(`/questions/${id}/edit`);
     };
 
     const handleDeleteClick = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/api/admin/questions/${id}`, {
+            await axios.delete(`http://localhost:8000/api/questions/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
@@ -61,7 +61,7 @@ function QuestionList() {
                             <div className="add-question-box shadow-sm p-3">
                                 <button
                                     className="btn btn-primary"
-                                    onClick={() => navigate('/admin/questions/add')}
+                                    onClick={() => navigate('/questions/add')}
                                 >
                                     <i className="bi bi-plus-lg"></i> Add New Question
                                 </button>

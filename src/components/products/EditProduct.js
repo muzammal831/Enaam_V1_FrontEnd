@@ -22,7 +22,7 @@
 //     useEffect(() => {
 //         const fetchProduct = async () => {
 //             try {
-//                 const response = await axios.get(`http://localhost:8000/api/admin/products/${id}`, {
+//                 const response = await axios.get(`http://localhost:8000/api/products/${id}`, {
 //                     headers: {
 //                         Authorization: `Bearer ${localStorage.getItem('token')}`,
 //                     },
@@ -35,7 +35,7 @@
 
 //         const fetchRewards = async () => {
 //             try {
-//                 const response = await axios.get('http://localhost:8000/api/admin/rewards', {
+//                 const response = await axios.get('http://localhost:8000/api/rewards', {
 //                     headers: {
 //                         Authorization: `Bearer ${localStorage.getItem('token')}`,
 //                     },
@@ -64,7 +64,7 @@
 //     const handleSubmit = async (e) => {
 //         e.preventDefault();
 //         try {
-//             await axios.put(`http://localhost:8000/api/admin/products/${id}`, formData, {
+//             await axios.put(`http://localhost:8000/api/products/${id}`, formData, {
 //                 headers: {
 //                     Authorization: `Bearer ${localStorage.getItem('token')}`,
 //                     'Content-Type': 'application/json',
@@ -74,7 +74,7 @@
 //             if (image) {
 //                 const formDataImage = new FormData();
 //                 formDataImage.append('image', image);
-//                 await axios.post(`http://localhost:8000/api/admin/products/${id}/upload-image`, formDataImage, {
+//                 await axios.post(`http://localhost:8000/api/products/${id}/upload-image`, formDataImage, {
 //                     headers: {
 //                         Authorization: `Bearer ${localStorage.getItem('token')}`,
 //                         'Content-Type': 'multipart/form-data',
@@ -82,7 +82,7 @@
 //                 });
 //             }
 
-//             navigate('/admin/products');
+//             navigate('/products');
 //         } catch (error) {
 //             console.error('Error:', error.response ? error.response.data : error.message);
 //         }
@@ -168,7 +168,7 @@ function EditProduct() {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/admin/products/${id}`, {
+                const response = await axios.get(`http://localhost:8000/api/products/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -185,7 +185,7 @@ function EditProduct() {
 
         const fetchRewards = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/admin/rewards', {
+                const response = await axios.get('http://localhost:8000/api/rewards', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -219,7 +219,7 @@ function EditProduct() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:8000/api/admin/products/${id}`, formData, {
+            await axios.put(`http://localhost:8000/api/products/${id}`, formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json',
@@ -229,7 +229,7 @@ function EditProduct() {
             if (image) {
                 const formDataImage = new FormData();
                 formDataImage.append('image', image);
-                await axios.post(`http://localhost:8000/api/admin/products/${id}/upload-image`, formDataImage, {
+                await axios.post(`http://localhost:8000/api/products/${id}/upload-image`, formDataImage, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                         'Content-Type': 'multipart/form-data',
@@ -237,7 +237,7 @@ function EditProduct() {
                 });
             }
 
-            navigate('/admin/products');
+            navigate('/products');
         } catch (error) {
             console.error('Error:', error.response ? error.response.data : error.message);
         }

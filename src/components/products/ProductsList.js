@@ -9,7 +9,7 @@
 //     useEffect(() => {
 //         const fetchProducts = async () => {
 //             try {
-//                 const response = await axios.get('http://localhost:8000/api/admin/products', {
+//                 const response = await axios.get('http://localhost:8000/api/products', {
 //                     headers: {
 //                         Authorization: `Bearer ${localStorage.getItem('token')}`
 //                     }
@@ -26,7 +26,7 @@
 //     const handleDelete = async (id) => {
 //         if (window.confirm('Are you sure you want to delete this product?')) {
 //             try {
-//                 await axios.delete(`http://localhost:8000/api/admin/products/${id}`, {
+//                 await axios.delete(`http://localhost:8000/api/products/${id}`, {
 //                     headers: {
 //                         Authorization: `Bearer ${localStorage.getItem('token')}`
 //                     }
@@ -41,7 +41,7 @@
 //     return (
 //         <div className="container mt-5">
 //             <h1>Products List</h1>
-//             <Link to="/admin/products/create" className="btn btn-primary mb-3">Add New Product</Link>
+//             <Link to="/products/create" className="btn btn-primary mb-3">Add New Product</Link>
 //             <table className="table">
 //                 <thead>
 //                     <tr>
@@ -76,7 +76,7 @@
 //                             <td>{product.draw_date}</td>
 //                             <td>{product.reward ? product.reward.name : 'N/A'}</td>
 //                             <td>
-//                                 <Link to={`/admin/products/${product.id}/edit/`} className="btn btn-warning btn-sm me-2">Edit</Link>
+//                                 <Link to={`/products/${product.id}/edit/`} className="btn btn-warning btn-sm me-2">Edit</Link>
 //                                 <button onClick={() => handleDelete(product.id)} className="btn btn-danger btn-sm">Delete</button>
 //                             </td>
 //                         </tr>
@@ -100,7 +100,7 @@ function ProductsList() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/admin/products', {
+                const response = await axios.get('http://localhost:8000/api/products', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -117,7 +117,7 @@ function ProductsList() {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this product?')) {
             try {
-                await axios.delete(`http://localhost:8000/api/admin/products/${id}`, {
+                await axios.delete(`http://localhost:8000/api/products/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -138,7 +138,7 @@ function ProductsList() {
                 <div className="col-md-9">
                     <div className="container mt-5">
                         <h1>Products List</h1>
-                        <Link to="/admin/products/create" className="btn btn-primary mb-3">Add New Product</Link>
+                        <Link to="/products/create" className="btn btn-primary mb-3">Add New Product</Link>
                         <table className="table">
                             <thead>
                                 <tr>
@@ -173,7 +173,7 @@ function ProductsList() {
                                         <td>{product.draw_date}</td>
                                         <td>{product.reward ? product.reward.name : 'N/A'}</td>
                                         <td>
-                                            <Link to={`/admin/products/${product.id}/edit/`} className="btn btn-warning btn-sm me-2">Edit</Link>
+                                            <Link to={`/products/${product.id}/edit/`} className="btn btn-warning btn-sm me-2">Edit</Link>
                                             <button onClick={() => handleDelete(product.id)} className="btn btn-danger btn-sm">Delete</button>
                                         </td>
                                     </tr>

@@ -24,13 +24,13 @@ function AddQuestion() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8000/api/admin/questions', formData, {
+            await axios.post('http://localhost:8000/api/questions', formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json',
                 },
             });
-            navigate('/admin/questions');
+            navigate('/questions');
         } catch (error) {
             console.error('Error:', error.response ? error.response.data : error.message);
         }

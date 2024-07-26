@@ -20,7 +20,7 @@
 //     useEffect(() => {
 //         const fetchRewardOptions = async () => {
 //             try {
-//                 const response = await axios.get('http://localhost:8000/api/admin/rewards', {
+//                 const response = await axios.get('http://localhost:8000/api/rewards', {
 //                     headers: {
 //                         Authorization: `Bearer ${localStorage.getItem('token')}`
 //                     }
@@ -34,7 +34,7 @@
 //         if (id) {
 //             const fetchProduct = async () => {
 //                 try {
-//                     const response = await axios.get(`http://localhost:8000/api/admin/products/${id}`, {
+//                     const response = await axios.get(`http://localhost:8000/api/products/${id}`, {
 //                         headers: {
 //                             Authorization: `Bearer ${localStorage.getItem('token')}`
 //                         }
@@ -71,8 +71,8 @@
 
 //         try {
 //             const url = id 
-//                 ? `http://localhost:8000/api/admin/products/${id}`
-//                 : 'http://localhost:8000/api/admin/products';
+//                 ? `http://localhost:8000/api/products/${id}`
+//                 : 'http://localhost:8000/api/products';
 //             const method = id ? 'put' : 'post';
 //             await axios[method](url, formData, {
 //                 headers: {
@@ -80,7 +80,7 @@
 //                     'Content-Type': 'multipart/form-data'
 //                 }
 //             });
-//             navigate('/admin/products');
+//             navigate('/products');
 //         } catch (error) {
 //             console.error('Error:', error.response ? error.response.data : error.message);
 //         }
@@ -172,7 +172,7 @@ function ProductForm() {
     useEffect(() => {
         const fetchRewardOptions = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/admin/rewards', {
+                const response = await axios.get('http://localhost:8000/api/rewards', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -186,7 +186,7 @@ function ProductForm() {
         if (id) {
             const fetchProduct = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:8000/api/admin/products/${id}`, {
+                    const response = await axios.get(`http://localhost:8000/api/products/${id}`, {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem('token')}`
                         }
@@ -224,8 +224,8 @@ function ProductForm() {
 
         try {
             const url = id 
-                ? `http://localhost:8000/api/admin/products/${id}`
-                : 'http://localhost:8000/api/admin/products';
+                ? `http://localhost:8000/api/products/${id}`
+                : 'http://localhost:8000/api/products';
             const method = id ? 'put' : 'post';
             
             await axios[method](url, productData, {
@@ -239,7 +239,7 @@ function ProductForm() {
                 const formData = new FormData();
                 formData.append('image', image);
 
-                await axios.post(`http://localhost:8000/api/admin/products/${id}/upload`, formData, {
+                await axios.post(`http://localhost:8000/api/products/${id}/upload`, formData, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                         'Content-Type': 'multipart/form-data'
@@ -247,7 +247,7 @@ function ProductForm() {
                 });
             }
 
-            navigate('/admin/products');
+            navigate('/products');
         } catch (error) {
             console.error('Error:', error.response ? error.response.data : error.message);
         }

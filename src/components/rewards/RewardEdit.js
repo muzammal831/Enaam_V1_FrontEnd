@@ -14,7 +14,7 @@
 //     useEffect(() => {
 //         const fetchReward = async () => {
 //             try {
-//                 const response = await axios.get(`http://localhost:8000/api/admin/rewards/${id}`, {
+//                 const response = await axios.get(`http://localhost:8000/api/rewards/${id}`, {
 //                     headers: {
 //                         Authorization: `Bearer ${localStorage.getItem('token')}`
 //                     }
@@ -44,7 +44,7 @@
 //         }
     
 //         try {
-//             const response = await axios.put(`http://localhost:8000/api/admin/rewards/${id}`, formData, {
+//             const response = await axios.put(`http://localhost:8000/api/rewards/${id}`, formData, {
 //                 headers: {
 //                     Authorization: `Bearer ${localStorage.getItem('token')}`,
 //                     'Content-Type': 'multipart/form-data'
@@ -111,7 +111,7 @@ function RewardEdit() {
     useEffect(() => {
         const fetchReward = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/admin/rewards/${id}`, {
+                const response = await axios.get(`http://localhost:8000/api/rewards/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -142,7 +142,7 @@ function RewardEdit() {
 
         try {
             // First update text fields
-            await axios.put(`http://localhost:8000/api/admin/rewards/${id}`, textData, {
+            await axios.put(`http://localhost:8000/api/rewards/${id}`, textData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json'
@@ -151,7 +151,7 @@ function RewardEdit() {
 
             // Then upload file if exists
             if (image) {
-                await axios.post(`http://localhost:8000/api/admin/rewards/${id}/upload`, formData, {
+                await axios.post(`http://localhost:8000/api/rewards/${id}/upload`, formData, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                         'Content-Type': 'multipart/form-data'
@@ -159,7 +159,7 @@ function RewardEdit() {
                 });
             }
 
-            navigate('/admin/rewards'); // Redirect after successful update
+            navigate('/rewards'); // Redirect after successful update
         } catch (error) {
             console.error('Error:', error.response ? error.response.data : error.message);
         }

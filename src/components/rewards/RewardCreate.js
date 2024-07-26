@@ -17,14 +17,14 @@ function CreateReward() {
         formData.append('image', image);
 
         try {
-            await axios.post('http://localhost:8000/api/admin/rewards', formData, {
+            await axios.post('http://localhost:8000/api/rewards', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
             alert('Reward created successfully!');
-            navigate('/admin/rewards'); // Redirect to the rewards list page
+            navigate('/rewards'); // Redirect to the rewards list page
         } catch (error) {
             console.error(error);
             alert('Error creating reward.');
