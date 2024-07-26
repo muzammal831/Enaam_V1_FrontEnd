@@ -40,7 +40,7 @@ const ProductsListComponent = () => {
 
                     {loading ? (
                         <Loader />
-                    ) : (products.map((item, index) => <ProductCard
+                    ) : (products?.map((item, index) => <ProductCard
                         product={item}
                         buttonText="Add to Cart"
                         addProductToCart={addProductToCart}
