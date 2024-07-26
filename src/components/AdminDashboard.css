@@ -1,0 +1,16 @@
+.admin-dashboard {
+    display: flex;
+}
+
+.dashboard-content {
+    margin-left: 250px; /* Same width as the sidebar */
+    padding: 20px;
+    flex: 1;
+}
+
+.total-users-box {
+    background-color: #f8f9fa;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
