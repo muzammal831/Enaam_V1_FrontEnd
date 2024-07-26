@@ -73,7 +73,7 @@ const RecentLuckyDraws = () => {
                                 ))}
                             </ol>
                             <div className="carousel-inner">
-                                {videos.map((chunk, index) => (
+                                {videos?.map((chunk, index) => (
                                     <div
                                         key={index}
                                         className={`carousel-item ${index === activeIndex ? 'active' : ''}`}
@@ -126,7 +126,7 @@ const RecentLuckyDraws = () => {
                         data-ride="carousel"
                     >
                         <ol className="carousel-indicators iframs-slider products-c">
-                            {videos.map((_, index) => (
+                            {videos?.map((_, index) => (
                                 <li
                                     key={index}
                                     data-target="#carouselExampleIndicatoriframsmobile"
@@ -136,7 +136,7 @@ const RecentLuckyDraws = () => {
                             ))}
                         </ol>
                         <div className="carousel-inner">
-                            {videos.map((video, index) => (
+                            {videos?.map((video, index) => (
                                 <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
                                     <div className="row">
                                         <div className="col-md-3 col-12">
