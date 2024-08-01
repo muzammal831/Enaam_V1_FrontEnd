@@ -25,7 +25,7 @@ const FAQs = () => {
       <Header />
       <div style={{ height: "15hv" }} />
       <section className="home-header inner-page">
-        <div className="container">
+        <div className="container-fluid ">
           <h3 className="mb-4 text-center">FAQs</h3>
           <div className="row">
             <div className="col-md-12">

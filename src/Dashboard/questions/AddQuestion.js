@@ -30,7 +30,7 @@ function AddQuestion() {
                     'Content-Type': 'application/json',
                 },
             });
-            navigate('/questions');
+            navigate('/dashboard/questions');
         } catch (error) {
             console.error('Error:', error.response ? error.response.data : error.message);
         }

@@ -13,14 +13,14 @@ function Logout() {
                 }
             });
             localStorage.removeItem('token');
-            navigate('/login');
+            navigate('/');
         } catch (error) {
             console.error(error);
             alert('Error logging out.');
         }
     };
 
-    return <button onClick={handleLogout}>Logout</button>;
+    return <button className='btn btn-danger' onClick={handleLogout}>Logout</button>;
 }
 
 export default Logout;

@@ -32,7 +32,7 @@ function BannerDisplay({ platform }) {
                             <div key={banner.id} className="col-md-4 mb-4">
                                 <div className="card">
                                     <img
-                                        src={`http://localhost:8000/storage/banner_images/${banner.image}`}
+                                        src={banner.image}
                                         alt="Banner"
                                         className="card-img-top"
                                     />

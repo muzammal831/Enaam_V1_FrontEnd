@@ -12,5 +12,49 @@
     background-color: #f8f9fa;
     padding: 15px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    border-radius: 8px;
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: center;
+}
+
+.table thead th {
+    background-color:#23a3dd; /* Bootstrap primary color */
+    color: white;
+    border-bottom: 2px solid #0056b3; /* Darker shade for separation */
+}
+
+.table tbody tr {
+    background-color: #ffffff;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table .bi {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.table .bi:hover {
+    color: #007bff; /* Change to your desired hover color */
+}
+
+.table .text-primary {
+    color: #007bff !important;
+}
+
+.table .text-danger {
+    color: #dc3545 !important;
 }

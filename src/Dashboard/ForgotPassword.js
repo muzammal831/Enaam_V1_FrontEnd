@@ -1,3 +1,5 @@
+
+
 // import React, { useState } from 'react';
 // import axios from 'axios';
 
@@ -21,27 +23,38 @@
 //     };
 
 //     return (
-//         <div>
-//             <form onSubmit={handleSubmit}>
-//                 <input
-//                     type="email"
-//                     placeholder="Enter your email"
-//                     value={email}
-//                     onChange={(e) => setEmail(e.target.value)}
-//                     required
-//                 />
-//                 <button type="submit">Send Password Reset Link</button>
-//             </form>
-//             {message && <p style={{ color: 'green' }}>{message}</p>}
-//             {error && <p style={{ color: 'red' }}>{error}</p>}
+//         <div className="container mt-5">
+//             <div className="card p-4 shadow-sm">
+//                 <h2 className="mb-4">Forgot Password</h2>
+//                 <form onSubmit={handleSubmit}>
+//                     <div className="mb-3">
+//                         <label htmlFor="email" className="form-label">Enter your email</label>
+//                         <input
+//                             type="email"
+//                             id="email"
+//                             className="form-control"
+//                             placeholder="Enter your email"
+//                             value={email}
+//                             onChange={(e) => setEmail(e.target.value)}
+//                             required
+//                         />
+//                     </div>
+//                     <button type="submit" className="btn btn-primary">Send Password Reset Link</button>
+//                 </form>
+//                 {message && <p className="mt-3 text-success">{message}</p>}
+//                 {error && <p className="mt-3 text-danger">{error}</p>}
+//             </div>
 //         </div>
 //     );
 // }
 
 // export default ForgotPassword;
 
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import Header from '../UserSide/Components/HeaderComponent'; // Import Header
+import Footer from '../UserSide/Components/FooterCompnent'; // Import Footer
 
 function ForgotPassword() {
     const [email, setEmail] = useState('');
@@ -63,27 +76,35 @@ function ForgotPassword() {
     };
 
     return (
-        <div className="container mt-5">
-            <div className="card p-4 shadow-sm">
-                <h2 className="mb-4">Forgot Password</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                        <label htmlFor="email" className="form-label">Enter your email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            className="form-control"
-                            placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
+        <div className="App">
+            <Header /> {/* Add Header */}
+            <div className="container mt-5">
+                <div className="row justify-content-center mt-5">
+                    <div className="col-md-6 col-lg-6 mt-5">
+                        <div className="card p-4 shadow-lg rounded">
+                            <h2 className="mb-4 text-center">Forgot Password</h2>
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">Enter your email</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        className="form-control"
+                                        placeholder="Enter your email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <button type="submit" className="btn btn-primary w-100">Send Password Reset Link</button>
+                            </form>
+                            {message && <p className="mt-3 text-success text-center">{message}</p>}
+                            {error && <p className="mt-3 text-danger text-center">{error}</p>}
+                        </div>
                     </div>
-                    <button type="submit" className="btn btn-primary">Send Password Reset Link</button>
-                </form>
-                {message && <p className="mt-3 text-success">{message}</p>}
-                {error && <p className="mt-3 text-danger">{error}</p>}
+                </div>
             </div>
+            <Footer /> {/* Add Footer */}
         </div>
     );
 }

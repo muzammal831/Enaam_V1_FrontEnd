@@ -49,10 +49,10 @@ function QuestionList() {
     return (
         <div className="container-fluid ">
             <div className="row text-start">
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <Sidebar />
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-10">
                     <div className="container-fluid mt-5">
 
                         <h1>Questions List</h1>
@@ -85,7 +85,7 @@ function QuestionList() {
                                         <td>{question.option2}</td>
                                         <td>{question.option3}</td>
                                         <td>{question.right_option}</td>
-                                        <td>
+                                        <td className="d-flex">
                                             <button
                                                 className="btn btn-link p-0 me-2"
                                                 onClick={() => handleAnswerClick(question.id)}

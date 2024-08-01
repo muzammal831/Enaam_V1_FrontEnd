@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="w3l-footer-29-main">
       <div className="footer-29-w3l py-5">
-        <div className="container py-4 position-relative">
+        <div className="container-fluid col-lg-10 py-4 position-relative">
           <FooterTop />
         </div>
       </div>

@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const InsightSection = () => {
     return (
         <section className="w3l-bottom-grids-6 service-w3l-bg py-5 mb-50 how-it-works-wrapper" id="winners">
-            <div className="container py-md-5 py-4">
+            <div className="container-fluid py-md-5 py-4 col-lg-10">
                 <div className="row">
                     <div className="col-md-6 m-o-2">
                         <ul className="how-it-works-listing">

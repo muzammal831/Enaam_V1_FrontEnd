@@ -71,7 +71,7 @@ function EditAboutUs() {
                 });
             }
 
-            navigate('/about-us');
+            navigate('/dashboard/about-us');
         } catch (error) {
             console.error('Error updating About Us data:', error);
         }
@@ -82,10 +82,10 @@ function EditAboutUs() {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <Sidebar />
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-10">
                     <div className="container mt-5">
                         <div className="card shadow-sm">
                             <div className="card-body">
@@ -93,7 +93,7 @@ function EditAboutUs() {
                                     <h1>Edit About Us</h1>
                                     <button
                                         className="btn btn-secondary bi bi-arrow-left"
-                                        onClick={() => navigate('/about-us')}
+                                        onClick={() => navigate('/dashboard/about-us')}
                                     >
                                          Back to List
                                     </button>
@@ -130,7 +130,7 @@ function EditAboutUs() {
                                         />
                                         {aboutUs.about_image && (
                                             <img
-                                                src={`http://localhost:8000/storage/about_images/${aboutUs.about_image}`}
+                                                src={aboutUs.about_image}
                                                 alt="About Us"
                                                 width="100"
                                                 className="mt-2"

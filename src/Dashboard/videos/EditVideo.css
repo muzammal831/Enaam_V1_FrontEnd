@@ -47,3 +47,33 @@ h1 {
 .btn {
     border-radius: 8px; /* Rounded corners for buttons */
 }
+
+.edit-video-card {
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.img-thumbnail-preview {
+    margin-top: 10px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .edit-video-card {
+        padding: 20px;
+    }
+
+    .img-thumbnail-preview {
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .edit-video-card {
+        padding: 15px;
+    }
+}

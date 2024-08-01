@@ -1,9 +1,9 @@
-
+/* 
 .sidebar {
     width: 250px;
     height: 100vh;
-    background-color: #343a40;
-    color: #fff;
+    background-color: #f8f9fa;
+    color: #000;
     position: fixed;
     top: 0;
     left: 0;
@@ -23,7 +23,7 @@
 }
 
 .sidebar-link {
-    color: #adb5bd;
+    color: #272626;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -34,7 +34,7 @@
 
 .sidebar-link:hover,
 .sidebar-link.active {
-    background-color: #495057;
+    background-color: #56a4f1;
     color: #fff;
 }
 
@@ -68,4 +68,73 @@
 
 .submenu-list li a:hover {
     color: #fff;
+} */
+
+
+/* Sidebar.css */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px; /* Default width when open */
+    background-color: #f8f9fa;
+    color: #000;
+    transition: width 0.3s;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.sidebar.closed {
+    width: 0; /* Width when closed */
+    overflow: hidden;
+}
+
+.sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    left: 250px; /* Same as sidebar width when open */
+    background: #333;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1100;
+    transition: left 0.3s;
+}
+
+
+.sidebar.closed + .sidebar-toggle {
+    left: 0;
+
+}
+
+/* Sidebar menu styles */
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 15px;
+    color: #272626;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.sidebar-link:hover, .sidebar-link.active {
+    background-color: #56a4f1;
+    color: #000;
+}
+
+.sidebar-link i {
+    margin-right: 10px;
+}
+
+/* Sidebar submenu styles (if needed) */
+.sidebar-submenu {
+    padding: 15px;
 }

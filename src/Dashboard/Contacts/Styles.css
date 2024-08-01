@@ -1,0 +1,67 @@
+Styles.css
+
+/* General container styling */
+.container-fluid {
+    padding: 20px;
+}
+
+/* Row styling to accommodate sidebar */
+.row {
+    display: flex;
+}
+
+/* Sidebar styling */
+.col-md-2 {
+    padding: 15px;
+}
+
+/* Main content area */
+.col-md-10 {
+    padding: 15px;
+}
+
+/* Title styling */
+h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 28px;
+    color: #007bff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Table styling */
+.table {
+    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-striped {
+    background-color: #f9f9f9;
+}
+
+.table-dark {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive table */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Centered text for no data */
+.text-center {
+    text-align: center;
+}
+
+/* Loader styling (if needed) */
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

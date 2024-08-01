@@ -1,3 +1,6 @@
+
+
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -48,41 +51,68 @@ function VideoList() {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <Sidebar />
                 </div>
-                <div className="col-md-9">
-                    <div className="container mt-5">
+                <div className="col-md-10">
+                    <div className="container-fluid mt-5">
                         <h1>Videos List</h1>
                         <button className="btn btn-primary mb-3" onClick={() => navigate("/dashboard/videos/add")}>
                             <i className="bi bi-plus-circle"></i> Add New Video
                         </button>
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {videos.map(video => (
-                                    <tr key={video.id}>
-                                        <td>{video.title}</td>
-                                        <td>
-                                            <button className="btn btn-primary" onClick={() => handleView(video.id)}>
-                                                <i className="bi bi-eye"></i> View
-                                            </button>
-                                            <button className="btn btn-secondary mx-2" onClick={() => handleEdit(video.id)}>
-                                                <i className="bi bi-pencil"></i> Edit
-                                            </button>
-                                            <button className="btn btn-danger" onClick={() => handleDelete(video.id)}>
-                                                <i className="bi bi-trash"></i> Delete
-                                            </button>
-                                        </td>
+                        <div className="table-responsive">
+                            <table className="table table-striped shadow-sm rounded">
+                                <thead style={{ backgroundColor: '#f8f9fa' }}>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Thumbnail</th>
+                                        <th>User Name</th>
+                                        <th>Reward Name</th>
+                                        <th>Date Announced</th>
+                                        <th>Actions</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {videos.map(video => (
+                                        <tr key={video.id}>
+                                            <td>{video.title}</td>
+                                            <td>
+                                                {video.thumbnail && (
+                                                    <img 
+                                                        src={video.thumbnail} 
+                                                        alt={video.title} 
+                                                        style={{ width: '100px', height: '90px', borderRadius: '5px' }} 
+                                                    />
+                                                )}
+                                            </td>
+                                            <td>{video.user ? video.user.name : 'N/A'}</td>
+                                            <td>{video.reward ? video.reward.name : 'N/A'}</td>
+                                            <td>{video.date_announced ? new Date(video.date_announced).toLocaleDateString() : 'N/A'}</td>
+                                            <td>
+                                                <span 
+                                                    className="text-primary me-2" 
+                                                    onClick={() => handleView(video.id)} 
+                                                    style={{ fontSize: '1.5rem', cursor: 'pointer' }}>
+                                                    <i className="bi bi-eye"/>
+                                                </span>
+                                                <span 
+                                                    className="text-warning me-2" 
+                                                    onClick={() => handleEdit(video.id)} 
+                                                    style={{ fontSize: '1.5rem', cursor: 'pointer' }}>
+                                                    <i className="bi bi-pencil"/>
+                                                </span>
+                                                <span 
+                                                    className="text-danger" 
+                                                    onClick={() => handleDelete(video.id)} 
+                                                    style={{ fontSize: '1.5rem', cursor: 'pointer' }}>
+                                                    <i className="bi bi-trash"/>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

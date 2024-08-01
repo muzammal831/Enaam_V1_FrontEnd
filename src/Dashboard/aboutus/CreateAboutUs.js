@@ -35,7 +35,7 @@ function CreateAboutUs() {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
-            navigate('/about-us');
+            navigate('/dashboard/about-us');
         } catch (error) {
             console.error('Error creating About Us data:', error);
         }
@@ -44,10 +44,10 @@ function CreateAboutUs() {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <Sidebar />
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-10">
                     <div className="container mt-5">
                         <div className="card shadow-sm">
                             <div className="card-body">
@@ -55,7 +55,7 @@ function CreateAboutUs() {
                                     <h1>Create About Us</h1>
                                     <button
                                         className="btn btn-secondary"
-                                        onClick={() => navigate('/about-us')}
+                                        onClick={() => navigate('/dashboard/about-us')}
                                     >
                                         <i className="bi bi-arrow-left"></i> Back to List
                                     </button>

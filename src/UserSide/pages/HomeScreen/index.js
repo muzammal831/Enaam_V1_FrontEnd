@@ -11,9 +11,10 @@ function App() {
   return (
     <div className="App">
         <HomeBanner />
-        <WinnersCarousel/>
-        <RecentLuckyDraws/>
-        <InsightSection/>
+        {/* <WinnersCarousel/>
+         */}
+         <RecentLuckyDraws/>
+       <InsightSection/>
         <ProductsListComponent/>
         <Footer/>
     </div>

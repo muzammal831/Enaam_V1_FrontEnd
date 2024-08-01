@@ -25,21 +25,29 @@ function ViewBanner() {
         fetchBanner();
     }, [id]);
 
-    if (!banner) return <div>Loading...</div>;
+    if (!banner) return <div className="loading">Loading...</div>;
 
     return (
-        <div className="d-flex">
-            <Sidebar /> {/* Add the Sidebar */}
-            <div className="container mt-5 ms-5">
-                <h1 className="mb-4">{banner.description}</h1>
-                <a href={banner.product_link} target="_blank" rel="noopener noreferrer" className="btn btn-link">
-                    <i className="bi bi-link"></i> Product Link
-                </a>
-                <img
-                    src={`http://localhost:8000/storage/banner_images/${banner.image}`}
-                    alt="Banner"
-                    className="img-fluid mt-3"
-                />
+        <div className="container-fluid">
+            <div className="row">
+                <div className="col-md-2">
+                    <Sidebar /> {/* Add the Sidebar */}
+                </div>
+                <div className="col-md-10 mt-5">
+                    <div className="card banner-card shadow-sm rounded">
+                        <img
+                            src={banner.image}
+                            alt="Banner"
+                            className="card-img-top banner-image "
+                        />
+                        <div className="card-body text-center">
+                            <h1 className="card-title mb-3">{banner.description}</h1>
+                            <a href={banner.product_link} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                                <i className="bi bi-link"></i> Product Link
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -1,3 +1,6 @@
+
+
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +27,7 @@ function CreateReward() {
                 }
             });
             alert('Reward created successfully!');
-            navigate('/rewards'); // Redirect to the rewards list page
+            navigate('/dashboard/rewards'); // Redirect to the rewards list page
         } catch (error) {
             console.error(error);
             alert('Error creating reward.');
@@ -34,27 +37,50 @@ function CreateReward() {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <Sidebar /> {/* Add Sidebar */}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-10">
                     <div className="container mt-5">
-                        <h1 className="mb-4">Create Reward</h1>
-                        <form onSubmit={handleSubmit} encType="multipart/form-data">
-                            <div className="mb-3">
-                                <label htmlFor="name" className="form-label">Name</label>
-                                <input type="text" id="name" className="form-control" value={name} onChange={(e) => setName(e.target.value)} required />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="description" className="form-label">Description</label>
-                                <textarea id="description" className="form-control" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="image" className="form-label">Image</label>
-                                <input type="file" id="image" className="form-control" onChange={(e) => setImage(e.target.files[0])} required />
-                            </div>
-                            <button type="submit" className="btn btn-primary">Create</button>
-                        </form>
+                        <div className="p-4 bg-light rounded shadow-sm">
+                            <h1 className="mb-4 fs-4 fw-bold text-dark">Create Reward</h1>
+                            <form onSubmit={handleSubmit} encType="multipart/form-data">
+                                <div className="mb-3">
+                                    <label htmlFor="name" className="form-label">Name</label>
+                                    <input 
+                                        type="text" 
+                                        id="name" 
+                                        className="form-control" 
+                                        value={name} 
+                                        onChange={(e) => setName(e.target.value)} 
+                                        required 
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="description" className="form-label">Description</label>
+                                    <textarea 
+                                        id="description" 
+                                        className="form-control" 
+                                        value={description} 
+                                        onChange={(e) => setDescription(e.target.value)} 
+                                        required
+                                    ></textarea>
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="image" className="form-label">Image</label>
+                                    <input 
+                                        type="file" 
+                                        id="image" 
+                                        className="form-control" 
+                                        onChange={(e) => setImage(e.target.files[0])} 
+                                        required 
+                                    />
+                                </div>
+                                <button type="submit" className="btn btn-primary shadow-sm">
+                                    Create
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

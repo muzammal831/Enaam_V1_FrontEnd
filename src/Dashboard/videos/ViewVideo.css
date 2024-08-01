@@ -1,0 +1,30 @@
+.video-card {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+}
+
+.video-element {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+.video-title h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .video-title h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .video-title h1 {
+        font-size: 1.25rem;
+    }
+}
+

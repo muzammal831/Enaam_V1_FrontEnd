@@ -38,6 +38,8 @@
 *::after {
   box-sizing: border-box;
 }
+/* Add a blur effect to the background when the modal is open */
+
 
 html {
   font-family: sans-serif;
@@ -79,6 +81,12 @@ hr {
   height: 0;
   overflow: visible;
 }
+#main-content.blurred {
+  filter: blur(5px); /* Apply blur effect */
+  transition: filter 0.3s ease;
+}
+
+
 
 h1,
 h2,
@@ -105,6 +113,28 @@ abbr[data-original-title] {
   -webkit-text-decoration-skip-ink: none;
   text-decoration-skip-ink: none;
 }
+
+/* Custom styles to apply blur to the background when modal is open */
+.modal-blur {
+  filter: blur(5px);
+  transition: filter 0.3s ease-in-out;
+}
+
+/* Ensure the modal itself is not blurred */
+.modal-content {
+  z-index: 1050;
+  filter: none;
+}
+
+/* Add a semi-transparent background to the modal to highlight it */
+.modal-content {
+  background-color: rgba(255, 255, 255, 0.9); /* Adjust the opacity as needed */
+  backdrop-filter: blur(10px); /* Adjust the blur radius as needed */
+  border-radius: 10px; /* Optional: Add some border-radius for a smoother look */
+  padding: 20px; /* Optional: Add some padding for better spacing */
+}
+
+
 
 address {
   margin-bottom: 1rem;
@@ -6380,7 +6410,7 @@ a.close.disabled {
   border-radius: 25px;
 }
 
-.modal-backdrop {
+/* .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -6388,15 +6418,15 @@ a.close.disabled {
   width: 100vw;
   height: 100vh;
   background-color: #000;
-}
+} */
 
-.modal-backdrop.fade {
+/* .modal-backdrop.fade {
   opacity: 0;
 }
 
 .modal-backdrop.show {
   opacity: 0.5;
-}
+} */
 
 .modal-header {
   display: flex;

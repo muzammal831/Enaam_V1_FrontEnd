@@ -3,12 +3,12 @@ import { BASE_URL } from ".";
 
 export const getBanners = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/products/banners`);
+      const response = await fetch(`${BASE_URL}/banners`);
       const data = await response.json();
       return data;
     } catch (error) {
       console.error('Error fetching about information:', error);
-      return false;
+      return error;
     }
   };
 
@@ -58,7 +58,7 @@ export const getRecentLuckyDraws = async () => {
 
     export const getFaqs = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/about/getFAQs`);
+        const response = await fetch(`${BASE_URL}/faqs`);
         const data = await response.json();
         return data;
       } catch (error) {
@@ -69,7 +69,7 @@ export const getRecentLuckyDraws = async () => {
 
     export const getProducts = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/products/getProducts`);
+        const response = await fetch(`${BASE_URL}/products`);
         const data = await response.json();
         return data;
       } catch (error) {

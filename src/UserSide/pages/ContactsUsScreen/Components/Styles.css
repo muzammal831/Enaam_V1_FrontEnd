@@ -1,0 +1,29 @@
+/* Header styling */
+.header {
+    margin-bottom: 20px;
+  }
+  
+  .navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .navbar-nav .nav-link {
+    margin-right: 15px;
+  }
+  
+  /* Footer styling */
+  .footer {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .footer p {
+    margin: 0;
+    color: #6c757d;
+  }
+  

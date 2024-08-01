@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from "react";
 import "../../../css/Styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,25 +14,14 @@ const HomeBanner = () => {
   useEffect(() => {
     getBanners()
       .then((data) => {
-        if (window.innerWidth <= 768) {
-          const mobileBanners = data.filter(
-            (banner) => banner.type !== "DESKTOP"
-          );
-          setBanners(mobileBanners);
-          console.log(mobileBanners);
-        } else {
-          const desktopBanners = data.filter(
-            (banner) => banner.type === "DESKTOP"
-          );
-          setBanners(desktopBanners);
-        }
+        setBanners(data || []);
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching FAQs:", error);
+        console.error("Error fetching banners:", error);
         setLoading(false);
       });
-  }, [banners]);
+  }, []);
 
   return (
     <div className="home-header">
@@ -49,38 +40,34 @@ const HomeBanner = () => {
               ) : (
                 <>
                   <ol className="carousel-indicators">
-                    {banners
-                      ?.filter((item) => item.type === "DESKTOP")
-                      .map((item, index) => (
-                        <li
-                          key={index}
-                          data-target="#carouselExampleIndicators"
-                          data-slide-to={index}
-                          className={index === 0 ? "active" : ""}
-                        ></li>
-                      ))}
+                    {Array.isArray(banners) && banners.map((item, index) => (
+                      <li
+                        key={index}
+                        data-target="#carouselExampleIndicators"
+                        data-slide-to={index}
+                        className={index === 0 ? "active" : ""}
+                      ></li>
+                    ))}
                   </ol>
                   <div className="carousel-inner">
-                    {banners
-                      ?.filter((item) => item.type === "DESKTOP")
-                      .map((banner, index) => (
-                        <div
-                          key={index}
-                          className={`carousel-item ${index === 0 ? "active" : ""
-                            }`}
-                        >
-                          <div className="row align-items-center">
-                            <div className="col-12">
-                              <img
-                                style={{ borderRadius: 20 }}
-                                className="img-fluid"
-                                src={banner.bannerImage}
-                                alt=""
-                              />
-                            </div>
+                    {Array.isArray(banners) && banners.map((banner, index) => (
+                      <div
+                        key={index}
+                        className={`carousel-item ${index === 0 ? "active" : ""
+                          }`}
+                      >
+                        <div className="row align-items-center">
+                          <div className="col-12">
+                            <img
+                              style={{ borderRadius: 20 }}
+                              className="img-fluid"
+                              src={banner?.image}
+                              alt=""
+                            />
                           </div>
                         </div>
-                      ))}
+                      </div>
+                    ))}
                   </div>
                 </>
               )}
@@ -93,9 +80,9 @@ const HomeBanner = () => {
                 <span
                   className="carousel-control-prev-icon"
                   aria-hidden="true"
-                  style={{borderRadius:"5px"}}
+                  style={{ borderRadius: "5px" }}
                 ></span>
-                <span className="sr-only" >Previous</span>
+                <span className="sr-only">Previous</span>
               </a>
               <a
                 className="carousel-control-next"
@@ -106,7 +93,7 @@ const HomeBanner = () => {
                 <span
                   className="carousel-control-next-icon"
                   aria-hidden="true"
-                  style={{borderRadius:"5px"}}
+                  style={{ borderRadius: "5px" }}
                 ></span>
                 <span className="sr-only">Next</span>
               </a>

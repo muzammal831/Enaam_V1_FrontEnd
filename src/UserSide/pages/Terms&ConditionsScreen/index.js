@@ -8,7 +8,7 @@ const TermsConditions = () => {
     <div>
       <Header />
       <div style={{ height: "15vh" }} />
-      <div class="container " style={{ marginBottom: "30px" }}>
+      <div class="container-fluid " style={{ marginBottom: "30px" }}>
         <div class="row">
           <div class="col-lg-8 offset-lg-2 ">
             <div class="card  p-4 glow">

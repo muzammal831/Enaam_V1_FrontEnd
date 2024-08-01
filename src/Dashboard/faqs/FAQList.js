@@ -1,3 +1,7 @@
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -48,50 +52,51 @@ function FAQList() {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-lg-2 col-md-4 col-sm-12">
                     <Sidebar />
                 </div>
-                <div className="col-md-9">
-                    <div className="container mt-5">
-                        <div className="d-flex justify-content-between align-items-center mb-4">
-                            <h1>FAQ List</h1>
-                            <button
-                                className="btn btn-success"
-                                onClick={handleAddClick}
-                            >
-                                Add New FAQ
-                            </button>
-                        </div>
-                        <div className="bg-white p-4 rounded shadow-sm">
-                            <table className="table">
-                                <thead>
-                                    <tr>
-                                        <th>Question</th>
-                                        <th>Answer</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {faqs.map((faq) => (
-                                        <tr key={faq.id}>
-                                            <td>{faq.question}</td>
-                                            <td>{faq.answer}</td>
-                                            <td>
-                                                <button 
-                                                    className="btn btn-warning me-2" 
-                                                    onClick={() => handleEditClick(faq.id)}>
-                                                    Edit
-                                                </button>
-                                                <button 
-                                                    className="btn btn-danger" 
-                                                    onClick={() => handleDeleteClick(faq.id)}>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                <div className="col-lg-10 col-md-8 col-sm-12">
+                    <div className="container-fluid mt-5">
+                        <div className="card shadow-sm mb-4">
+                            <div className="card-body">
+                                <div className="d-flex justify-content-between align-items-center mb-4">
+                                    <h1>FAQ List</h1>
+                                    <button className="btn btn-success" onClick={handleAddClick}>
+                                        Add New FAQ
+                                    </button>
+                                </div>
+                                <div className="table-responsive">
+                                    <table className="table table-hover">
+                                        <thead className="table-dark">
+                                            <tr>
+                                                <th scope="col">Question</th>
+                                                <th scope="col">Answer</th>
+                                                <th scope="col">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {faqs.map((faq) => (
+                                                <tr key={faq.id}>
+                                                    <td>{faq.question}</td>
+                                                    <td>{faq.answer}</td>
+                                                    <td>
+                                                        <button 
+                                                            className="btn btn-warning me-2" 
+                                                            onClick={() => handleEditClick(faq.id)}>
+                                                            Edit
+                                                        </button>
+                                                        <button 
+                                                            className="btn btn-danger" 
+                                                            onClick={() => handleDeleteClick(faq.id)}>
+                                                            Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

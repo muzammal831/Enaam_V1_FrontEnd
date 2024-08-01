@@ -1,6 +1,5 @@
 
-
-//     import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
 // import { useParams, useNavigate } from 'react-router-dom';
 // import Sidebar from '../sidebar/Sidebar'; // Import Sidebar component
@@ -16,6 +15,7 @@
 //         reward_id: '',
 //     });
 //     const [image, setImage] = useState(null);
+//     const [imagePreview, setImagePreview] = useState(null);
 //     const [rewards, setRewards] = useState([]);
 //     const navigate = useNavigate();
 
@@ -28,6 +28,10 @@
 //                     },
 //                 });
 //                 setFormData(response.data);
+//                 // Set the current image URL for preview
+//                 if (response.data.image_url) {
+//                     setImagePreview(response.data.image_url);
+//                 }
 //             } catch (error) {
 //                 console.error('Error fetching product:', error);
 //             }
@@ -58,7 +62,12 @@
 //     };
 
 //     const handleImageChange = (e) => {
-//         setImage(e.target.files[0]);
+//         const file = e.target.files[0];
+//         setImage(file);
+
+//         // Create a URL for the selected image to display a preview
+//         const previewUrl = URL.createObjectURL(file);
+//         setImagePreview(previewUrl);
 //     };
 
 //     const handleSubmit = async (e) => {
@@ -133,6 +142,11 @@
 //                             <div className="mb-3">
 //                                 <label htmlFor="image" className="form-label">Image</label>
 //                                 <input type="file" className="form-control" id="image" name="image" onChange={handleImageChange} />
+//                                 {imagePreview && (
+//                                     <div className="mt-3">
+//                                         <img src={imagePreview} alt="Image preview" style={{ width: '200px', height: 'auto' }} />
+//                                     </div>
+//                                 )}
 //                             </div>
 //                             <button type="submit" className="btn btn-primary">Save Changes</button>
 //                         </form>
@@ -174,7 +188,6 @@ function EditProduct() {
                     },
                 });
                 setFormData(response.data);
-                // Set the current image URL for preview
                 if (response.data.image_url) {
                     setImagePreview(response.data.image_url);
                 }
@@ -210,8 +223,6 @@ function EditProduct() {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setImage(file);
-
-        // Create a URL for the selected image to display a preview
         const previewUrl = URL.createObjectURL(file);
         setImagePreview(previewUrl);
     };
@@ -237,7 +248,7 @@ function EditProduct() {
                 });
             }
 
-            navigate('/products');
+            navigate('/dashboard/products');
         } catch (error) {
             console.error('Error:', error.response ? error.response.data : error.message);
         }
@@ -246,56 +257,114 @@ function EditProduct() {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <Sidebar /> {/* Add Sidebar */}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-10">
                     <div className="container mt-5">
-                        <h1>Edit Product</h1>
-                        <form onSubmit={handleSubmit}>
-                            {/* Form fields */}
-                            <div className="mb-3">
-                                <label htmlFor="name" className="form-label">Name</label>
-                                <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange} required />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="price" className="form-label">Price</label>
-                                <input type="number" className="form-control" id="price" name="price" value={formData.price} onChange={handleChange} required />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="quantity" className="form-label">Quantity</label>
-                                <input type="number" className="form-control" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} required />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="description" className="form-label">Description</label>
-                                <textarea className="form-control" id="description" name="description" value={formData.description} onChange={handleChange} required></textarea>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="draw_date" className="form-label">Draw Date</label>
-                                <input type="date" className="form-control" id="draw_date" name="draw_date" value={formData.draw_date} onChange={handleChange} />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="reward_id" className="form-label">Reward</label>
-                                <select className="form-control" id="reward_id" name="reward_id" value={formData.reward_id} onChange={handleChange} required>
-                                    <option value="">Select Reward</option>
-                                    {rewards.map((reward) => (
-                                        <option key={reward.id} value={reward.id}>
-                                            {reward.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="image" className="form-label">Image</label>
-                                <input type="file" className="form-control" id="image" name="image" onChange={handleImageChange} />
-                                {imagePreview && (
-                                    <div className="mt-3">
-                                        <img src={imagePreview} alt="Image preview" style={{ width: '200px', height: 'auto' }} />
-                                    </div>
-                                )}
-                            </div>
-                            <button type="submit" className="btn btn-primary">Save Changes</button>
-                        </form>
+                        <h1 className="mb-4">Edit Product</h1>
+                        <div className="card shadow-sm rounded p-4">
+                            <form onSubmit={handleSubmit}>
+                                {/* Form fields */}
+                                <div className="mb-3">
+                                    <label htmlFor="name" className="form-label">Name</label>
+                                    <input 
+                                        type="text" 
+                                        className="form-control shadow-sm rounded" 
+                                        id="name" 
+                                        name="name" 
+                                        value={formData.name} 
+                                        onChange={handleChange} 
+                                        required 
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="price" className="form-label">Price</label>
+                                    <input 
+                                        type="number" 
+                                        className="form-control shadow-sm rounded" 
+                                        id="price" 
+                                        name="price" 
+                                        value={formData.price} 
+                                        onChange={handleChange} 
+                                        required 
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="quantity" className="form-label">Quantity</label>
+                                    <input 
+                                        type="number" 
+                                        className="form-control shadow-sm rounded" 
+                                        id="quantity" 
+                                        name="quantity" 
+                                        value={formData.quantity} 
+                                        onChange={handleChange} 
+                                        required 
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="description" className="form-label">Description</label>
+                                    <textarea 
+                                        className="form-control shadow-sm rounded" 
+                                        id="description" 
+                                        name="description" 
+                                        value={formData.description} 
+                                        onChange={handleChange} 
+                                        required 
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="draw_date" className="form-label">Draw Date</label>
+                                    <input 
+                                        type="date" 
+                                        className="form-control shadow-sm rounded" 
+                                        id="draw_date" 
+                                        name="draw_date" 
+                                        value={formData.draw_date} 
+                                        onChange={handleChange} 
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="reward_id" className="form-label">Reward</label>
+                                    <select 
+                                        className="form-control shadow-sm rounded" 
+                                        id="reward_id" 
+                                        name="reward_id" 
+                                        value={formData.reward_id} 
+                                        onChange={handleChange} 
+                                        required
+                                    >
+                                        <option value="">Select Reward</option>
+                                        {rewards.map((reward) => (
+                                            <option key={reward.id} value={reward.id}>
+                                                {reward.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="image" className="form-label">Image</label>
+                                    <input 
+                                        type="file" 
+                                        className="form-control shadow-sm rounded" 
+                                        id="image" 
+                                        name="image" 
+                                        onChange={handleImageChange} 
+                                    />
+                                    {imagePreview && (
+                                        <div className="mt-3">
+                                            <img 
+                                                src={imagePreview} 
+                                                alt="Image preview" 
+                                                className="img-fluid rounded shadow-sm" 
+                                                style={{ maxWidth: '300px', height: 'auto' }} 
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                                <button type="submit" className="btn btn-primary shadow-sm rounded">Save Changes</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
