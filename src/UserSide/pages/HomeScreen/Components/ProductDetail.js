@@ -16,7 +16,7 @@ const ProductDetail = () => {
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/products/${id}`);
+                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/products/${id}`);
                 setProduct(response.data);
                 setLoading(false);
             } catch (error) {
@@ -32,10 +32,10 @@ const ProductDetail = () => {
         try {
             if (!localStorage.getItem('token')) {
                 alert('You need to login first');
-                navigate('/dashboard/login');
+                navigate('/');
                 return;
             }
-            const response = await axios.post('http://localhost:8000/api/cart/add', {
+            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/cart/add', {
                 product_id: product.id,
                 quantity: 1, // Default quantity
                 price: product.price
@@ -126,7 +126,7 @@ const ProductDetail = () => {
                                         <div className="detail-img">
                                             <img src={product.image} alt={product.name} />
                                         </div>
-                                        <h4>Spend ${product.price}</h4>
+                                        <h4>Spend PKR{product.price}</h4>
                                         <p>{product.description}</p>
                                     </div>
                                 </div>

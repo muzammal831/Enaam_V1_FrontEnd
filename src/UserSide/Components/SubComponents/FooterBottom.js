@@ -4,7 +4,7 @@ import "../../css/Styles.css"
 const FooterBottom = () => {
   return (
     <div className="w3l-copyright">
-      <div className="container">
+      <div className="container-fluid col-lg-10">
         <div className="row bottom-copies align-items-center">
           <p className="col-lg-8 copy-footer-29" style={{display:"flex",alignItems:"center"}}>
             <img src={require("../../images/ammanah.png")} alt="" /> © 2023 — enaam.pk. All Rights Reserved.

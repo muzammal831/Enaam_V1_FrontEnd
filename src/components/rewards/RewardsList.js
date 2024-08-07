@@ -9,7 +9,7 @@ function RewardsList() {
     useEffect(() => {
         const fetchRewards = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/admin/rewards', {
+                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/admin/rewards', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -25,7 +25,7 @@ function RewardsList() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/api/admin/rewards/${id}`, {
+            await axios.delete(`http://3.138.38.248/Enaam_Backend_V1/public/api/admin/rewards/${id}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
             setRewards(rewards.filter(reward => reward.id !== id));
@@ -59,7 +59,7 @@ function RewardsList() {
                                     <tr key={reward.id}>
                                         <td>{reward.id}</td>
                                         <td>{reward.name}</td>
-                                        <td><img src={`http://localhost:8000${reward.image_url}`} alt={reward.name} style={{ width: '100px' }} /></td>
+                                        <td><img src={`http://3.138.38.248/Enaam_Backend_V1/public${reward.image_url}`} alt={reward.name} style={{ width: '100px' }} /></td>
                                         <td>{reward.description}</td>
                                         <td>
                                             <Link to={`/admin/rewards/${reward.id}/edit`} className="btn btn-primary btn-sm">Edit</Link>

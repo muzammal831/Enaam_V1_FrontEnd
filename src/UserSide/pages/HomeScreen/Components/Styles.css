@@ -1,0 +1,26 @@
+.answer-item {
+    position: relative; /* Ensure proper positioning of pseudo-element */
+    padding: 10px;
+    margin: 5px;
+    border-radius: 50%; /* Optional: rounded corners */
+}
+
+.answer-item .answer-inputs {
+    position: absolute;
+    left: -9999px; /* Hide the actual radio button */
+}
+
+.answer-item .answer-block {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border: 5px solid transparent; /* Default border */
+    border-radius: 100px; /* Optional: rounded corners */
+    cursor: pointer; /* Pointer cursor for clickable items */
+    transition: border 0.3s; /* Smooth transition */
+}
+
+.answer-item.active .answer-block {
+    border: 5px solid #007bff; /* Active border color */
+    background-color: #f0f8ff; /* Optional: background color when active */
+}

@@ -1,7 +1,12 @@
+
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../sidebar/Sidebar'; // Ensure this is the correct path
+import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
 
 function CreateAboutUs() {
     const [formData, setFormData] = useState({
@@ -9,6 +14,8 @@ function CreateAboutUs() {
         about_detail: '',
         about_image: null,
     });
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Sidebar state
+    const [loading, setLoading] = useState(false); // Add loading state
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -21,6 +28,8 @@ function CreateAboutUs() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Set loading to true before starting submission
+
         const form = new FormData();
         form.append('heading', formData.heading);
         form.append('about_detail', formData.about_detail);
@@ -29,77 +38,85 @@ function CreateAboutUs() {
         }
 
         try {
-            await axios.post('http://localhost:8000/api/about-us', form, {
+            await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/about-us', form, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
+            toast.success('About Us data created successfully!');
             navigate('/dashboard/about-us');
         } catch (error) {
-            console.error('Error creating About Us data:', error);
+            console.error('Error creating About Us data:', error.response ? error.response.data : error.message);
+            toast.error(`Error: ${error.response ? error.response.data.message : 'Failed to create About Us data.'}`);
+        } finally {
+            setLoading(false); // Set loading to false after submission
         }
+    };
+
+    const handleSidebarToggle = (isOpen) => {
+        setIsSidebarOpen(isOpen);
     };
 
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
-                    <Sidebar />
-                </div>
-                <div className="col-md-10">
-                    <div className="container mt-5">
-                        <div className="card shadow-sm">
-                            <div className="card-body">
-                                <div className="d-flex justify-content-between align-items-center mb-4">
-                                    <h1>Create About Us</h1>
-                                    <button
-                                        className="btn btn-secondary"
-                                        onClick={() => navigate('/dashboard/about-us')}
-                                    >
-                                        <i className="bi bi-arrow-left"></i> Back to List
-                                    </button>
+                <Sidebar onToggleSidebar={handleSidebarToggle} />
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
+                    <div className="container-fluid p-5 mt-5">
+                        <div className="p-4 bg-light rounded shadow-sm">
+                            {loading ? (
+                                <div className="d-flex justify-content-center">
+                                    <Loader /> {/* Show loader while loading */}
                                 </div>
-                                <form onSubmit={handleSubmit}>
-                                    <div className="mb-3">
-                                        <label className="form-label">Heading</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="heading"
-                                            value={formData.heading}
-                                            onChange={handleChange}
-                                            required
-                                        />
+                            ) : (
+                                <div>
+                                    <div className="d-flex justify-content-between align-items-center mb-4">
+                                        <h1 className="mb-4 fs-4 fw-bold text-dark">Create About Us</h1>
+                                     
                                     </div>
-                                    <div className="mb-3">
-                                        <label className="form-label">About Detail</label>
-                                        <textarea
-                                            className="form-control"
-                                            name="about_detail"
-                                            value={formData.about_detail}
-                                            onChange={handleChange}
-                                            required
-                                        ></textarea>
-                                    </div>
-                                    <div className="mb-3">
-                                        <label className="form-label">About Image</label>
-                                        <input
-                                            type="file"
-                                            className="form-control"
-                                            name="about_image"
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-                                    <button type="submit" className="btn btn-primary bi bi-plus">
-                                       Create
-                                    </button>
-                                </form>
-                            </div>
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="mb-3">
+                                            <label className="form-label">Heading</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="heading"
+                                                value={formData.heading}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                        </div>
+                                        <div className="mb-3">
+                                            <label className="form-label">About Detail</label>
+                                            <textarea
+                                                className="form-control"
+                                                name="about_detail"
+                                                value={formData.about_detail}
+                                                onChange={handleChange}
+                                                required
+                                            ></textarea>
+                                        </div>
+                                        <div className="mb-3">
+                                            <label className="form-label">About Image</label>
+                                            <input
+                                                type="file"
+                                                className="form-control"
+                                                name="about_image"
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <button type="submit" className="btn btn-primary shadow-sm bi bi-plus">
+                                            Create
+                                        </button>
+                                    </form>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
             </div>
+            <ToastContainer /> {/* Add ToastContainer to show toast notifications */}
         </div>
     );
 }

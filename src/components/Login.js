@@ -1,55 +1,3 @@
-// import React, { useState } from 'react';
-// import axios from 'axios';
-// import { Link } from 'react-router-dom';
-
-// function Login() {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const [message, setMessage] = useState('');
-//     const [error, setError] = useState('');
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         try {
-//             const response = await axios.post('http://localhost:8000/api/login', {
-//                 email,
-//                 password
-//             });
-//             localStorage.setItem('token', response.data.token);
-//             setMessage('Login successful!');
-//             setError('');
-//         } catch (error) {
-//             setError('Login failed. Please check your credentials and try again.');
-//             setMessage('');
-//         }
-//     };
-
-//     return (
-//         <div>
-//             <form onSubmit={handleSubmit}>
-//                 <input
-//                     type="email"
-//                     placeholder="Email"
-//                     onChange={(e) => setEmail(e.target.value)}
-//                     required
-//                 />
-//                 <input
-//                     type="password"
-//                     placeholder="Password"
-//                     onChange={(e) => setPassword(e.target.value)}
-//                     required
-//                 />
-//                 <button type="submit">Login</button>
-//             </form>
-//             {message && <p style={{ color: 'green' }}>{message}</p>}
-//             {error && <p style={{ color: 'red' }}>{error}</p>}
-//             <Link to="/forgot-password">Forgot Password?</Link>
-//         </div>
-//     );
-// }
-
-// export default Login;
-
 
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -64,7 +12,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/login', {
+            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/login', {
                 email,
                 password
             });

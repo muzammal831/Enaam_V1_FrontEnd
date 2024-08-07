@@ -1,160 +1,13 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import { useParams, useNavigate } from 'react-router-dom';
-// import './EditVideo.css'; // Import the CSS file for styling
-// import Sidebar from '../sidebar/Sidebar'; // Import the Sidebar component
 
-// function EditVideo() {
-//     const { id } = useParams();
-//     const navigate = useNavigate();
-//     const [video, setVideo] = useState(null);
-//     const [formData, setFormData] = useState({
-//         title: '',
-//         thumbnail: null,
-//         video: null,
-//     });
-
-//     useEffect(() => {
-//         const fetchVideo = async () => {
-//             try {
-//                 const response = await axios.get(`http://localhost:8000/api/videos/${id}`, {
-//                     headers: {
-//                         Authorization: `Bearer ${localStorage.getItem('token')}`,
-//                     },
-//                 });
-//                 setVideo(response.data);
-//                 setFormData({
-//                     title: response.data.title,
-//                     thumbnail: null, // We don't prefill this with the existing thumbnail
-//                     video: null, // We don't prefill this with the existing video
-//                 });
-//             } catch (error) {
-//                 console.error('Error fetching video:', error);
-//             }
-//         };
-
-//         fetchVideo();
-//     }, [id]);
-
-//     const handleChange = (e) => {
-//         const { name, value, files } = e.target;
-//         setFormData({
-//             ...formData,
-//             [name]: files ? files[0] : value,
-//         });
-//     };
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-
-//         try {
-//             await axios.put(`http://localhost:8000/api/videos/${id}`, {
-//                 title: formData.title,
-//             }, {
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                     Authorization: `Bearer ${localStorage.getItem('token')}`,
-//                 },
-//             });
-
-//             if (formData.thumbnail) {
-//                 const thumbnailFormData = new FormData();
-//                 thumbnailFormData.append('thumbnail', formData.thumbnail);
-
-//                 await axios.post(`http://localhost:8000/api/videos/${id}/upload-thumbnail`, thumbnailFormData, {
-//                     headers: {
-//                         'Content-Type': 'multipart/form-data',
-//                         Authorization: `Bearer ${localStorage.getItem('token')}`,
-//                     },
-//                 });
-//             }
-
-//             if (formData.video) {
-//                 const videoFormData = new FormData();
-//                 videoFormData.append('video', formData.video);
-
-//                 await axios.post(`http://localhost:8000/api/videos/${id}/upload-video`, videoFormData, {
-//                     headers: {
-//                         'Content-Type': 'multipart/form-data',
-//                         Authorization: `Bearer ${localStorage.getItem('token')}`,
-//                     },
-//                 });
-//             }
-
-//             navigate('/dashboard/videos');
-//         } catch (error) {
-//             console.error('Error updating video:', error);
-//         }
-//     };
-
-//     if (!video) return <div>Loading...</div>;
-
-//     return (
-//         <div className="container-fluid">
-//             <div className="row">
-//                 <div className="col-md-2">
-//                     <Sidebar />
-//                 </div>
-//                 <div className="col-md-10">
-//                     <div className="container mt-5">
-//                         <div className="edit-video-card shadow-sm p-4 mb-5 bg-white rounded">
-//                             <h1 className="text-center mb-4">Edit Video</h1>
-//                             <form onSubmit={handleSubmit}>
-//                                 <div className="mb-3">
-//                                     <label className="form-label">Title</label>
-//                                     <input
-//                                         type="text"
-//                                         className="form-control"
-//                                         name="title"
-//                                         value={formData.title}
-//                                         onChange={handleChange}
-//                                         required
-//                                     />
-//                                 </div>
-//                                 <div className="mb-3">
-//                                     <label className="form-label">Thumbnail</label>
-//                                     <input
-//                                         type="file"
-//                                         className="form-control"
-//                                         name="thumbnail"
-//                                         onChange={handleChange}
-//                                     />
-//                                     {video.thumbnail && (
-//                                         <img
-//                                             src={video.thumbnail}
-//                                             alt="Video Thumbnail"
-//                                             className="img-thumbnail-preview"
-//                                         />
-//                                     )}
-//                                 </div>
-//                                 <div className="mb-3">
-//                                     <label className="form-label">Video</label>
-//                                     <input
-//                                         type="file"
-//                                         className="form-control"
-//                                         name="video"
-//                                         onChange={handleChange}
-//                                     />
-//                                 </div>
-//                                 <button type="submit" className="btn btn-primary w-25 ">
-//                                     Update Video
-//                                 </button>
-//                             </form>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default EditVideo;
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import './EditVideo.css'; // Import the CSS file for styling
 import Sidebar from '../sidebar/Sidebar'; // Import the Sidebar component
+import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
+import { ToastContainer, toast } from 'react-toastify'; // Import Toastify
+import 'react-toastify/dist/ReactToastify.css'; // Import Toastify styles
 
 function EditVideo() {
     const { id } = useParams();
@@ -171,11 +24,14 @@ function EditVideo() {
     });
     const [users, setUsers] = useState([]);
     const [rewards, setRewards] = useState([]);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Sidebar state
+    const [loading, setLoading] = useState(true); // Loading state
 
     useEffect(() => {
         const fetchVideo = async () => {
+            setLoading(true); // Set loading to true before starting fetch
             try {
-                const videoResponse = await axios.get(`http://localhost:8000/api/videos/${id}`, {
+                const videoResponse = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -192,27 +48,31 @@ function EditVideo() {
                 });
             } catch (error) {
                 console.error('Error fetching video:', error);
+                toast.error('Error fetching video.');
+            } finally {
+                setLoading(false); // Set loading to false after fetch
             }
         };
 
         const fetchUsersAndRewards = async () => {
             try {
                 const [usersResponse, rewardsResponse] = await Promise.all([
-                    axios.get('http://localhost:8000/api/users', {
+                    axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/users', {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem('token')}`,
                         },
                     }),
-                    axios.get('http://localhost:8000/api/rewards', {
+                    axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/rewards', {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem('token')}`,
                         },
                     }),
                 ]);
-                setUsers(usersResponse.data);
-                setRewards(rewardsResponse.data);
+                setUsers(usersResponse.data || []); // Ensure users is an array
+                setRewards(rewardsResponse.data.rewards || []); // Ensure rewards is an array
             } catch (error) {
                 console.error('Error fetching users or rewards:', error);
+                toast.error('Error fetching users or rewards.');
             }
         };
 
@@ -230,9 +90,10 @@ function EditVideo() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Set loading to true before starting submission
 
         try {
-            await axios.put(`http://localhost:8000/api/videos/${id}`, {
+            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}`, {
                 title: formData.title,
                 user_id: formData.user_id,
                 reward_id: formData.reward_id,
@@ -249,7 +110,7 @@ function EditVideo() {
                 const thumbnailFormData = new FormData();
                 thumbnailFormData.append('thumbnail', formData.thumbnail);
 
-                await axios.post(`http://localhost:8000/api/videos/${id}/upload-thumbnail`, thumbnailFormData, {
+                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}/upload-thumbnail`, thumbnailFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -261,7 +122,7 @@ function EditVideo() {
                 const videoFormData = new FormData();
                 videoFormData.append('video', formData.video);
 
-                await axios.post(`http://localhost:8000/api/videos/${id}/upload-video`, videoFormData, {
+                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}/upload-video`, videoFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -269,122 +130,152 @@ function EditVideo() {
                 });
             }
 
+            toast.success('Video updated successfully!');
             navigate('/dashboard/videos');
         } catch (error) {
             console.error('Error updating video:', error);
+            toast.error('Error updating video.');
+        } finally {
+            setLoading(false); // Set loading to false after submission
         }
     };
+
+    const handleSidebarToggle = (isOpen) => {
+        setIsSidebarOpen(isOpen);
+    };
+
+    if (loading) {
+        return (
+            <div className="container mt-5 d-flex justify-content-center">
+                <Loader /> {/* Show loader while loading */}
+            </div>
+        );
+    }
 
     if (!video) return <div>Loading...</div>;
 
     return (
         <div className="container-fluid">
+            <ToastContainer /> {/* Include the ToastContainer */}
             <div className="row">
-                <div className="col-md-2">
-                    <Sidebar />
-                </div>
-                <div className="col-md-10">
-                    <div className="container mt-5">
-                        <div className="edit-video-card shadow-sm p-4 mb-5 bg-white rounded">
-                            <h1 className="text-center mb-4">Edit Video</h1>
-                            <form onSubmit={handleSubmit}>
-                                <div className="mb-3">
-                                    <label className="form-label">Title</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        name="title"
-                                        value={formData.title}
-                                        onChange={handleChange}
-                                        required
+                <Sidebar onToggleSidebar={handleSidebarToggle} />
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
+                    <div className="container-fluid col-11 mt-5 p-5 bg-light rounded shadow-sm">
+                        <h1 className="mb-4">Edit Video</h1>
+                        <form onSubmit={handleSubmit}>
+                            <div className="mb-3">
+                                <label htmlFor="title" className="form-label">Title</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="title"
+                                    name="title"
+                                    value={formData.title}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="user_id" className="form-label">User</label>
+                                <select
+                                    className="form-control"
+                                    id="user_id"
+                                    name="user_id"
+                                    value={formData.user_id}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">Select a User</option>
+                                    {users.map(user => (
+                                        <option key={user.id} value={user.id}>
+                                            {user.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="reward_id" className="form-label">Reward</label>
+                                <select
+                                    className="form-control"
+                                    id="reward_id"
+                                    name="reward_id"
+                                    value={formData.reward_id}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">Select a Reward</option>
+                                    {rewards.map(reward => (
+                                        <option key={reward.id} value={reward.id}>
+                                            {reward.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="ticket_name" className="form-label">Ticket Name</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="ticket_name"
+                                    name="ticket_name"
+                                    value={formData.ticket_name}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="date_announced" className="form-label">Date Announced</label>
+                                <input
+                                    type="datetime-local"
+                                    className="form-control"
+                                    id="date_announced"
+                                    name="date_announced"
+                                    value={formData.date_announced}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="thumbnail" className="form-label">Thumbnail</label>
+                                <input
+                                    type="file"
+                                    className="form-control"
+                                    id="thumbnail"
+                                    name="thumbnail"
+                                    onChange={handleChange}
+                                />
+                                {video.thumbnail && (
+                                    <img
+                                    style={{borderRadius:"10px"}}
+                                        src={video.thumbnail}
+                                        alt="Video Thumbnail"
+                                        width="100"
+                                        className="mt-2"
                                     />
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">User</label>
-                                    <select
-                                        className="form-control"
-                                        name="user_id"
-                                        value={formData.user_id}
-                                        onChange={handleChange}
-                                        required
-                                    >
-                                        <option value="">Select a User</option>
-                                        {users.map(user => (
-                                            <option key={user.id} value={user.id}>
-                                                {user.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Reward</label>
-                                    <select
-                                        className="form-control"
-                                        name="reward_id"
-                                        value={formData.reward_id}
-                                        onChange={handleChange}
-                                        required
-                                    >
-                                        <option value="">Select a Reward</option>
-                                        {rewards.map(reward => (
-                                            <option key={reward.id} value={reward.id}>
-                                                {reward.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Ticket Name</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        name="ticket_name"
-                                        value={formData.ticket_name}
-                                        onChange={handleChange}
-                                        required
+                                )}
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="video" className="form-label">Video</label>
+                                <input
+                                style={{borderRadius:"10px"}}
+                                    type="file"
+                                    className="form-control"
+                                    id="video"
+                                    name="video"
+                                    onChange={handleChange}
+                                />
+                                {video.video && (
+                                    <video
+                                        src={video.video}
+                                        controls
+                                        width="200"
+                                        height="200"
+                                        className="mt-2"
                                     />
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Date Announced</label>
-                                    <input
-                                        type="datetime-local"
-                                        className="form-control"
-                                        name="date_announced"
-                                        value={formData.date_announced}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Thumbnail</label>
-                                    <input
-                                        type="file"
-                                        className="form-control"
-                                        name="thumbnail"
-                                        onChange={handleChange}
-                                    />
-                                    {video.thumbnail && (
-                                        <img
-                                            src={video.thumbnail}
-                                            alt="Video Thumbnail"
-                                            className="img-thumbnail-preview"
-                                        />
-                                    )}
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Video</label>
-                                    <input
-                                        type="file"
-                                        className="form-control"
-                                        name="video"
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <button type="submit" className="btn btn-primary w-25">
-                                    Update Video
-                                </button>
-                            </form>
-                        </div>
+                                )}
+                            </div>
+                            <button type="submit" className="btn btn-primary">Update Video</button>
+                        </form>
                     </div>
                 </div>
             </div>

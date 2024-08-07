@@ -1,9 +1,13 @@
 
 
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../sidebar/Sidebar'; // Ensure this is the correct path
+import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
 
 function EditQuestion() {
     const { id } = useParams();
@@ -14,13 +18,17 @@ function EditQuestion() {
         option1: '',
         option2: '',
         option3: '',
+        option4: '',
         right_option: '',
     });
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Sidebar state
+    const [loading, setLoading] = useState(true); // Add loading state
 
     useEffect(() => {
         const fetchQuestion = async () => {
+            setLoading(true); // Set loading to true before starting fetch
             try {
-                const response = await axios.get(`http://localhost:8000/api/questions/${id}`, {
+                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/questions/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -31,10 +39,14 @@ function EditQuestion() {
                     option1: response.data.option1,
                     option2: response.data.option2,
                     option3: response.data.option3,
+                    option4: response.data.option4,
                     right_option: response.data.right_option,
                 });
             } catch (error) {
                 console.error('Error fetching question:', error);
+                toast.error('Failed to fetch question.');
+            } finally {
+                setLoading(false); // Set loading to false after fetch
             }
         };
 
@@ -49,27 +61,37 @@ function EditQuestion() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:8000/api/questions/${id}`, formData, {
+            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/questions/${id}`, formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
+            toast.success('Question updated successfully!');
             navigate('/dashboard/questions');
         } catch (error) {
             console.error('Error updating question:', error);
+            toast.error('Failed to update question.');
         }
     };
 
-    if (!question) return <div className="container mt-5">Loading...</div>;
+    const handleSidebarToggle = (isOpen) => {
+        setIsSidebarOpen(isOpen);
+    };
+
+    if (loading) {
+        return (
+            <div className="container mt-5 d-flex justify-content-center">
+                <Loader /> {/* Show loader while loading */}
+            </div>
+        );
+    }
 
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
-                    <Sidebar />
-                </div>
-                <div className="col-md-10">
-                    <div className="form-container mt-5 p-4 bg-white rounded shadow-sm">
+                <Sidebar onToggleSidebar={handleSidebarToggle} />
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
+                    <div className="container-fluid col-11 mt-5 p-5 bg-light rounded shadow-sm ">
                         <h1 className="mb-4">Edit Question</h1>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
@@ -121,6 +143,18 @@ function EditQuestion() {
                                 />
                             </div>
                             <div className="mb-3">
+                                <label htmlFor="option4" className="form-label">Option 4</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="option4"
+                                    name="option4"
+                                    value={formData.option4}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="mb-3">
                                 <label htmlFor="right_option" className="form-label">Correct Option</label>
                                 <input
                                     type="text"
@@ -137,6 +171,7 @@ function EditQuestion() {
                     </div>
                 </div>
             </div>
+            <ToastContainer /> {/* Add ToastContainer to show toast notifications */}
         </div>
     );
 }

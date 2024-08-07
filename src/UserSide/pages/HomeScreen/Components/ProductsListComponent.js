@@ -1,12 +1,13 @@
 
 
-
 import React, { useEffect, useState } from 'react';
 import { getProducts } from '../../../Services/GetAPI'; // Adjust the import path if necessary
 import ProductCard from '../../../Components/SubComponents/ProductCard';
 import Loader from '../../../Components/LoaderComponent';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Import axios for HTTP requests
+import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 
 const ProductsListComponent = () => {
     const [products, setProducts] = useState([]);
@@ -16,7 +17,7 @@ const ProductsListComponent = () => {
     const addProductToCart = async (id) => {
         try {
             const product = products.find(item => item.id === id);
-            const response = await axios.post('http://localhost:8000/api/cart/add', {
+            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/cart/add', {
                 product_id: product.id,
                 quantity: 1, // Default quantity
                 price: product.price
@@ -25,25 +26,21 @@ const ProductsListComponent = () => {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            alert('Product added to cart successfully');
+            toast.success('Product added to cart successfully');
             navigate('/cart');
         } catch (error) {
             console.error('Error adding product to cart:', error);
             if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
                 if (error.response.status === 401) {
-                    alert('You need to login first');
-                    navigate('/dashboard/login');
+                    toast.error('You need to login first');
+                    navigate('/');
                 } else {
-                    alert(`Failed to add product to cart: ${error.response.data.message}`);
+                    toast.error(`Failed to add product to cart: ${error.response.data.message}`);
                 }
             } else if (error.request) {
-                // The request was made but no response was received
-                alert('No response from the server. Please try again later.');
+                toast.error('No response from the server. Please try again later.');
             } else {
-                // Something happened in setting up the request that triggered an Error
-                alert(`Error: ${error.message}`);
+                toast.error(`Error: ${error.message}`);
             }
         }
     };
@@ -51,11 +48,21 @@ const ProductsListComponent = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const data = await getProducts();
-                setProducts(data);
+                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/products', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                if (response.data.status === 200) {
+                    setProducts(response.data.products);
+                    toast.success(response.data.message);
+                } else {
+                    toast.error('Failed to fetch products');
+                }
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching products:', error);
+                toast.error('An error occurred while fetching products');
                 setLoading(false);
             }
         };
@@ -86,11 +93,10 @@ const ProductsListComponent = () => {
                         ))
                     )}
                 </div>
+                <ToastContainer /> {/* Add the ToastContainer */}
             </div>
         </section>
     );
 };
 
 export default ProductsListComponent;
-
-

@@ -15,7 +15,7 @@ function ViewBlog() {
     useEffect(() => {
         const fetchBlog = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/blogs/${id}`, {
+                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/blogs/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },

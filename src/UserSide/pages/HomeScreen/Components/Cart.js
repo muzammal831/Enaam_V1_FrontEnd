@@ -1,9 +1,8 @@
 
 
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import CartIcon from './CartIcon';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../../Components/HeaderComponent'; // Import Header
 import Footer from '../../../Components/FooterCompnent'; // Import Footer
 import Loader from '../../../Components/LoaderComponent'; // Import Loader
@@ -11,16 +10,17 @@ import Loader from '../../../Components/LoaderComponent'; // Import Loader
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate(); // Use navigate for redirection
 
     useEffect(() => {
         const fetchCartItems = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/cart', {
+                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/cart', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
                 });
-                setCartItems(response.data);
+                setCartItems(response?.data?.cart?.cart_items || []); // Convert object to array and set cart items
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching cart items:', error);
@@ -30,73 +30,66 @@ const Cart = () => {
         fetchCartItems();
     }, []);
 
-    const updateQuantity = async (id, quantity) => {
+    const updateQuantity = async (productId, quantity) => {
+        if (quantity <= 0) return; 
+
         try {
-            await axios.put(`http://localhost:8000/api/cart/${id}`, { quantity }, {
+            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/cart/updateQuantity/${productId}`, { quantity }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            // Refresh cart items
-            const response = await axios.get('http://localhost:8000/api/cart', {
+           
+            const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/cart', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            setCartItems(response.data);
+            setCartItems(response?.data?.cart?.cart_items || []); 
         } catch (error) {
             console.error('Error updating quantity:', error);
         }
     };
 
-    const removeItem = async (id) => {
+    const removeItem = async (productId) => {
         if (window.confirm('Are you sure you want to remove this item from your cart?')) {
             try {
-                await axios.delete(`http://localhost:8000/api/cart/${id}`, {
+                await axios.delete(`http://3.138.38.248/Enaam_Backend_V1/public/api/cart/removeItem/${productId}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
                 });
-                // Refresh cart items
-                const response = await axios.get('http://localhost:8000/api/cart', {
+                
+                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/cart', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
                 });
-                setCartItems(response.data);
+                setCartItems(response?.data?.cart.cart_items); 
             } catch (error) {
                 console.error('Error removing item:', error);
             }
         }
     };
+    
 
     const getTotalPrice = () => {
         return cartItems.reduce((total, item) => total + (item.quantity * item.price), 0).toFixed(2);
     };
 
-    const handleCheckout = async () => {
-        try {
-            await axios.post('http://localhost:8000/api/checkout', {}, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-            alert('Checkout successful');
-            // setCartItems([]);
-        } catch (error) {
-            console.error('Error during checkout:', error);
-            alert('Checkout failed');
-        }
+    const handleCheckout = () => {
+        // Redirect to CheckoutPage with cart items
+        navigate('/checkout', { state: { cartItems } });
     };
 
     return (
         <div className="App">
-            <Header /> {/* Add Header */}
+            <Header />
             <div className="container-fluid col-lg-11 mt-5">
                 <h1 className="mt-5">Your Cart</h1>
 
                 {loading ? (
-                    <Loader /> // Show Loader while loading
+                    <Loader />
                 ) : (
                     <>
                         <div className="row mt-5">
@@ -109,36 +102,35 @@ const Cart = () => {
                                         <p>Your cart is empty</p>
                                     ) : (
                                         cartItems.map(item => (
-                                            <div className="row chunking-wrapper" key={item.id} data-product-id={item.id} style={{ alignItems: 'center' }}>
+                                            <div className="row chunking-wrapper" key={item.item_id} data-product-id={item.item_id} style={{ alignItems: 'center' }}>
                                                 <div className="col-md-4">
                                                     <div className="detail-chunk">
                                                         <div>
-                                                            {/* Display the reward image */}
-                                                            <img src={item.product.reward.image} alt={item.product.reward.name} style={{ maxWidth: '100%' }} />
+                                                            <img
+                                                                src={item.reward ? item.reward : item.image} 
+                                                                alt={item.name || 'Product Image'}
+                                                                style={{ maxWidth: '100%' }}
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-4">
                                                     <div className="detail-chunk">
-                                                        <p className="text-left">{item.product.description}</p>
+                                                        <p className="text-left">{item.description || 'No description available'}</p>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-4" style={{ flexDirection: 'row' }}>
                                                     <div className="button-container" style={{ flexDirection: 'row' }}>
-                                                        <button type="button" className="altera decrescimo btn btn-outline-secondary btn-sm me-2" onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>
+                                                        <button type="button" className="altera decrescimo btn btn-outline-secondary btn-sm me-2" onClick={() => updateQuantity(item.item_id, item.quantity - 1)} disabled={item.quantity <= 1}>
                                                             <i className="bi bi-dash"></i>
                                                         </button>
                                                         <input type="text" id="txtAcrescimo" value={item.quantity} readOnly className="form-control d-inline-block w-25 text-center" />
-                                                        <button type="button" className="altera acrescimo btn btn-outline-secondary btn-sm ms-2" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+                                                        <button type="button" className="altera acrescimo btn btn-outline-secondary btn-sm ms-2" onClick={() => updateQuantity(item.item_id, item.quantity + 1)}>
                                                             <i className="bi bi-plus"></i>
                                                         </button>
-                                                        {/* Add Remove Button */}
-                                                        <button type="button" className="btn btn-outline-danger btn-sm ms-5 mt-3" onClick={() => removeItem(item.id)}>
+                                                        <button type="button" className="btn btn-outline-danger btn-sm ms-5 mt-3" onClick={() => removeItem(item.item_id)}>
                                                             <i className="bi bi-trash"></i> Remove
                                                         </button>
-                                                    </div>
-                                                    <div className="error-container" style={{ flexDirection: 'row', marginTop: '10px' }}>
-                                                        <span style={{ color: 'red', marginLeft: '-170px' }}>{item.product.available}</span>
                                                     </div>
                                                 </div>
                                             </div>

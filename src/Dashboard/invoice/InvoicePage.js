@@ -1,4 +1,4 @@
-// src/pages/InvoicePage.js
+
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -8,16 +8,19 @@ import Sidebar from '../sidebar/Sidebar';
 const InvoicePage = () => {
     const [invoices, setInvoices] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [role, setRole] = useState('');
 
     useEffect(() => {
         const fetchInvoices = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/invoices', {
+                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/invoices', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
                 });
-                setInvoices(response.data);
+
+                setRole(response.data.role); // Set role from response
+                setInvoices(response.data.invoices); // Set invoices
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching invoices:', error);

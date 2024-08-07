@@ -1,10 +1,12 @@
 
 
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../sidebar/Sidebar'; // Ensure this is the correct path
+import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
 
 function EditBlog() {
     const { id } = useParams();
@@ -15,11 +17,14 @@ function EditBlog() {
         description: '',
         blog_image: null,
     });
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Sidebar state
+    const [loading, setLoading] = useState(true); // Add loading state
 
     useEffect(() => {
         const fetchBlog = async () => {
+            setLoading(true); // Set loading to true before starting fetch
             try {
-                const response = await axios.get(`http://localhost:8000/api/blogs/${id}`, {
+                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/blogs/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -32,6 +37,9 @@ function EditBlog() {
                 });
             } catch (error) {
                 console.error('Error fetching blog:', error);
+                toast.error('Failed to fetch blog.');
+            } finally {
+                setLoading(false); // Set loading to false after fetch
             }
         };
 
@@ -48,9 +56,10 @@ function EditBlog() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Set loading to true before starting submission
 
         try {
-            await axios.put(`http://localhost:8000/api/blogs/${id}`, {
+            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/blogs/${id}`, {
                 heading: formData.heading,
                 description: formData.description,
             }, {
@@ -64,7 +73,7 @@ function EditBlog() {
                 const fileFormData = new FormData();
                 fileFormData.append('blog_image', formData.blog_image);
 
-                await axios.post(`http://localhost:8000/api/blogs/${id}/upload-image`, fileFormData, {
+                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/blogs/${id}/upload-image`, fileFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -72,29 +81,44 @@ function EditBlog() {
                 });
             }
 
+            toast.success('Blog updated successfully!');
             navigate('/dashboard/blogs');
         } catch (error) {
             console.error('Error updating blog:', error);
+            toast.error('Failed to update blog.');
+        } finally {
+            setLoading(false); // Set loading to false after submission
         }
     };
+
+    const handleSidebarToggle = (isOpen) => {
+        setIsSidebarOpen(isOpen);
+    };
+
+    if (loading) {
+        return (
+            <div className="container mt-5 d-flex justify-content-center">
+                <Loader /> {/* Show loader while loading */}
+            </div>
+        );
+    }
 
     if (!blog) return <div>Loading...</div>;
 
     return (
-        <div className="container-fluid ">
+        <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
-                    <Sidebar />
-                </div>
-                <div className="col-md-10 ms-auto ">
-                    <div className="container mt-5  shadow p-5 ">
-                        <h1>Edit Blog</h1>
+                <Sidebar onToggleSidebar={handleSidebarToggle} />
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
+                    <div className="container-fluid col-11 mt-5 p-5 bg-light rounded shadow-sm">
+                        <h1 className="mb-4">Edit Blog</h1>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
-                                <label className="form-label">Heading</label>
+                                <label htmlFor="heading" className="form-label">Heading</label>
                                 <input
                                     type="text"
                                     className="form-control"
+                                    id="heading"
                                     name="heading"
                                     value={formData.heading}
                                     onChange={handleChange}
@@ -102,9 +126,10 @@ function EditBlog() {
                                 />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Description</label>
+                                <label htmlFor="description" className="form-label">Description</label>
                                 <textarea
                                     className="form-control"
+                                    id="description"
                                     name="description"
                                     value={formData.description}
                                     onChange={handleChange}
@@ -112,15 +137,17 @@ function EditBlog() {
                                 ></textarea>
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Blog Image</label>
+                                <label htmlFor="blog_image" className="form-label">Blog Image</label>
                                 <input
                                     type="file"
                                     className="form-control"
+                                    id="blog_image"
                                     name="blog_image"
                                     onChange={handleChange}
                                 />
                                 {blog.blog_image && (
                                     <img
+                                    style={{borderRadius: "10px"}}
                                         src={blog.blog_image}
                                         alt="Blog"
                                         width="100"
@@ -128,13 +155,14 @@ function EditBlog() {
                                     />
                                 )}
                             </div>
-                            <button type="submit" className="btn btn-primary">
-                                <i className="bi bi-save"></i> Update Blog
+                            <button type="submit" className="btn btn-primary bi bi-plus">
+                                Update
                             </button>
                         </form>
                     </div>
                 </div>
             </div>
+            <ToastContainer /> {/* Add ToastContainer to show toast notifications */}
         </div>
     );
 }

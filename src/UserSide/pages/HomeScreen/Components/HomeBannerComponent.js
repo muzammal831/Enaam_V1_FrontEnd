@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from "react";
 import "../../../css/Styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,15 +11,24 @@ const HomeBanner = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getBanners()
-      .then((data) => {
-        setBanners(data || []);
-        setLoading(false);
-      })
-      .catch((error) => {
+    const fetchBanners = async () => {
+      try {
+        const response = await getBanners();
+        console.log('Fetched banners data:', response); // Log the response for debugging
+        if (response.status === 200 && Array.isArray(response.banners)) {
+          setBanners(response.banners);
+        } else {
+          setBanners([]);
+          console.error('Unexpected response format:', response);
+        }
+      } catch (error) {
         console.error("Error fetching banners:", error);
+        setBanners([]);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    fetchBanners();
   }, []);
 
   return (
@@ -40,7 +48,7 @@ const HomeBanner = () => {
               ) : (
                 <>
                   <ol className="carousel-indicators">
-                    {Array.isArray(banners) && banners.map((item, index) => (
+                    {banners.map((item, index) => (
                       <li
                         key={index}
                         data-target="#carouselExampleIndicators"
@@ -50,16 +58,15 @@ const HomeBanner = () => {
                     ))}
                   </ol>
                   <div className="carousel-inner">
-                    {Array.isArray(banners) && banners.map((banner, index) => (
+                    {banners.map((banner, index) => (
                       <div
                         key={index}
-                        className={`carousel-item ${index === 0 ? "active" : ""
-                          }`}
+                        className={`carousel-item ${index === 0 ? "active" : ""}`}
                       >
                         <div className="row align-items-center">
                           <div className="col-12">
                             <img
-                              style={{ borderRadius: 20 }}
+                              style={{ borderRadius: 20, width: "70%", height: "300px" }}
                               className="img-fluid"
                               src={banner?.image}
                               alt=""

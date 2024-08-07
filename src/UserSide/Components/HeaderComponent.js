@@ -1,184 +1,5 @@
 
 
-// import React, { useEffect, useState } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import '../css/Styles.css'; // Import any custom CSS for styling if needed
-// import CartIcon from '../pages/HomeScreen/Components/CartIcon';
-// import CustomModal from './CustomModal'; // Import the CustomModal component
-// import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
-// import Logout from '../../Dashboard/Logout'; // Import the Logout component
-// import LoginModal from './LoginModal'; // Import the LoginModal component
-// import Login from '../../Dashboard/Login';
-// const Header = () => {
-//     const [user, setUser] = useState(null);
-//     const [isModalOpen, setIsModalOpen] = useState(false); // State to track modal visibility
-//     const navigate = useNavigate(); // Initialize useNavigate hook
-
-//     useEffect(() => {
-//         const fetchUser = async () => {
-//             try {
-//                 const response = await axios.get('http://localhost:8000/api/user', {
-//                     headers: {
-//                         Authorization: `Bearer ${localStorage.getItem('token')}`
-//                     }
-//                 });
-//                 setUser(response.data);
-//             } catch (error) {
-//                 console.error('Error fetching user data:', error);
-//             }
-//         };
-
-//         // Fetch user data if token is present
-//         if (localStorage.getItem('token')) {
-//             fetchUser();
-//         }
-//     }, []);
-
-//     useEffect(() => {
-//         const mainContent = document.getElementById('main-content');
-//         if (isModalOpen) {
-//             mainContent.classList.add('blurred');
-//         } else {
-//             mainContent.classList.remove('blurred');
-//         }
-//     }, [isModalOpen]);
-
-//     // Logout function
-//     const handleLogout = async () => {
-//         try {
-//             await axios.post('http://localhost:8000/api/logout', {}, {
-//                 headers: {
-//                     Authorization: `Bearer ${localStorage.getItem('token')}`
-//                 }
-//             });
-//             localStorage.removeItem('token');
-//             // Reload the page
-//             window.location.reload();
-//         } catch (error) {
-//             console.error('Error logging out:', error);
-//             alert('Error logging out.');
-//         }
-//     };
-
-//     const handleModalOpen = () => {
-//         setIsModalOpen(true);
-//     };
-
-//     const handleModalClose = () => {
-//         setIsModalOpen(false);
-//     };
-
-//     return (
-//         <>
-//             <header id="site-header" className="fixed-top">
-//                 <div className="container-fluid">
-//                     <nav className="navbar navbar-expand-lg stroke">
-//                         {/* Logo */}
-//                         <a className="navbar-brand" href="/">
-//                             <img src={require("../images/logo.png")} alt="Enaam.pk" title="Enaam" style={{ height: '69px', marginLeft: 10 }} />
-//                         </a>
-
-//                         {/* Toggler */}
-//                         <button className="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-//                             <span className="navbar-toggler-icon fa icon-expand fa-bars"></span>
-//                             <span className="navbar-toggler-icon fa icon-close fa-times"></span>
-//                         </button>
-
-//                         {/* Desktop Navigation */}
-//                         <div className="collapse navbar-collapse on-desktop" id="navbarTogglerDemo02">
-//                             <ul className="navbar-nav ml-lg-auto">
-//                                 <li className="nav-item">
-//                                     Need help? Contact Us <a href="tel:+924235131693">Call +92-42-35 131 693</a>
-//                                 </li>
-//                             </ul>
-//                         </div>
-
-//                         <div className="collapse navbar-collapse on-desktop" id="navbarTogglerDemo02">
-//                             <ul className="navbar-nav ml-lg-auto main-menu">
-//                                 <li className="nav-item">
-//                                     <a className="nav-link" href="/prizes">Prizes</a>
-//                                 </li>
-//                                 <li className="nav-item">
-//                                     <a className="nav-link" href="/recentLuckyDraws">Winners</a>
-//                                 </li>
-//                                 <li className="nav-item dropdown align-items-center x-efeected-li">
-//                                     <div id="userState" className="d-flex align-items-center">
-//                                         {user ? (
-//                                             <>
-//                                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-//                                                     <img id="user-image" src={require("../images/user-icon.png")} alt="User Profile" title={user.name} className="rounded-circle" style={{ height: '30px' }} />
-//                                                     <span>{user.name}</span>
-//                                                 </a>
-//                                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-//                                                     <a className="dropdown-item" href="/dashboard/user">Profile</a>
-//                                                     <a className="dropdown-item" href="#" onClick={handleLogout}>Logout</a>
-//                                                 </div>
-//                                             </>
-//                                         ) : (
-//                                             <a id="login-link" href="#" className="nav-link" onClick={handleModalOpen}>Login</a>
-//                                         )}
-//                                     </div>
-//                                 </li>
-//                             </ul>
-//                         </div>
-
-//                         {/* Mobile Navigation */}
-//                         <div className="collapse navbar-collapse on-mobile" id="navbarTogglerDemo02">
-//                             <ul className="navbar-nav ml-lg-auto">
-//                                 <li className="nav-item">
-//                                     <div id="google_translate_element"></div>
-//                                 </li>
-//                                 <li className="nav-item">
-//                                     <div id="mobUserState" className="d-flex align-items-center">
-//                                         {user ? (
-//                                             <>
-//                                                 <a href="/profile">
-//                                                     <img id="mob-user-image" src={require("../images/user-icon.png")} alt="User Profile" title={user.name} className="rounded-circle" style={{ height: '30px' }} />
-//                                                 </a>
-//                                                 <a href="/profile">
-//                                                     <span id="mob-user-name">{user.name}</span>
-//                                                 </a>
-//                                                 <Logout /> {/* Add the Logout component here */}
-//                                             </>
-//                                         ) : (
-//                                             <a id="mob-login-link" href="#" className="nav-link" onClick={handleModalOpen}>Login</a>
-//                                         )}
-//                                     </div>
-//                                 </li>
-//                                 <li className="nav-item">
-//                                     <a className="nav-link" href="prizes.php">Prizes</a>
-//                                 </li>
-//                                 <li className="nav-item">
-//                                     <a className="nav-link" href="/recentLuckyDraws">Winners</a>
-//                                 </li>
-//                                 <li className="nav-item">
-//                                     Need help? Contact Us
-//                                 </li>
-//                                 <li>
-//                                     <a href="tel:+924235131693">Call +92-42-35 131 693</a>
-//                                 </li>
-//                             </ul>
-//                         </div>
-//                     </nav>
-//                 </div>
-//                 <CustomModal isOpen={isModalOpen} onClose={handleModalClose}>
-//                     <div>
-//                         <Login />
-                      
-//                     </div>
-//                 </CustomModal>
-//             </header>
-//             <div id="main-content">
-//                 {/* Main content goes here */}
-//             </div>
-//         </>
-//     );
-// };
-
-// export default Header;
-
-
 
 
 import React, { useEffect, useState } from 'react';
@@ -201,7 +22,7 @@ const Header = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/user', {
+                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/user', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -228,7 +49,7 @@ const Header = () => {
 
     const handleLogout = async () => {
         try {
-            await axios.post('http://localhost:8000/api/logout', {}, {
+            await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/logout', {}, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -323,7 +144,7 @@ const Header = () => {
                                     </div>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="prizes.php">Prizes</a>
+                                    <a className="nav-link" href="/prizes">Prizes</a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="/recentLuckyDraws">Winners</a>

@@ -23,7 +23,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/contacts', formData);
+      const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/contacts', formData);
       setMessage(response.data.message);
       setFormData({ username: '', email: '', message: '' });
     } catch (error) {

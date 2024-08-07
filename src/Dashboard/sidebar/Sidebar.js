@@ -1,24 +1,56 @@
 
 
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.css'; // Import CSS for styling
 
-function Sidebar() {
+function Sidebar({ onToggleSidebar }) {
     const [isOpen, setIsOpen] = useState(true);
     const location = useLocation();
 
+    // Toggle sidebar open/closed state
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
+        if (onToggleSidebar) {
+            onToggleSidebar(!isOpen);
+        }
     };
 
+    // Handle screen resizing to automatically close sidebar on smaller screens
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 768) {
+                setIsOpen(false);
+            } else {
+                setIsOpen(true);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Call on mount to set the initial state
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Update the toggle button position based on the sidebar state
+    useEffect(() => {
+        const toggleButton = document.querySelector('.sidebar-toggle');
+        if (toggleButton) {
+            const sidebarWidth = isOpen ? '250px' : '0px';
+            toggleButton.style.left = isOpen ? `calc(${sidebarWidth} + -30px)` : '1px'; // Adjust for padding
+        }
+    }, [isOpen]);
+
     return (
-        <>
-            {/* <button className="sidebar-toggle" onClick={toggleSidebar}>
+        <div className="sidebar-container">
+            <button
+                className="sidebar-toggle"
+                onClick={toggleSidebar}
+            >
                 {isOpen ? <i className="bi bi-chevron-left"></i> : <i className="bi bi-chevron-right"></i>}
-            </button> */}
+            </button>
             <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
-           
                 <img
                     style={{ width: '150px', height: 'auto' }}
                     className="logo"
@@ -115,17 +147,8 @@ function Sidebar() {
                         </Link>
                     </li>
                 </ul>
-                <div className="sidebar-submenu">
-                    <h5>Banner Categories</h5>
-                    {/* <ul className="submenu-list">
-                        <li><Link to="/dashboard/banners/desktop">Desktop Banners</Link></li>
-                        <li><Link to="/dashboard/banners/mobile">Mobile Banners</Link></li>
-                        <li><Link to="/dashboard/banners/mobilead">Mobile Ads Banners</Link></li>
-                        <li><Link to="/dashboard/banners/both">All Platforms</Link></li>
-                    </ul> */}
-                </div>
             </div>
-        </>
+        </div>
     );
 }
 

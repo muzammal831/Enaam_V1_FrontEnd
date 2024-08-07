@@ -1,0 +1,22 @@
+/* Header.css */
+
+.header {
+    height: 60px; /* Adjust as needed */
+    background-color: #343a40;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    transition: margin-left 0.3s, width 0.3s;
+    z-index: 1000;
+}
+
+.header-expanded {
+    margin-left: 250px; /* Adjust based on sidebar width */
+    width: calc(100% - 250px);
+}
+
+.header-collapsed {
+    margin-left: 0;
+    width: 100%;
+}

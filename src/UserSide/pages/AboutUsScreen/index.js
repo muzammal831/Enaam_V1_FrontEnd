@@ -1,5 +1,7 @@
 
 
+
+
 import React, { useEffect, useState } from 'react';
 import Header from '../../Components/HeaderComponent';
 import Footer from '../../Components/FooterCompnent';
@@ -8,7 +10,7 @@ import "../../css/Styles.css";
 import Loader from '../../Components/LoaderComponent';
 
 // Define the API endpoint and token for better management
-const API_URL = 'http://localhost:8000/api/about-us';
+const API_URL = 'http://3.138.38.248/Enaam_Backend_V1/public/api/about-us';
 const TOKEN = localStorage.getItem('token');
 
 const AboutUs = () => {
@@ -23,7 +25,13 @@ const AboutUs = () => {
             Authorization: `Bearer ${TOKEN}`,
           },
         });
-        setAboutUsList(response.data);
+
+        // Check if the response status is 200 and data format is as expected
+        if (response.data.status === 200 && Array.isArray(response.data.aboutUs)) {
+          setAboutUsList(response.data.aboutUs);
+        } else {
+          console.error('Unexpected response format:', response.data);
+        }
         setLoading(false);
       } catch (error) {
         console.error('Error fetching About Us data:', error);
@@ -44,29 +52,31 @@ const AboutUs = () => {
           {loading ? (
             <Loader />
           ) : (
-            <div className="row">
-              {aboutUsList.length > 0 ? (
-                <div className="col-md-12 mb-4">
-                  <div className="card shadow-sm">
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-md-8 text-left">
-                          <h4 className="mt-4">{aboutUsList[0].heading}</h4>
-                          <p style={{ fontSize: '13px', textAlign: 'justify' }}>{aboutUsList[0].about_detail}</p>
-                        </div>
-                        {aboutUsList[0].about_image && (
-                          <div className="col-md-4">
-                            <img src={aboutUsList[0].about_image} alt={aboutUsList[0].heading} className="img-fluid" />
+            aboutUsList.length > 0 ? (
+              <div className="row">
+                {aboutUsList.map((item, index) => (
+                  <div className="col-md-12 mb-4" key={index}>
+                    <div className="card shadow-sm">
+                      <div className="card-body">
+                        <div className="row">
+                          <div className="col-md-8 text-left">
+                            <h4 className="mt-4">{item.heading}</h4>
+                            <p style={{ fontSize: '13px', textAlign: 'justify' }}>{item.about_detail}</p>
                           </div>
-                        )}
+                          {item.about_image && (
+                            <div className="col-md-4">
+                              <img src={item.about_image} alt={item.heading} className="img-fluid" />
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <p className="text-center">No About Us data available.</p>
-              )}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center">No About Us data available.</p>
+            )
           )}
         </div>
       </section>

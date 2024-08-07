@@ -27,7 +27,7 @@ function UserInfo() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/user', {
+                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/user', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -46,7 +46,7 @@ function UserInfo() {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put('http://localhost:8000/api/user', {
+            const response = await axios.put('http://3.138.38.248/Enaam_Backend_V1/public/api/user', {
                 name,
                 email,
                 phone,

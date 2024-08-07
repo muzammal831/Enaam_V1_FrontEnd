@@ -16,6 +16,8 @@ import Cart from './pages/HomeScreen/Components/Cart';
 import ProductDetail from './pages/HomeScreen/Components/ProductDetail';
 import BlogDetails from './pages/BlogsScreen/BlogDetails';
 import Contact from './pages/ContactsUsScreen/Components/Contact';
+import CheckoutPage from './pages/HomeScreen/Components/CheckoutPage';
+import Game from './pages/HomeScreen/Components/Game';
 
 const UserSide = () => {
   return (
@@ -35,9 +37,10 @@ const UserSide = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/blogs/:id" element={<BlogDetails />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
 
 
-
+        <Route path="/game" element={<Game />} />
       </Routes>
  
   );

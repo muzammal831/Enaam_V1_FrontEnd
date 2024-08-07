@@ -1,73 +1,4 @@
-// import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
-// import Logout from './Logout';
 
-// function UserInfo() {
-//     const [user, setUser] = useState(null);
-//     const [name, setName] = useState('');
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const [passwordConfirmation, setPasswordConfirmation] = useState('');
-
-//     useEffect(() => {
-//         const fetchUser = async () => {
-//             try {
-//                 const response = await axios.get('http://localhost:8000/api/user', {
-//                     headers: {
-//                         Authorization: `Bearer ${localStorage.getItem('token')}`
-//                     }
-//                 });
-//                 setUser(response.data);
-//                 setName(response.data.name);
-//                 setEmail(response.data.email);
-//             } catch (error) {
-//                 console.error(error);
-//             }
-//         };
-
-//         fetchUser();
-//     }, []);
-
-//     const handleUpdate = async (e) => {
-//         e.preventDefault();
-//         try {
-//             const response = await axios.put('http://localhost:8000/api/user', {
-//                 name,
-//                 email,
-//                 password,
-//                 password_confirmation: passwordConfirmation
-//             }, {
-//                 headers: {
-//                     Authorization: `Bearer ${localStorage.getItem('token')}`
-//                 }
-//             });
-//             setUser(response.data);
-//             alert('Profile updated successfully!');
-//         } catch (error) {
-//             console.error(error);
-//             alert('Error updating profile.');
-//         }
-//     };
-
-//     return user ? (
-//         <div>
-//             <h1>{user.name}</h1>
-//             <p>{user.email}</p>
-//             <form onSubmit={handleUpdate}>
-//                 <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
-//                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-//                 <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-//                 <input type="password" placeholder="Confirm Password" onChange={(e) => setPasswordConfirmation(e.target.value)} />
-//                 <button type="submit">Update</button>
-//             </form>
-//             <Logout />
-//         </div>
-//     ) : (
-//         <p>Loading...</p>
-//     );
-// }
-
-// export default UserInfo;
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -83,7 +14,7 @@ function UserInfo() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/user', {
+                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/user', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -102,7 +33,7 @@ function UserInfo() {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put('http://localhost:8000/api/user', {
+            const response = await axios.put('http://3.138.38.248/Enaam_Backend_V1/public/api/user', {
                 name,
                 email,
                 password,
