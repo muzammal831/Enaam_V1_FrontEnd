@@ -10,13 +10,13 @@ import Footer from "../../Components/FooterCompnent";
 function App() {
   return (
     <div className="App">
-        <HomeBanner />
-        {/* <WinnersCarousel/>
+      <HomeBanner />
+      {/* <WinnersCarousel/>
          */}
-         <RecentLuckyDraws/>
-       <InsightSection/>
-        <ProductsListComponent/>
-        <Footer/>
+      <RecentLuckyDraws />
+      <InsightSection />
+      <ProductsListComponent />
+      <Footer />
     </div>
   );
 }

@@ -1,44 +1,20 @@
-
-
-
-
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/Styles.css'; // Import any custom CSS for styling if needed
-import CartIcon from '../pages/HomeScreen/Components/CartIcon';
 import CustomModal from './CustomModal'; // Import the CustomModal component
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import Logout from '../../Dashboard/Logout'; // Import the Logout component
 import Login from '../../Dashboard/Login';
 import Register from '../../Dashboard/Register'; // Import the Register component
+import { useApp } from '../Services/AppContext';
+import '../css/Styles.css'; // Import any custom CSS for styling if needed
 
 const Header = () => {
-    const [user, setUser] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [showLogin, setShowLogin] = useState(true); // State to track which component to show in the modal
-    const navigate = useNavigate();
+    const [showLogin, setShowLogin] = useState(true);
+    const { userData, logout } = useApp();
+
 
     useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/user', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-                setUser(response.data);
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            }
-        };
-
-        if (localStorage.getItem('token')) {
-            fetchUser();
-        }
-    }, []);
-
-    useEffect(() => {
+        alert(JSON.stringify(localStorage.getItem('userData')))
         const mainContent = document.getElementById('main-content');
         if (isModalOpen) {
             mainContent.classList.add('blurred');
@@ -46,21 +22,6 @@ const Header = () => {
             mainContent.classList.remove('blurred');
         }
     }, [isModalOpen]);
-
-    const handleLogout = async () => {
-        try {
-            await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/logout', {}, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-            localStorage.removeItem('token');
-            window.location.reload();
-        } catch (error) {
-            console.error('Error logging out:', error);
-            alert('Error logging out.');
-        }
-    };
 
     const handleModalOpen = () => {
         setIsModalOpen(true);
@@ -103,19 +64,24 @@ const Header = () => {
                                 </li>
                                 <li className="nav-item dropdown align-items-center x-efeected-li">
                                     <div id="userState" className="d-flex align-items-center">
-                                        {user ? (
+                                        {userData ? (
                                             <>
                                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                                                    <img id="user-image" src={require("../images/user-icon.png")} alt="User Profile" title={user.name} className="rounded-circle" style={{ height: '30px' }} />
-                                                    <span>{user.name}</span>
+                                                    <img id="user-image" src={require("../images/user-icon.png")} alt="User Profile" title={userData.name} className="rounded-circle" style={{ height: '30px' }} />
+                                                    <span>{userData.name}</span>
                                                 </a>
                                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                    <a className="dropdown-item" href="/dashboard/user">Profile</a>
-                                                    <a className="dropdown-item" href="#" onClick={handleLogout}>Logout</a>
+                                                    <a className="dropdown-item" href="/profileScreen">Profile</a>
+                                                    <a className="dropdown-item" href="#" onClick={() => { logout() }}>Logout</a>
                                                 </div>
                                             </>
                                         ) : (
-                                            <a id="login-link" href="#" className="nav-link" onClick={handleModalOpen}>Login</a>
+                                            <>
+                                                <a href="/profile">
+                                                    <img id="mob-user-image" src={require("../images/user-icon.png")} alt="User Profile" className="rounded-circle" style={{ height: '30px', }} />
+                                                </a>
+                                                <a id="mob-login-link" href="#" className="nav-link" onClick={handleModalOpen}>Login</a>
+                                            </>
                                         )}
                                     </div>
                                 </li>
@@ -128,18 +94,23 @@ const Header = () => {
                                 </li>
                                 <li className="nav-item">
                                     <div id="mobUserState" className="d-flex align-items-center">
-                                        {user ? (
+                                        {userData ? (
                                             <>
                                                 <a href="/profile">
-                                                    <img id="mob-user-image" src={require("../images/user-icon.png")} alt="User Profile" title={user.name} className="rounded-circle" style={{ height: '30px' }} />
+                                                    <img id="mob-user-image" src={require("../images/user-icon.png")} alt="User Profile" title={userData.name} className="rounded-circle" style={{ height: '30px', }} />
                                                 </a>
                                                 <a href="/profile">
-                                                    <span id="mob-user-name">{user.name}</span>
+                                                    <span id="mob-user-name" >{userData.name}</span>
                                                 </a>
                                                 <Logout />
                                             </>
                                         ) : (
-                                            <a id="mob-login-link" href="#" className="nav-link" onClick={handleModalOpen}>Login</a>
+                                            <>
+                                                <a href="/profile">
+                                                    <img id="mob-user-image" src={require("../images/user-icon.png")} alt="User Profile" className="rounded-circle" style={{ height: '30px', }} />
+                                                </a>
+                                                <a id="mob-login-link" href="#" className="nav-link" onClick={handleModalOpen}>Login</a>
+                                            </>
                                         )}
                                     </div>
                                 </li>
@@ -159,6 +130,7 @@ const Header = () => {
                         </div>
                     </nav>
                 </div>
+
                 <CustomModal isOpen={isModalOpen} onClose={handleModalClose}>
                     <div>
                         {showLogin ? <Login /> : <Register />}

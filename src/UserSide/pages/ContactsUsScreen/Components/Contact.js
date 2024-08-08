@@ -37,7 +37,7 @@ const Contact = () => {
       <div className="container mt-5" style={{ marginBottom: '30px' }}>
         <div className="row mt-5">
           <div className="col-lg-8 mt-5 offset-lg-2">
-            <div className="card glow p-4">
+            <div className="card glow p-4"style={{borderRadius:20}}>
               <h2 className="text-center mb-4">Contact Us</h2>
               {message && <p className="mt-3 text-success text-center">{message}</p>}
               <form onSubmit={handleSubmit}>

@@ -1,13 +1,42 @@
 
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "../../css/ProductList.css";
 import { Colors } from '../../globals/colors';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { addToCart, token } from '../../Services/PostAPI';
+import { ToastContainer, toast } from 'react-toastify';
+import "../../css/ProductList.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css'; 
 
-const ProductCard = ({ product, addProductToCart, percentage, progress_bar_class }) => {
+
+const ProductCard = ({ product, percentage, progress_bar_class }) => {
+    const navigate = useNavigate();
+    const addProductToCart = async (item) => {
+        const payload = {
+            product_id: item.id,
+            quantity: 1,
+            price: item.price
+        }
+        if(!token) {
+            toast.error('Please login to add product to cart');
+            return;
+        }else{
+        addToCart(payload).then((response) => {
+            if (response.status === 200) {
+                toast.success(response.message);
+                navigate('/cart');
+            } else {
+                toast.error(response.message);
+            }
+        }).catch((error) => {
+            toast.error(error.message);
+        })
+    }
+    }
+
     return (
         <div className="col-md-12 tikker glow">
+            <ToastContainer/>
             <div className="row">
                 <div className="col-md-3">
                     <div className="p-0 position-relative">
@@ -27,7 +56,7 @@ const ProductCard = ({ product, addProductToCart, percentage, progress_bar_class
                         <div style={{ display: "flex" }} />
                         <div className="mt-md-1 mb-lg-0 mb-4">
                             <Link className={"prizeDetailsButton"} to={`/product/${product.id}`}>Prize Details</Link>
-                            <button className={"addCartButton"} onClick={() => { if (percentage < 100) addProductToCart(product.id); }}>Add to Cart</button>
+                            <button className={"addCartButton"} onClick={() => { addProductToCart(product)}}>Add to Cart</button>
                         </div>
                     </div>
                 </div>

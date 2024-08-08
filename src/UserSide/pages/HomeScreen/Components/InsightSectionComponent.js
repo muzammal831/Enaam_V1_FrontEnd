@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../../css/Styles.css';
 
 const InsightSection = () => {
     return (
@@ -10,7 +11,6 @@ const InsightSection = () => {
                         <ul className="how-it-works-listing">
                             <li>
                                 <div className="working-img">
-                                    <div className="upper-number">1</div>
                                     <img src={require("../../../images/how-works/monitor-mobbile.png")} alt="Register" />
                                 </div>
                                 <div className="title-x">
@@ -19,7 +19,6 @@ const InsightSection = () => {
                             </li>
                             <li>
                                 <div className="working-img">
-                                    <div className="upper-number">2</div>
                                     <img src={require("../../../images/how-works/gift.png")} alt="Browse Prizes" />
                                 </div>
                                 <div className="title-x">
@@ -28,7 +27,6 @@ const InsightSection = () => {
                             </li>
                             <li>
                                 <div className="working-img">
-                                    <div className="upper-number">3</div>
                                     <img src={require("../../../images/how-works/heart.png")} alt="Choose your favourite item to win" />
                                 </div>
                                 <div className="title-x">
@@ -37,7 +35,6 @@ const InsightSection = () => {
                             </li>
                             <li>
                                 <div className="working-img">
-                                    <div className="upper-number">4</div>
                                     <img src={require("../../../images/how-works/dollar-square.png")} alt="Answer a simple question & pay item entry fee" />
                                 </div>
                                 <div className="title-x">
@@ -46,7 +43,6 @@ const InsightSection = () => {
                             </li>
                             <li>
                                 <div className="working-img">
-                                    <div className="upper-number">5</div>
                                     <img src={require("../../../images/how-works/calendar.png")} alt="Wait for lucky draw & get a chance to win" />
                                 </div>
                                 <div className="title-x">

@@ -30,8 +30,8 @@ function ForgotPassword() {
             <Header /> {/* Add Header */}
             <div className="container mt-5">
                 <div className="row justify-content-center mt-5">
-                    <div className="col-md-6 col-lg-6 mt-5">
-                        <div className="card p-4 shadow-lg rounded">
+                    <div className="col-md-8 col-lg-8 mt-5" >
+                        <div className="card p-4 shadow-lg rounded" style={{borderRadius:20}}>
                             <h2 className="mb-4 text-center">Forgot Password</h2>
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-3">

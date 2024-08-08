@@ -11,7 +11,7 @@ const TermsConditions = () => {
       <div class="container-fluid " style={{ marginBottom: "30px" }}>
         <div class="row">
           <div class="col-lg-8 offset-lg-2 ">
-            <div class="card  p-4 glow">
+            <div class="card  p-4 glow" style={{borderRadius:20}}>
               <h2 class="text-center mb-4">Terms & Conditions</h2>
               <ol class="list-group list-group-flush">
                 <li class="list-group-item">

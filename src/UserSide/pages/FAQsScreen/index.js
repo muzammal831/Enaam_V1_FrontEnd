@@ -23,7 +23,6 @@ const FAQs = () => {
   return (
     <div className='App'>
       <Header />
-      <div style={{ height: "15hv" }} />
       <section className="home-header inner-page">
         <div className="container-fluid ">
           <h3 className="mb-4 text-center">FAQs</h3>
@@ -41,7 +40,7 @@ const FAQs = () => {
                           {faqs.map((faq, index) => {
                             const collapseId = `collapse${index + 1}`;
                             return (
-                              <div className="card glow" key={index}>
+                              <div className="card glow" style={{borderRadius:8}} key={index}>
                                 <div className="card-header">
                                   <a
                                     style={{ textAlign: "left", textDecoration: "none" }}

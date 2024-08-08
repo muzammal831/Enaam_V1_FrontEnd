@@ -53,18 +53,18 @@ const AboutUs = () => {
             <Loader />
           ) : (
             aboutUsList.length > 0 ? (
-              <div className="row">
+              <div className="row" >
                 {aboutUsList.map((item, index) => (
-                  <div className="col-md-12 mb-4" key={index}>
-                    <div className="card shadow-sm">
-                      <div className="card-body">
-                        <div className="row">
-                          <div className="col-md-8 text-left">
+                  <div className="col-md-12 mb-4"  key={index}>
+                    <div className="card shadow-sm" style={{borderRadius:20}}>
+                      <div className="card-body"  >
+                        <div className="row" >
+                          <div className="col-md-8 text-left" >
                             <h4 className="mt-4">{item.heading}</h4>
                             <p style={{ fontSize: '13px', textAlign: 'justify' }}>{item.about_detail}</p>
                           </div>
                           {item.about_image && (
-                            <div className="col-md-4">
+                            <div className="col-md-4" style={{borderRadius:20}}>
                               <img src={item.about_image} alt={item.heading} className="img-fluid" />
                             </div>
                           )}

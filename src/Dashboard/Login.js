@@ -1,10 +1,7 @@
-
-
-
-
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { useApp } from '../UserSide/Services/AppContext';
+import '../UserSide/css/Styles.css';
 
 function Login() {
     const [emailOrPhone, setEmailOrPhone] = useState('');
@@ -12,36 +9,33 @@ function Login() {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { login  } = useApp()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/login', {
-                email_or_phone: emailOrPhone,
-                password
-            });
 
-            // Debugging: Log the entire response
-            console.log('API Response:', response.data);
+        const payload = {
+            email_or_phone: emailOrPhone,
+            password: password
+        }
 
-            // Store token and role in localStorage
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('role', response.data.role);
-
+        login(payload).then((response) => {
             setMessage('Login successful!');
             setError('');
-            navigate('/dashboard');  // Redirect to dashboard or desired page
-        } catch (error) {
-            setError('Login failed. Please check your credentials and try again.');
-            setMessage('');
-        }
+            navigate('/dashboard');
+        }).catch((error) => {
+            setError(error);
+        })
+
     };
+
+
 
     return (
         <div className="container-fluid">
             <div className="row text-start">
                 <div className="col-md-12">
-                    <div style={{ border: '0px' }} className="card">
+                    <div  className="card">
                         <div className="card-body">
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-3">
@@ -66,7 +60,7 @@ function Login() {
                                         required
                                     />
                                 </div>
-                                <button type="submit" className="btn btn-primary">Login</button>
+                                <button type="submit" className="btn btn-primary w-100">Login</button>
                             </form>
                             {message && <p className="text-success mt-3">{message}</p>}
                             {error && <p className="text-danger mt-3">{error}</p>}

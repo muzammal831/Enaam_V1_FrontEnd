@@ -51,7 +51,7 @@ function ResetPassword() {
                     onChange={(e) => setPasswordConfirmation(e.target.value)}
                     required
                 />
-                <button type="submit">Reset Password</button>
+                <button type="submit" >Reset Password</button>
             </form>
             {message && <p style={{ color: 'green' }}>{message}</p>}
             {error && <p style={{ color: 'red' }}>{error}</p>}

@@ -123,7 +123,7 @@ function Register() {
                                             required
                                         />
                                     </div>
-                                    <button type="submit" className="btn btn-primary">Register</button>
+                                    <button type="submit" className="btn btn-primary w-100">Register</button>
                                 </form>
                                 {message && <p className="text-success mt-3">{message}</p>}
                                 {error && <p className="text-danger mt-3">{error}</p>}

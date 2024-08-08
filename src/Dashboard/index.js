@@ -5,7 +5,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './Register';
 import Login from './Login';
-import UserInfo from './UserInfo';
+import UserInfo from './ProfileScreen';
 import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 import AdminDashboard from './AdminDashboard';
@@ -44,6 +44,7 @@ import InvoiceDetailsPage from './invoice/InvoiceDetailsPage';
 import ContactList from './Contacts/ContactList';
 import PrivateRoute from './PrivateRoute'; // Import the PrivateRoute component
 import ProductDetail from './products/ProductDetail';
+import ProfileScreen from './ProfileScreen';
 
 export const DashboardRoutes = () => {
     return (
@@ -51,7 +52,7 @@ export const DashboardRoutes = () => {
             <Routes>
                 <Route path="/dashboard/register" element={<Register />} />
                 <Route path="/dashboard/login" element={<Login />} />
-                <Route path="/dashboard/user" element={<UserInfo />} />
+                <Route path="/profileScreen" element={<ProfileScreen />} />
                 <Route path="/dashboard/forgot-password" element={<ForgotPassword />} />
                 <Route path="/dashboard/reset-password/:token" element={<ResetPassword />} />
 

@@ -7329,6 +7329,7 @@ button.bg-dark:focus {
 
 .rounded-circle {
   border-radius: 50% !important;
+  margin-right: 10px;
 }
 
 .rounded-pill {
@@ -14770,6 +14771,9 @@ span.indicator {
 .inner-page {
   padding-top: 175px;
   padding-bottom: 100px;
+  padding-left: 50px;
+  padding-right: 50px;
+  text-align:center;
 }
 
 .compaign-btn button {
@@ -15372,10 +15376,18 @@ html.translated-rtl .shipping-card {
     margin-top: 0 !important;
   }
 
-  .hide-on-mobile {
-    display: none;
-  }
+  .on-mobile {
+    width: 100%;
+}
 
+/* Styles for mobile devices */
+ @media (max-width: 768px) {
+    .on-mobile {
+        height: 150px;
+        width: 90%;
+        margin: 20px auto;
+    }
+}
   .show-on-mobile {
     display: block;
   }
@@ -15549,6 +15561,7 @@ ol.carousel-indicators.iframs-slider.products-c~.carousel-inner {
 ul.how-it-works-listing li {
   display: flex;
   align-items: center;
+  text-align: left;
   margin-bottom: 15px;
 }
 
