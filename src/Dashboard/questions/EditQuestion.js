@@ -28,7 +28,7 @@ function EditQuestion() {
         const fetchQuestion = async () => {
             setLoading(true); // Set loading to true before starting fetch
             try {
-                const response = await axios.get(`http://localhost:8000/api/questions/${id}`, {
+                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/questions/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -61,7 +61,7 @@ function EditQuestion() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:8000/api/questions/${id}`, formData, {
+            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/questions/${id}`, formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },

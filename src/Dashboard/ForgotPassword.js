@@ -14,7 +14,7 @@ function ForgotPassword() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/forgot-password', {
+            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/forgot-password', {
                 email
             });
             setMessage(response.data.message);

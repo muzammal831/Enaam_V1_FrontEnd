@@ -19,7 +19,7 @@ const GameScreen = () => {
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/questions', {
+                const response = await axios.get(`${BASE_URL}/questions`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -73,14 +73,14 @@ const GameScreen = () => {
 
                 // Update cart with correctness
                 await axios.post(
-                    'http://localhost:8000/api/cart/update-is-correct',
+                    `${BASE_URL}/cart/update-is-correct`,
                     { is_correct: isCorrect ? 'yes' : 'no' },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
 
                 // Submit cart data to invoice
                 await axios.post(
-                    'http://localhost:8000/api/cart/addInvoice',
+                    `${BASE_URL}/cart/addInvoice`,
                     { is_correct: isCorrect ? 'yes' : 'no' },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );

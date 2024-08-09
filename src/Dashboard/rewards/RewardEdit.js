@@ -23,7 +23,7 @@ function RewardEdit() {
         const fetchReward = async () => {
             setLoading(true); // Set loading to true before starting fetch
             try {
-                const response = await axios.get(`http://localhost:8000/api/rewards/${id}`, {
+                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/rewards/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -59,7 +59,7 @@ function RewardEdit() {
 
         try {
             // First update text fields
-            await axios.put(`http://localhost:8000/api/rewards/${id}`, textData, {
+            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/rewards/${id}`, textData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ function RewardEdit() {
 
             // Then upload file if exists
             if (image) {
-                await axios.post(`http://localhost:8000/api/rewards/${id}/upload`, formData, {
+                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/rewards/${id}/upload`, formData, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                         'Content-Type': 'multipart/form-data'

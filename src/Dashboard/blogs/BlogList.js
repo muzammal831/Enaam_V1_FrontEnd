@@ -21,7 +21,7 @@ function BlogList() {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/blogs', {
+                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/blogs', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -53,7 +53,7 @@ function BlogList() {
 
     const handleDeleteClick = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/api/blogs/${id}`, {
+            await axios.delete(`http://3.138.38.248/Enaam_Backend_V1/public/api/blogs/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },

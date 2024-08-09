@@ -21,7 +21,7 @@ function VideoList() {
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/videos', {
+                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/videos', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -53,7 +53,7 @@ function VideoList() {
 
     const handleDeleteClick = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/api/videos/${id}`, {
+            await axios.delete(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },

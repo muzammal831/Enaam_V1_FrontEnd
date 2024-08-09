@@ -39,7 +39,7 @@ function AddBanner() {
         data.append('image', formData.image);
 
         try {
-            await axios.post('http://localhost:8000/api/banners', data, {
+            await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/banners', data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${localStorage.getItem('token')}`,

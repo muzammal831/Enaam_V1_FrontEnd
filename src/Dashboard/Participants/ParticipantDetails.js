@@ -15,7 +15,7 @@ const ParticipantDetails = () => {
     useEffect(() => {
         const fetchParticipant = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/participants/${id}`, {
+                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/participants/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }

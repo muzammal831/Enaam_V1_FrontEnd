@@ -18,7 +18,7 @@ function Register() {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/register', {
+            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/register', {
                 name,
                 email,
                 password,
@@ -37,7 +37,7 @@ function Register() {
     const handleVerifyOtp = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/verify-otp', {
+            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/verify-otp', {
                 phone,
                 otp
             });

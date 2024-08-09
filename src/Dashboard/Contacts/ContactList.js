@@ -17,7 +17,7 @@ const ContactList = () => {
     useEffect(() => {
         const fetchContacts = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/contacts', {
+                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/contacts', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },

@@ -34,7 +34,7 @@ function EditVideo() {
         const fetchVideo = async () => {
             setLoading(true); // Set loading to true before starting fetch
             try {
-                const videoResponse = await axios.get(`http://localhost:8000/api/videos/${id}`, {
+                const videoResponse = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -63,12 +63,12 @@ function EditVideo() {
         const fetchUsersAndRewards = async () => {
             try {
                 const [usersResponse, rewardsResponse] = await Promise.all([
-                    axios.get('http://localhost:8000/api/users', {
+                    axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/users', {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem('token')}`,
                         },
                     }),
-                    axios.get('http://localhost:8000/api/rewards', {
+                    axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/rewards', {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem('token')}`,
                         },
@@ -103,7 +103,7 @@ function EditVideo() {
         setLoading(true); // Set loading to true before starting submission
 
         try {
-            await axios.put(`http://localhost:8000/api/videos/${id}`, {
+            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}`, {
                 title: formData.title,
                 user_id: formData.user_id,
                 reward_id: formData.reward_id,
@@ -121,7 +121,7 @@ function EditVideo() {
                 const thumbnailFormData = new FormData();
                 thumbnailFormData.append('thumbnail', formData.thumbnail);
 
-                await axios.post(`http://localhost:8000/api/videos/${id}/upload-thumbnail`, thumbnailFormData, {
+                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}/upload-thumbnail`, thumbnailFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -133,7 +133,7 @@ function EditVideo() {
                 const videoFormData = new FormData();
                 videoFormData.append('video', formData.video);
 
-                await axios.post(`http://localhost:8000/api/videos/${id}/upload-video`, videoFormData, {
+                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}/upload-video`, videoFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,

@@ -33,7 +33,7 @@ function AddBlog() {
 
         try {
             // Post the blog data
-            const response = await axios.post('http://localhost:8000/api/blogs', {
+            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/blogs', {
                 heading: formData.heading,
                 description: formData.description,
             }, {
@@ -48,7 +48,7 @@ function AddBlog() {
                 const fileFormData = new FormData();
                 fileFormData.append('blog_image', formData.blog_image);
 
-                await axios.post(`http://localhost:8000/api/blogs/${response.data.id}/upload-image`, fileFormData, {
+                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/blogs/${response.data.id}/upload-image`, fileFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,

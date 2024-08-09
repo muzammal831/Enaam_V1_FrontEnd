@@ -19,7 +19,7 @@ function BannerList() {
     useEffect(() => {
         const fetchBanners = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/banners/platform/${platform}`, {
+                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/banners/platform/${platform}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -50,7 +50,7 @@ function BannerList() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/api/banners/${id}`, {
+            await axios.delete(`http://3.138.38.248/Enaam_Backend_V1/public/api/banners/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },

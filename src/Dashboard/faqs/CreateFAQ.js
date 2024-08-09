@@ -25,7 +25,7 @@ function CreateFAQ() {
         e.preventDefault();
         setLoading(true); // Set loading to true before starting submission
         try {
-            await axios.post('http://localhost:8000/api/faqs', formData, {
+            await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/faqs', formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
