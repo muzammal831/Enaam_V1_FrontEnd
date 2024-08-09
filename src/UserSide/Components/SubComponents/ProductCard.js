@@ -7,17 +7,19 @@ import { ToastContainer, toast } from 'react-toastify';
 import "../../css/ProductList.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css'; 
+import { useApp } from '../../Services/AppContext';
 
 
 const ProductCard = ({ product, percentage, progress_bar_class }) => {
     const navigate = useNavigate();
+    const { addToCart , userData} = useApp()
     const addProductToCart = async (item) => {
         const payload = {
             product_id: item.id,
             quantity: 1,
             price: item.price
         }
-        if(!token) {
+        if(!userData?.token) {
             toast.error('Please login to add product to cart');
             return;
         }else{

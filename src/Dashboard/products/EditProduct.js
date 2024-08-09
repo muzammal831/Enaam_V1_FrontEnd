@@ -30,7 +30,7 @@ function EditProduct() {
         const fetchProduct = async () => {
             setLoading(true); // Set loading to true before starting fetch
             try {
-                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/products/${id}`, {
+                const response = await axios.get(`http://localhost:8000/api/products/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -57,7 +57,7 @@ function EditProduct() {
 
         const fetchRewards = async () => {
             try {
-                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/rewards', {
+                const response = await axios.get('http://localhost:8000/api/rewards', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -92,7 +92,7 @@ function EditProduct() {
         
         try {
             // Update product details excluding image
-            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/products/${id}`, formData, {
+            await axios.put(`http://localhost:8000/api/products/${id}`, formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ function EditProduct() {
             if (image) {
                 const formDataImage = new FormData();
                 formDataImage.append('image', image);
-                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/products/${id}/upload-image`, formDataImage, {
+                await axios.post(`http://localhost:8000/api/products/${id}/upload-image`, formDataImage, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                         'Content-Type': 'multipart/form-data',

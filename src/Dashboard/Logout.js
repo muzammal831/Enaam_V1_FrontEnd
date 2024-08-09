@@ -7,7 +7,7 @@ function Logout() {
 
     const handleLogout = async () => {
         try {
-            await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/logout', {}, {
+            await axios.post('http://localhost:8000/api/logout', {}, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

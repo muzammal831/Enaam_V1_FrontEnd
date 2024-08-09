@@ -36,7 +36,7 @@ const UserSide = () => {
         <Route path="/cart" element={<CartScreen />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/blogs/:id" element={<BlogDetails />} />
-        <Route path="/initislGameScreen" element={<InititalGameScreen />} />
+        <Route path="/initialGameScreen" element={<InititalGameScreen />} />
 
 
         <Route path="/GameScreen" element={<GameScreen />} />

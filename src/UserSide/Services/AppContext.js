@@ -30,8 +30,23 @@ export const AppProvider = ({ children }) => {
     getVideos();
     // getWinners();
     getProducts();
-    // getCart();
+    getCart();
   }, []);
+
+useEffect(() => {
+    const saveUserData = async () => {
+        try {
+            if (userData) {
+                localStorage.setItem('userData', JSON.stringify(userData));
+            } else {
+                localStorage.removeItem('userData');
+            }
+        } catch (error) {
+            console.error('Failed to save user data:', error);
+        }
+    };
+    saveUserData();
+}, [userData]);
 
   const login = async (payload) => {
     try {
@@ -143,16 +158,15 @@ export const AppProvider = ({ children }) => {
     }
   };
   const addToCart = async (payload) => {
-    setLoading(true)
     try {
       const response = await axios.post(
-        `${BASE_URL}/cart/addToCart`,
+        `${BASE_URL}/cart/add`,
          payload,
-        { headers: { 'Accept-Language': 'en' } }
+         {headers: {Authorization: `Bearer ${userData?.token}`}
+      }
       );
-      getCart();
-      setLoading(false);
-      return response?.data;
+      getCart()
+      return response;
     } catch (error) {
       console.error('Error adding item to cart:', error);
       setProducts([]);
@@ -160,20 +174,41 @@ export const AppProvider = ({ children }) => {
       return error;
     }
   };
+
+  const updateCart = async (payload) => {
+    try {
+        const response = await axios.put(
+            `${BASE_URL}/cart/updateQuantity/${payload.id}`,
+            { quantity: payload?.quantity },
+            {
+                headers: {
+                    Authorization: `Bearer ${userData?.token}`
+                }
+            }
+        );
+
+        getCart();
+        return response;
+    } catch (error) {
+        console.error('Error adding item to cart:', error);
+        return error;
+    }
+};
+
   const removeFromCart = async (payload) => {
     // setLoading(true)
     try {
-      // If payload contains data to send as part of the request body, include it in the config
       const response = await axios.delete(
-        `${BASE_URL}/cart/removeFromCart`,
+        `${BASE_URL}/cart/removeItem/${payload.id}`,
         {
-          data: payload,
-          headers: { 'Accept-Language': 'en' }
+            headers: {
+                Authorization: `Bearer ${userData?.token}`
+            }
         }
-      );
+    )
       getCart();
       setLoading(false);
-      return response?.data;
+      return response;
     } catch (error) {
       console.error('Error removing item from cart:', error);
       setProducts([]);
@@ -184,10 +219,15 @@ export const AppProvider = ({ children }) => {
   const getCart = async () => {
     // setLoading(true)
     try {
-      const response = await axios.get(`${BASE_URL}/cart/${165}`,{headers: {'Accept-Language': 'en'}});
+      const response = await axios.get(`${BASE_URL}/cart`,{headers: {Authorization: `Bearer ${userData?.token}`}});
       setCartData(response?.data?.data)
-      setLoading(false)
-      return response?.data;
+      if (response.data?.status === 200) {
+        setCartData(response?.data?.data)
+        return response.data?.cart;
+      } else {
+        console.error('Unexpected response format:', response.data);
+        return [];
+      }
     } catch (error) {
       console.error('Error fetching about information:', error);
       setProducts([])
@@ -228,6 +268,7 @@ export const AppProvider = ({ children }) => {
         videos,
         login,
         getCart,
+        updateCart,
         getBanners,
         getVideos,
         addToCart,

@@ -25,7 +25,7 @@ function EditAboutUs() {
         const fetchAboutUs = async () => {
             setLoading(true); // Set loading to true before starting fetch
             try {
-                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/about-us/${id}`, {
+                const response = await axios.get(`http://localhost:8000/api/about-us/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -61,7 +61,7 @@ function EditAboutUs() {
 
         try {
             // Send JSON payload for text fields
-            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/about-us/${id}`, {
+            await axios.put(`http://localhost:8000/api/about-us/${id}`, {
                 heading: formData.heading,
                 about_detail: formData.about_detail,
             }, {
@@ -76,7 +76,7 @@ function EditAboutUs() {
                 const fileFormData = new FormData();
                 fileFormData.append('about_image', formData.about_image);
 
-                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/about-us/${id}/upload-image`, fileFormData, {
+                await axios.post(`http://localhost:8000/api/about-us/${id}/upload-image`, fileFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,

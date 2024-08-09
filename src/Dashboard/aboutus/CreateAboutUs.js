@@ -38,7 +38,7 @@ function CreateAboutUs() {
         }
 
         try {
-            await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/about-us', form, {
+            await axios.post('http://localhost:8000/api/about-us', form, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${localStorage.getItem('token')}`,

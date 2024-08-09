@@ -26,7 +26,7 @@ function EditBanner() {
         const fetchBanner = async () => {
             setLoading(true); // Set loading to true before starting fetch
             try {
-                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/banners/${id}`, {
+                const response = await axios.get(`http://localhost:8000/api/banners/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -69,7 +69,7 @@ function EditBanner() {
         };
 
         try {
-            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/banners/${id}`, textFields, {
+            await axios.put(`http://localhost:8000/api/banners/${id}`, textFields, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -81,7 +81,7 @@ function EditBanner() {
                 const imageData = new FormData();
                 imageData.append('image', formData.image);
 
-                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/banners/${id}/upload-image`, imageData, {
+                await axios.post(`http://localhost:8000/api/banners/${id}/upload-image`, imageData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,

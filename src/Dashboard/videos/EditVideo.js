@@ -1,5 +1,6 @@
 
 
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -21,17 +22,19 @@ function EditVideo() {
         reward_id: '',
         ticket_name: '',
         date_announced: '',
+        video_url: '',
     });
     const [users, setUsers] = useState([]);
     const [rewards, setRewards] = useState([]);
     const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Sidebar state
     const [loading, setLoading] = useState(true); // Loading state
+    const [youTubeID, setYouTubeID] = useState('');
 
     useEffect(() => {
         const fetchVideo = async () => {
             setLoading(true); // Set loading to true before starting fetch
             try {
-                const videoResponse = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}`, {
+                const videoResponse = await axios.get(`http://localhost:8000/api/videos/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -45,7 +48,10 @@ function EditVideo() {
                     reward_id: videoResponse.data.reward_id,
                     ticket_name: videoResponse.data.ticket_name,
                     date_announced: videoResponse.data.date_announced,
+                    video_url: videoResponse.data.video_url,
                 });
+                const ytID = extractYouTubeID(videoResponse.data.video_url);
+                setYouTubeID(ytID);
             } catch (error) {
                 console.error('Error fetching video:', error);
                 toast.error('Error fetching video.');
@@ -57,12 +63,12 @@ function EditVideo() {
         const fetchUsersAndRewards = async () => {
             try {
                 const [usersResponse, rewardsResponse] = await Promise.all([
-                    axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/users', {
+                    axios.get('http://localhost:8000/api/users', {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem('token')}`,
                         },
                     }),
-                    axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/rewards', {
+                    axios.get('http://localhost:8000/api/rewards', {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem('token')}`,
                         },
@@ -86,6 +92,10 @@ function EditVideo() {
             ...formData,
             [name]: files ? files[0] : value,
         });
+        if (name === 'video_url') {
+            const ytID = extractYouTubeID(value);
+            setYouTubeID(ytID);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -93,12 +103,13 @@ function EditVideo() {
         setLoading(true); // Set loading to true before starting submission
 
         try {
-            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}`, {
+            await axios.put(`http://localhost:8000/api/videos/${id}`, {
                 title: formData.title,
                 user_id: formData.user_id,
                 reward_id: formData.reward_id,
                 ticket_name: formData.ticket_name,
                 date_announced: formData.date_announced,
+                video_url: formData.video_url,
             }, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -110,7 +121,7 @@ function EditVideo() {
                 const thumbnailFormData = new FormData();
                 thumbnailFormData.append('thumbnail', formData.thumbnail);
 
-                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}/upload-thumbnail`, thumbnailFormData, {
+                await axios.post(`http://localhost:8000/api/videos/${id}/upload-thumbnail`, thumbnailFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -122,7 +133,7 @@ function EditVideo() {
                 const videoFormData = new FormData();
                 videoFormData.append('video', formData.video);
 
-                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/videos/${id}/upload-video`, videoFormData, {
+                await axios.post(`http://localhost:8000/api/videos/${id}/upload-video`, videoFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -142,6 +153,12 @@ function EditVideo() {
 
     const handleSidebarToggle = (isOpen) => {
         setIsSidebarOpen(isOpen);
+    };
+
+    const extractYouTubeID = (url) => {
+        const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        const match = url.match(regex);
+        return match ? match[1] : null;
     };
 
     if (loading) {
@@ -236,45 +253,76 @@ function EditVideo() {
                                 />
                             </div>
                             <div className="mb-3">
+                                <label htmlFor="video_url" className="form-label">Video URL</label>
+                                <input
+                                    type="url"
+                                    className="form-control"
+                                    id="video_url"
+                                    name="video_url"
+                                    value={formData.video_url}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            {youTubeID && (
+                                <div className="mb-3">
+                                    <label className="form-label">Embedded Video</label>
+                                    <iframe
+                                        width="560"
+                                        height="315"
+                                        src={`https://www.youtube.com/embed/${youTubeID}`}
+                                        title="YouTube video player"
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    ></iframe>
+                                </div>
+                            )}
+                            <div className="mb-3">
                                 <label htmlFor="thumbnail" className="form-label">Thumbnail</label>
                                 <input
+                                
                                     type="file"
                                     className="form-control"
                                     id="thumbnail"
                                     name="thumbnail"
                                     onChange={handleChange}
+                                    accept="image/*"
                                 />
-                                {video.thumbnail && (
+{video.thumbnail && (
                                     <img
-                                    style={{borderRadius:"10px"}}
+                                        style={{ maxWidth: '20%',height: '70px;', marginTop: '10px' }}
                                         src={video.thumbnail}
-                                        alt="Video Thumbnail"
-                                        width="100"
-                                        className="mt-2"
+                                        alt="Current Thumbnail"
                                     />
                                 )}
+
+
+
+                                
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="video" className="form-label">Video</label>
+                                <label htmlFor="video" className="form-label">Video File</label>
                                 <input
-                                style={{borderRadius:"10px"}}
                                     type="file"
                                     className="form-control"
                                     id="video"
                                     name="video"
                                     onChange={handleChange}
+                                    accept="video/*"
                                 />
-                                {video.video && (
+                                 {video.video && (
                                     <video
-                                        src={video.video}
+                                        style={{ maxWidth: '30%',height: '70px;', marginTop: '10px' }}
                                         controls
-                                        width="200"
-                                        height="200"
-                                        className="mt-2"
-                                    />
+                                        src={video.video}
+                                    >
+                                        Your browser does not support the video tag.
+                                    </video>
                                 )}
                             </div>
-                            <button type="submit" className="btn btn-primary">Update Video</button>
+                            <button type="submit" className="btn btn-primary">
+                                Update Video
+                            </button>
                         </form>
                     </div>
                 </div>

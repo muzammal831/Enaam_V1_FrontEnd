@@ -18,7 +18,7 @@ function Register() {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/register', {
+            const response = await axios.post('http://localhost:8000/api/register', {
                 name,
                 email,
                 password,
@@ -37,7 +37,7 @@ function Register() {
     const handleVerifyOtp = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/verify-otp', {
+            const response = await axios.post('http://localhost:8000/api/verify-otp', {
                 phone,
                 otp
             });
@@ -123,7 +123,7 @@ function Register() {
                                             required
                                         />
                                     </div>
-                                    <button type="submit" className="btn btn-primary w-100">Register</button>
+                                    <button type="submit" className="btn btn-primary">Register</button>
                                 </form>
                                 {message && <p className="text-success mt-3">{message}</p>}
                                 {error && <p className="text-danger mt-3">{error}</p>}

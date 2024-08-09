@@ -14,7 +14,7 @@ const Header = () => {
 
 
     useEffect(() => {
-        alert(JSON.stringify(localStorage.getItem('userData')))
+        // alert(JSON.stringify(localStorage.getItem('userData')))
         const mainContent = document.getElementById('main-content');
         if (isModalOpen) {
             mainContent.classList.add('blurred');

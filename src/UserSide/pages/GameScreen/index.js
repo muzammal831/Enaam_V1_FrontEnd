@@ -1,19 +1,11 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from'../../Components/HeaderComponent'
 import Footer from '../../Components/FooterCompnent';
 
 const InititalGameScreen = () => {
     const navigate = useNavigate();
-
-    const handleNext = () => {
-        const gameType = sessionStorage.getItem('gameType');
-        if (gameType === 'MCQ') {
-            navigate('/GameScreen');
-        } else {
-            navigate('/GameScreen');
-        }
-    };
+    
 
     return (
         <div className="App">
@@ -30,7 +22,7 @@ const InititalGameScreen = () => {
                                         <li>3- Winner will be selected randomly by Lucky Draw</li>
                                     </ol>
                                     <div className="cart-btn-wrap" style={{ margin: 'auto' ,}}>
-                                        <button onClick={handleNext} style={{padding:"10px 100px 10px" }} className="btn btn-primary" id="nextButton">
+                                        <button onClick={()=>{ navigate('/GameScreen'); }} style={{padding:"10px 100px 10px" }} className="btn btn-primary" id="nextButton">
                                             Next
                                         </button>
                                     </div>

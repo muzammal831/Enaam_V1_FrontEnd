@@ -5,7 +5,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './Register';
 import Login from './Login';
-import UserInfo from './ProfileScreen';
+import UserInfo from './UserInfo';
 import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 import AdminDashboard from './AdminDashboard';
@@ -44,17 +44,21 @@ import InvoiceDetailsPage from './invoice/InvoiceDetailsPage';
 import ContactList from './Contacts/ContactList';
 import PrivateRoute from './PrivateRoute'; // Import the PrivateRoute component
 import ProductDetail from './products/ProductDetail';
-import ProfileScreen from './ProfileScreen';
+import ParticipantsList from './Participants/ParticipantsList';
+import ParticipantDetails from './Participants/ParticipantDetails';
 
 export const DashboardRoutes = () => {
     return (
      
             <Routes>
+
                 <Route path="/dashboard/register" element={<Register />} />
                 <Route path="/dashboard/login" element={<Login />} />
-                <Route path="/profileScreen" element={<ProfileScreen />} />
+                <Route path="/dashboard/user" element={<UserInfo />} />
                 <Route path="/dashboard/forgot-password" element={<ForgotPassword />} />
                 <Route path="/dashboard/reset-password/:token" element={<ResetPassword />} />
+                <Route path="/dashboard/participants" element={<ParticipantsList />} />
+                <Route path="/dashboard/participants/:id" element={<ParticipantDetails />} />
 
                 {/* Admin Routes */}
                 <Route path="/dashboard" element={<PrivateRoute element={AdminDashboard} />} />

@@ -27,7 +27,7 @@ function NewProduct() {
     useEffect(() => {
         const fetchRewards = async () => {
             try {
-                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/rewards', {
+                const response = await axios.get('http://localhost:8000/api/rewards', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -66,7 +66,7 @@ function NewProduct() {
         try {
             setLoading(true); // Set loading to true before starting submission
             // Post product data
-            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/products', formData, {
+            const response = await axios.post('http://localhost:8000/api/products', formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ function NewProduct() {
             if (image) {
                 const imageData = new FormData();
                 imageData.append('image', image);
-                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/products/${productId}/upload-image`, imageData, {
+                await axios.post(`http://localhost:8000/api/products/${productId}/upload-image`, imageData, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                         'Content-Type': 'multipart/form-data',

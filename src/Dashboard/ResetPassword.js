@@ -14,7 +14,7 @@ function ResetPassword() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/reset-password', {
+            const response = await axios.post('http://localhost:8000/api/reset-password', {
                 token,
                 email,
                 password,
@@ -51,7 +51,7 @@ function ResetPassword() {
                     onChange={(e) => setPasswordConfirmation(e.target.value)}
                     required
                 />
-                <button type="submit" >Reset Password</button>
+                <button type="submit">Reset Password</button>
             </form>
             {message && <p style={{ color: 'green' }}>{message}</p>}
             {error && <p style={{ color: 'red' }}>{error}</p>}

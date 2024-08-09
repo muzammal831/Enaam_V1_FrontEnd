@@ -20,7 +20,7 @@ function RewardsList() {
     useEffect(() => {
         const fetchRewards = async () => {
             try {
-                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/rewards', {
+                const response = await axios.get('http://localhost:8000/api/rewards', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -45,7 +45,7 @@ function RewardsList() {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://3.138.38.248/Enaam_Backend_V1/public/api/rewards/${rewardToDelete}`, {
+            await axios.delete(`http://localhost:8000/api/rewards/${rewardToDelete}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
             setRewards(rewards.filter(reward => reward.id !== rewardToDelete));

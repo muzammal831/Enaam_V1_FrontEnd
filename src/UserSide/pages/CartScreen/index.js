@@ -1,14 +1,11 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/HeaderComponent';
 import Footer from '../../Components/FooterCompnent';
 import Loader from '../../Components/LoaderComponent';
-import { getCart } from '../../Services/GetAPI';
 import { CartComponent } from './Components/CartComponent';
-import { deleteCart, updateCart } from '../../Services/PostAPI';
 import { ToastContainer, toast } from 'react-toastify';
+import { useApp } from '../../Services/AppContext';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -16,6 +13,7 @@ const CartScreen = () => {
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { cartData , getCart , updateCart , removeFromCart} = useApp()
 
     useEffect(() => {
         setLoading(true);
@@ -43,7 +41,7 @@ const CartScreen = () => {
     };
 
     const handleCheckout = () => {
-        navigate('/initislGameScreen', { state: { cartItems } });
+        navigate('/initialGameScreen', { state: { cartItems } });
     };
 
     return (
@@ -81,7 +79,7 @@ const CartScreen = () => {
                                                     }
                                                 })
                                             }} deleteItem={() => {
-                                                    deleteCart({ id: item?.item_id }).then((response) => {
+                                                removeFromCart({ id: item?.item_id }).then((response) => {
                                                         if (response.status === 200) {
                                                             getUpdatedCart()
                                                         } else {

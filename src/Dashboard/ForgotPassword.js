@@ -14,7 +14,7 @@ function ForgotPassword() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/forgot-password', {
+            const response = await axios.post('http://localhost:8000/api/forgot-password', {
                 email
             });
             setMessage(response.data.message);
@@ -30,8 +30,8 @@ function ForgotPassword() {
             <Header /> {/* Add Header */}
             <div className="container mt-5">
                 <div className="row justify-content-center mt-5">
-                    <div className="col-md-8 col-lg-8 mt-5" >
-                        <div className="card p-4 shadow-lg rounded" style={{borderRadius:20}}>
+                    <div className="col-md-6 col-lg-6 mt-5">
+                        <div className="card p-4 shadow-lg rounded">
                             <h2 className="mb-4 text-center">Forgot Password</h2>
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-3">

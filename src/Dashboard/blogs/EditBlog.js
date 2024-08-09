@@ -24,7 +24,7 @@ function EditBlog() {
         const fetchBlog = async () => {
             setLoading(true); // Set loading to true before starting fetch
             try {
-                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/blogs/${id}`, {
+                const response = await axios.get(`http://localhost:8000/api/blogs/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -59,7 +59,7 @@ function EditBlog() {
         setLoading(true); // Set loading to true before starting submission
 
         try {
-            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/blogs/${id}`, {
+            await axios.put(`http://localhost:8000/api/blogs/${id}`, {
                 heading: formData.heading,
                 description: formData.description,
             }, {
@@ -73,7 +73,7 @@ function EditBlog() {
                 const fileFormData = new FormData();
                 fileFormData.append('blog_image', formData.blog_image);
 
-                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/blogs/${id}/upload-image`, fileFormData, {
+                await axios.post(`http://localhost:8000/api/blogs/${id}/upload-image`, fileFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,

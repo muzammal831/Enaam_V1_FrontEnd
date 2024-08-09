@@ -21,7 +21,7 @@ function ProductForm() {
     useEffect(() => {
         const fetchRewardOptions = async () => {
             try {
-                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/rewards', {
+                const response = await axios.get('http://localhost:8000/api/rewards', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -35,7 +35,7 @@ function ProductForm() {
         if (id) {
             const fetchProduct = async () => {
                 try {
-                    const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/products/${id}`, {
+                    const response = await axios.get(`http://localhost:8000/api/products/${id}`, {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem('token')}`
                         }
@@ -73,8 +73,8 @@ function ProductForm() {
 
         try {
             const url = id 
-                ? `http://3.138.38.248/Enaam_Backend_V1/public/api/products/${id}`
-                : 'http://3.138.38.248/Enaam_Backend_V1/public/api/products';
+                ? `http://localhost:8000/api/products/${id}`
+                : 'http://localhost:8000/api/products';
             const method = id ? 'put' : 'post';
             
             await axios[method](url, productData, {
@@ -88,7 +88,7 @@ function ProductForm() {
                 const formData = new FormData();
                 formData.append('image', image);
 
-                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/products/${id}/upload`, formData, {
+                await axios.post(`http://localhost:8000/api/products/${id}/upload`, formData, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                         'Content-Type': 'multipart/form-data'

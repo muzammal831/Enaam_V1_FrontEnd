@@ -146,6 +146,14 @@ function Sidebar({ onToggleSidebar }) {
                             <i className="bi bi-telephone"></i> Contacts
                         </Link>
                     </li>
+                    <li>
+                        <Link
+                            to="/dashboard/participants"
+                            className={`sidebar-link ${location.pathname === '/participants' ? 'active' : ''}`}
+                        >
+                            <i className="bi bi-telephone"></i> Participants
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </div>

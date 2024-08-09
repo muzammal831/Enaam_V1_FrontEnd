@@ -20,7 +20,7 @@ function ProductsList() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/products', {
+                const response = await axios.get('http://localhost:8000/api/products', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -50,7 +50,7 @@ function ProductsList() {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://3.138.38.248/Enaam_Backend_V1/public/api/products/${productToDelete}`, {
+            await axios.delete(`http://localhost:8000/api/products/${productToDelete}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
