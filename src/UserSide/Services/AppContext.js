@@ -51,6 +51,7 @@ useEffect(() => {
   const login = async (payload) => {
     try {
       const response = await axios.post(`${BASE_URL}/login`, payload);
+      alert(JSON.stringify(response))
       setUser(response?.data?.user );
       return response.data;
     } catch (error) {

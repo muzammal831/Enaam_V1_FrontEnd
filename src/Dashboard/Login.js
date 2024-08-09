@@ -3,46 +3,34 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { useApp } from '../UserSide/Services/AppContext';
 
 function Login() {
     const [emailOrPhone, setEmailOrPhone] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
+    const { login } = useApp()
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/login', {
+            const response = await login({
                 email_or_phone: emailOrPhone,
                 password
             });
+            if(response?.data?.role === "admin"){
+                navigate('/dashboard'); 
+            } else{
 
-            // Debugging: Log the entire response
-            console.log('API Response:', response.data);
-
-            const { token, role, name, email, phone } = response.data.user;
-
-            // Store token and role in localStorage
-            localStorage.setItem('token', token);
-            localStorage.setItem('role', role);
-
-            // Display the response in console log
-            console.log(`Login successful! 
-                \nName: ${name} 
-                \nEmail: ${email} 
-                \nPhone: ${phone} 
-                \nRole: ${role} 
-                \nToken: ${token}`);
-
+                navigate('/'); 
+            }
             setMessage('Login successful!');
             setError('');
-            navigate('/dashboard');  // Redirect to dashboard or desired page
         } catch (error) {
             setError('Login failed. Please check your credentials and try again.');
             setMessage('');
-            console.error('Login Error:', error.response.data);
         }
     };
 
