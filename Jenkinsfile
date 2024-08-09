@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/MudassirChaudhre/Enaam_V1_FrontEnd.git'
+                git branch: 'dep', url: 'https://github.com/MudassirChaudhre/Enaam_V1_FrontEnd.git'
             }
         }
 
