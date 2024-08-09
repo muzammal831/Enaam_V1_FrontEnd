@@ -6,6 +6,7 @@ import Sidebar from '../sidebar/Sidebar';
 import Loader from '../../UserSide/Components/LoaderComponent'; 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Header from '../sidebar/Header';
 
 const ParticipantsList = () => {
     const [participants, setParticipants] = useState([]);
@@ -39,8 +40,9 @@ const ParticipantsList = () => {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="dashboard-content p-4">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                    <Header />
+                    <div className="dashboard-content ">
                         <div className="d-flex justify-content-center">
                             <Loader /> {/* Assuming you have a Loader component */}
                         </div>
@@ -54,8 +56,9 @@ const ParticipantsList = () => {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="dashboard-content p-4">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                   <Header />
+                    <div className="dashboard-content ">
                         <div className="d-flex justify-content-between align-items-center mb-4">
                             <h1 className="fs-3 fw-bold text-dark shadow-sm p-3 mb-2 bg-body rounded">Participants List</h1>
                         </div>

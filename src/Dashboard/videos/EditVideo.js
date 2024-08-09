@@ -9,6 +9,7 @@ import Sidebar from '../sidebar/Sidebar'; // Import the Sidebar component
 import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
 import { ToastContainer, toast } from 'react-toastify'; // Import Toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import Toastify styles
+import Header from '../sidebar/Header';
 
 function EditVideo() {
     const { id } = useParams();
@@ -176,8 +177,9 @@ function EditVideo() {
             <ToastContainer /> {/* Include the ToastContainer */}
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="container-fluid col-11 mt-5 p-5 bg-light rounded shadow-sm">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                    <Header />
+                    <div style={{ maxWidth:'99%' }} className="container-fluid col-12 mt-4 p-5 bg-light rounded shadow-sm">
                         <h1 className="mb-4">Edit Video</h1>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">

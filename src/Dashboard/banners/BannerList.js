@@ -8,6 +8,7 @@ import Sidebar from '../sidebar/Sidebar'; // Ensure this is the correct path
 import Loader from '../../UserSide/Components/LoaderComponent'; // Adjust the import path if necessary
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Header from '../sidebar/Header';
 
 function BannerList() {
     const [banners, setBanners] = useState([]);
@@ -75,8 +76,10 @@ function BannerList() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="dashboard-content p-4">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                   <Header/>
+                   
+                    <div className="dashboard-content">
                         <div className="d-flex justify-content-between align-items-center mb-4">
                             <h1 className="fs-3 fw-bold text-dark shadow-sm p-3 mb-2 bg-body rounded">Banners List</h1>
                             <button
@@ -109,7 +112,7 @@ function BannerList() {
                                 <table className="table table-hover table-striped table-bordered shadow-sm rounded">
                                     <thead className="table-dark">
                                         <tr>
-                                            <th>Image</th>
+                                            <th className="text-center">Image</th>
                                             <th>Description</th>
                                             <th>Product Link</th>
                                             <th>Platform</th>
@@ -120,12 +123,13 @@ function BannerList() {
                                         {banners.length ? (
                                             banners.map(banner => (
                                                 <tr key={banner.id}>
-                                                    <td>
+                                                    <td className='text-center'>
                                                         <img
+                                                        
                                                             src={banner.image}
                                                             alt={banner.description}
                                                             className="img-fluid"
-                                                            style={{ maxWidth: '100px', borderRadius: '10px' }}
+                                                            style={{ width: '130px', height: '80px', borderRadius: '10px' }}
                                                         />
                                                     </td>
                                                     <td>{banner.description}</td>

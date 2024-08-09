@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../sidebar/Sidebar'; // Ensure this is the correct path
 import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
+import Header from '../sidebar/Header';
 
 function CreateAboutUs() {
     const [formData, setFormData] = useState({
@@ -38,7 +39,7 @@ function CreateAboutUs() {
         }
 
         try {
-            await axios.post('http://localhost:8000/api/about-us', form, {
+            await axios.post('http://3.138.38.248/Enaam_Backend_V1/public/api/about-us', form, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -62,8 +63,9 @@ function CreateAboutUs() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="container-fluid p-5 mt-5">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                   <Header />
+                    <div className="container-fluid  mt-4">
                         <div className="p-4 bg-light rounded shadow-sm">
                             {loading ? (
                                 <div className="d-flex justify-content-center">

@@ -6,7 +6,8 @@
 .sidebar {
     position: fixed;
     top: 0;
-    left: 0;
+    margin-left: -10px;
+    
     height: 100%;
     width: 250px; /* Default width when open */
     background-color: #f8f9fa;
@@ -36,7 +37,7 @@
     transition: left 0.3s, right 0.3s; /* Transition for smooth position change */
 }
 
-/* Adjust the toggle button position based on the sidebar state */
+Adjust the toggle button position based on the sidebar state
 .sidebar.open + .sidebar-toggle {
     left: 230px; /* Position to the right of the sidebar */
 }

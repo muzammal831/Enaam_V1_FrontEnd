@@ -8,6 +8,7 @@ import Loader from '../../UserSide/Components/LoaderComponent'; // Adjust the im
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Styles.css'; // Ensure this CSS file is imported
+import Header from '../sidebar/Header';
 
 const ContactList = () => {
     const [contacts, setContacts] = useState([]);
@@ -42,8 +43,9 @@ const ContactList = () => {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="dashboard-content p-4">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                   <Header  />
+                    <div className="dashboard-content ">
                         <h1 className="fs-3 fw-bold text-dark shadow-sm p-3 mb-4 bg-body rounded">Contact List</h1>
                         {loading ? (
                             <div className="d-flex justify-content-center">

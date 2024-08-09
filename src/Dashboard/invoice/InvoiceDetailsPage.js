@@ -1,14 +1,14 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../sidebar/Sidebar';
+import Header from '../sidebar/Header';
 
 const InvoiceDetailsPage = () => {
     const { id } = useParams();
     const [invoice, setInvoice] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     useEffect(() => {
         const fetchInvoice = async () => {
@@ -29,10 +29,21 @@ const InvoiceDetailsPage = () => {
         fetchInvoice();
     }, [id]);
 
+    const handleSidebarToggle = (isOpen) => {
+        setIsSidebarOpen(isOpen);
+
+        const toggleButton = document.querySelector('.sidebar-toggle');
+        if (toggleButton) {
+            const sidebarWidth = isOpen ? '250px' : '0px';
+            const marginTop = isOpen ? '2px' : '3px'; 
+            toggleButton.style.left = isOpen ? `calc(${sidebarWidth} - 10px)` : '1px';
+            toggleButton.style.top = marginTop;
+        }
+    };
+
     if (loading) return <p>Loading...</p>;
     if (!invoice) return <p>No invoice found</p>;
 
-    // Handle invoice_id and ticket_id if they are not arrays
     const parseJson = (data) => {
         try {
             return JSON.parse(data);
@@ -49,13 +60,16 @@ const InvoiceDetailsPage = () => {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
-                    <Sidebar />
-                </div>
-                <div className="col-md-10 mt-5">
-                    <h1>Invoice Details</h1>
-                    <div className="card mb-3 mt-3">
+                <Sidebar onToggleSidebar={handleSidebarToggle} />
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                   <Header  />
+                   
+                   
+                    <div className="card mb-3 mt-3 ">
+                    
+                 
                         <div className="card-header bg-primary text-white">
+                        
                             Invoice #{invoice.id}
                         </div>
                         <div className="card-body">

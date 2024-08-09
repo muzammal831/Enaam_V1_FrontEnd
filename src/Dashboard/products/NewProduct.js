@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../sidebar/Sidebar'; // Import Sidebar component
 import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
+import Header from '../sidebar/Header';
 
 function NewProduct() {
     const [formData, setFormData] = useState({
@@ -104,14 +105,15 @@ function NewProduct() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="container-fluid p-5 mt-5">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                   <Header />
+                    <div className="container-fluid ">
                         {loading ? (
                             <div className="d-flex justify-content-center">
                                 <Loader /> {/* Show loader while loading */}
                             </div>
                         ) : (
-                            <div className="p-4 bg-light rounded shadow-sm">
+                            <div className="p-4 bg-light rounded shadow-sm mt-4">
                                 <h1 className="mb-4 fs-4 fw-bold text-dark">Add New Product</h1>
                                 <form onSubmit={handleSubmit}>
                                     {/* Form fields */}
@@ -201,7 +203,7 @@ function NewProduct() {
                                             onChange={handleImageChange} 
                                         />
                                     </div>
-                                    <button type="submit" className="btn btn-primary shadow-sm rounded">Submit</button>
+                                    <button type="submit" className="btn btn-primary shadow-sm rounded w-25 rounded-pill">Submit</button>
                                 </form>
                             </div>
                         )}

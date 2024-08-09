@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../sidebar/Sidebar'; // Ensure this is the correct path
 import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
+import Header from '../sidebar/Header';
 
 function EditBlog() {
     const { id } = useParams();
@@ -109,8 +110,9 @@ function EditBlog() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="container-fluid col-11 mt-5 p-5 bg-light rounded shadow-sm">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                    <Header />
+                    <div style={{maxWidth: "99%"}} className="container-fluid col-12 mt-4 p-4 bg-light rounded shadow-sm">
                         <h1 className="mb-4">Edit Blog</h1>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
@@ -155,7 +157,7 @@ function EditBlog() {
                                     />
                                 )}
                             </div>
-                            <button type="submit" className="btn btn-primary bi bi-plus">
+                            <button type="submit" className="btn btn-primary ">
                                 Update
                             </button>
                         </form>

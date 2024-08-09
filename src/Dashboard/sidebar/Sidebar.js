@@ -37,8 +37,12 @@ function Sidebar({ onToggleSidebar }) {
     useEffect(() => {
         const toggleButton = document.querySelector('.sidebar-toggle');
         if (toggleButton) {
-            const sidebarWidth = isOpen ? '250px' : '0px';
+            const sidebarWidth = isOpen ? '270px' : '';
+            const sidebarTop = isOpen ? '270px' : '';
+            
             toggleButton.style.left = isOpen ? `calc(${sidebarWidth} + -30px)` : '1px'; // Adjust for padding
+            toggleButton.style.top = isOpen ? `calc(${sidebarTop} + -268px)` : '3px'; 
+        
         }
     }, [isOpen]);
 

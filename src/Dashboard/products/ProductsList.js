@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Sidebar from '../sidebar/Sidebar'; // Import Sidebar component
 import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
 import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer for notifications
+import Header from '../sidebar/Header';
 
 function ProductsList() {
     const [products, setProducts] = useState([]);
@@ -72,8 +73,9 @@ function ProductsList() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="dashboard-content p-4">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                    <Header onSidebarToggle={handleSidebarToggle} />
+                    <div className="dashboard-content">
                         <div className="d-flex justify-content-between align-items-center mb-4">
                             <h1 className="fs-3 fw-bold text-dark shadow-sm p-3 mb-2 bg-body rounded">Products List</h1>
                             <Link to="/dashboard/products/create" className="btn btn-primary shadow-sm">
@@ -194,7 +196,7 @@ function ProductsList() {
                                 <p>Are you sure you want to delete this product?</p>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" onClick={() => setShowDeleteModal(false)}>
+                                <button type="button" className="btn btn-primary" onClick={() => setShowDeleteModal(false)}>
                                     Cancel
                                 </button>
                                 <button type="button" className="btn btn-danger" onClick={handleDelete}>

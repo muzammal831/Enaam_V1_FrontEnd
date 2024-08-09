@@ -8,6 +8,7 @@ import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader
 import './AddBanner.css'; // Import the CSS file for styling
 import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css'; // Import CSS for toast
+import Header from '../sidebar/Header';
 
 function AddBanner() {
     const navigate = useNavigate();
@@ -63,8 +64,9 @@ function AddBanner() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="container-fluid p-5 mt-5">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                    <Header />
+                    <div className="container-fluid mt-4">
                         <div className="p-4 bg-light rounded shadow-sm">
                             {loading ? (
                                 <div className="d-flex justify-content-center">

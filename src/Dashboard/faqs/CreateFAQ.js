@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../sidebar/Sidebar'; // Import Sidebar component
 import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
+import Header from '../sidebar/Header';
 
 function CreateFAQ() {
     const [formData, setFormData] = useState({
@@ -48,8 +49,9 @@ function CreateFAQ() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="container-fluid p-5 mt-5">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                   <Header />
+                    <div className="container-fluid  mt-5">
                         <div className="p-4 bg-light rounded shadow-sm">
                             {loading ? (
                                 <div className="d-flex justify-content-center">

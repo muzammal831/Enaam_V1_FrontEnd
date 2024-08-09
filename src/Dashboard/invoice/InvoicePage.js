@@ -8,6 +8,7 @@ import Sidebar from '../sidebar/Sidebar'; // Ensure this is the correct path
 import Loader from '../../UserSide/Components/LoaderComponent'; // Adjust the import path if necessary
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Header from '../sidebar/Header';
 
 const InvoicePage = () => {
     const [invoices, setInvoices] = useState([]);
@@ -42,8 +43,9 @@ const InvoicePage = () => {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="dashboard-content p-4">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                   <Header />
+                    <div className="dashboard-content ">
                         <h1 className="fs-3 fw-bold text-dark shadow-sm p-3 mb-2 bg-body rounded">Invoices</h1>
 
                         {loading ? (

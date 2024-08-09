@@ -7,6 +7,7 @@ import Sidebar from '../sidebar/Sidebar'; // Import Sidebar component
 import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
 import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer for notifications
 import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
+import Header from '../sidebar/Header';
 
 function ProductDetail() {
     const { id } = useParams(); // Get the product ID from the URL
@@ -59,7 +60,8 @@ function ProductDetail() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                   <Header onToggleSidebar={handleSidebarToggle} />
                     <div className="dashboard-content p-4">
                         <div className="d-flex justify-content-between align-items-center mb-4">
                             <h1 className="fs-3 fw-bold text-dark shadow p-3 mb-2 bg-light rounded">

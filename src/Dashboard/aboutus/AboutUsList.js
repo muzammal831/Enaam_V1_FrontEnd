@@ -8,6 +8,7 @@ import Sidebar from '../sidebar/Sidebar'; // Ensure this is the correct path
 import Loader from '../../UserSide/Components/LoaderComponent'; // Adjust the import path if necessary
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Header from '../sidebar/Header';
 
 function AboutUsList() {
     const [aboutUs, setAboutUs] = useState([]);
@@ -21,7 +22,7 @@ function AboutUsList() {
     useEffect(() => {
         const fetchAboutUs = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/about-us', {
+                const response = await axios.get('http://3.138.38.248/Enaam_Backend_V1/public/api/about-us', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -49,7 +50,7 @@ function AboutUsList() {
 
     const handleDeleteClick = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/api/about-us/${id}`, {
+            await axios.delete(`http://3.138.38.248/Enaam_Backend_V1/public/api/about-us/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
@@ -81,8 +82,9 @@ function AboutUsList() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="dashboard-content p-4">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                    <Header/>
+                    <div className="dashboard-content mt-3">
                         <div className="d-flex justify-content-between align-items-center mb-4">
                             <h1 className="fs-3 fw-bold text-dark shadow-sm p-3 mb-2 bg-body rounded">About Us List</h1>
                             <button
@@ -112,7 +114,7 @@ function AboutUsList() {
                                         <tr>
                                             <th>Heading</th>
                                             <th>About Detail</th>
-                                            <th className='text-center'>About </th>
+                                            <th className='text-center'>Image</th>
                                             <th className="col-2">Actions</th>
                                         </tr>
                                     </thead>
@@ -125,12 +127,13 @@ function AboutUsList() {
                                                     <td className="text-center">
                                                         {item.about_image && (
                                                             <img
-style={{borderRadius:"10px"}}
+                                                                style={{width:"120px", height:"70px", borderRadius:"10px"}}
                                                                 src={item.about_image}
                                                                 alt={item.heading}
                                                                 width="100"
                                                                 height="70"
-                                                                className="img-fluid"   
+                                                                className="img-fluid  rounded shadow"   
+                                                                
                                                             />
                                                         )}
                                                     </td>

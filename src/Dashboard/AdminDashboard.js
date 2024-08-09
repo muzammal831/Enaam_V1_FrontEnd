@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Sidebar from './sidebar/Sidebar';
 import Loader from '../UserSide/Components/LoaderComponent'; // Adjust the import path if necessary
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
+import Header from './sidebar/Header';
 
 function AdminDashboard() {
     const [users, setUsers] = useState([]);
@@ -67,7 +68,9 @@ function AdminDashboard() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                    
+                    <Header />
                     <div className="dashboard-content p-4">
                         <div className="total-users-box mb-4 p-3 bg-light rounded shadow-sm">
                             <h3 className="mb-0">Total Users: {totalUsers}</h3>

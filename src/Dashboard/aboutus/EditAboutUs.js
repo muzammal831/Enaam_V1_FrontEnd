@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../sidebar/Sidebar'; // Ensure this is the correct path
 import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
+import Header from '../sidebar/Header';
 
 function EditAboutUs() {
     const { id } = useParams();
@@ -25,7 +26,7 @@ function EditAboutUs() {
         const fetchAboutUs = async () => {
             setLoading(true); // Set loading to true before starting fetch
             try {
-                const response = await axios.get(`http://localhost:8000/api/about-us/${id}`, {
+                const response = await axios.get(`http://3.138.38.248/Enaam_Backend_V1/public/api/about-us/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -61,7 +62,7 @@ function EditAboutUs() {
 
         try {
             // Send JSON payload for text fields
-            await axios.put(`http://localhost:8000/api/about-us/${id}`, {
+            await axios.put(`http://3.138.38.248/Enaam_Backend_V1/public/api/about-us/${id}`, {
                 heading: formData.heading,
                 about_detail: formData.about_detail,
             }, {
@@ -76,7 +77,7 @@ function EditAboutUs() {
                 const fileFormData = new FormData();
                 fileFormData.append('about_image', formData.about_image);
 
-                await axios.post(`http://localhost:8000/api/about-us/${id}/upload-image`, fileFormData, {
+                await axios.post(`http://3.138.38.248/Enaam_Backend_V1/public/api/about-us/${id}/upload-image`, fileFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -112,8 +113,9 @@ function EditAboutUs() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="container-fluid col-11 mt-5 p-5 bg-light rounded shadow-sm ">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                    <Header />
+                    <div className="container-fluid  mt-4 p-5 bg-light rounded shadow-sm ">
                         <h1 className="mb-4">Edit About Us</h1>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">

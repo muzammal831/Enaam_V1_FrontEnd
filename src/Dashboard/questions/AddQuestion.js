@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../sidebar/Sidebar'; // Import Sidebar component
 import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
 import './AddQuestion.css'; // Import CSS for styling
+import Header from '../sidebar/Header';
 
 function AddQuestion() {
     const [formData, setFormData] = useState({
@@ -55,10 +56,12 @@ function AddQuestion() {
 
     return (
         <div className="container-fluid">
-            <div className="row">
+            <div className="row ">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="container-fluid p-5 mt-5">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                <Header />
+                    <div className="container-fluid  col-md-12 mt-4">
+                       <div>
                         <div className="p-4 bg-light rounded shadow-sm">
                             {loading ? (
                                 <div className="d-flex justify-content-center">
@@ -146,6 +149,7 @@ function AddQuestion() {
                                     </form>
                                 </div>
                             )}
+                        </div>
                         </div>
                     </div>
                 </div>

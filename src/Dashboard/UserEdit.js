@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from './sidebar/Sidebar';
 import Loader from '../UserSide/Components/LoaderComponent';
+import Header from './sidebar/Header';
 
 function UserEdit() {
     const { id } = useParams();
@@ -92,18 +93,16 @@ function UserEdit() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="p-4">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                    <Header onToggleSidebar={handleSidebarToggle} />
+                    <div className="p-3">
                         {loading ? (
                             <div className="d-flex justify-content-center">
                                 <Loader />
                             </div>
                         ) : (
-                            <div>
-                                <div className="d-flex justify-content-between align-items-center mb-4">
-                                    <h1>Edit User</h1>
-                                </div>
-                                
+                            <div >
+                            
                                 <form onSubmit={handleUpdate} className="border p-4 rounded bg-light shadow-sm">
                                     <h1 className="mb-0">{user.name}</h1>
                                     <p className="card-text text-center">{user.email}</p>

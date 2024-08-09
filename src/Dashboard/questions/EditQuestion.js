@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../sidebar/Sidebar'; // Ensure this is the correct path
 import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
+import Header from '../sidebar/Header';
 
 function EditQuestion() {
     const { id } = useParams();
@@ -90,8 +91,10 @@ function EditQuestion() {
         <div className="container-fluid">
             <div className="row">
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="container-fluid col-11 mt-5 p-5 bg-light rounded shadow-sm ">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                   <Header />
+
+                    <div style={{ maxWidth: '98%', }} className="container-fluid  mt-4 bg-light rounded shadow-sm p-4 ">
                         <h1 className="mb-4">Edit Question</h1>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
@@ -169,7 +172,8 @@ function EditQuestion() {
                             <button type="submit" className="btn btn-primary">Update Question</button>
                         </form>
                     </div>
-                </div>
+                    </div>
+                
             </div>
             <ToastContainer /> {/* Add ToastContainer to show toast notifications */}
         </div>

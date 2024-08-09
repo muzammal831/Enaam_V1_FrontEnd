@@ -8,6 +8,7 @@ import Sidebar from '../sidebar/Sidebar'; // Import the Sidebar component
 import Loader from '../../UserSide/Components/LoaderComponent'; // Import Loader component
 import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css'; // Import CSS for toast
+import Header from '../sidebar/Header';
 
 function EditBanner() {
     const { id } = useParams();
@@ -119,8 +120,9 @@ function EditBanner() {
                 {/* Sidebar */}
                 <Sidebar onToggleSidebar={handleSidebarToggle} />
                 {/* Form Content */}
-                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12'} ms-auto`}>
-                    <div className="container-fluid col-11 mt-5 p-5 bg-light rounded shadow-sm">
+                <div className={`col ${isSidebarOpen ? 'col-md-10' : 'col-md-12 mt-3'} ms-auto`}>
+                   <Header />
+                    <div className="container-fluid  mt-4 p-5 bg-light rounded shadow-sm">
                         <h1 className="mb-4">Edit Banner</h1>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
@@ -175,7 +177,7 @@ function EditBanner() {
                                     <img
                                         src={banner.image}
                                         alt="Banner"
-                                        width="100"
+                                       style={{ width: '120px', height: '70px', marginTop: '10px', borderRadius: '10px' }}
                                         className="mt-2"
                                     />
                                 )}
